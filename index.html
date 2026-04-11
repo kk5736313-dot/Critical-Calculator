@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- SEO Title -->
+<title>Critical Calculator – Free Online Calculators for Finance, Math & Lifestyle</title>
+
+<!-- Meta Description -->
+<meta name="description" content="All-in-one calculator hub for mortgage, fractions, cost of living & more. Fast, simple, and free tools in one place.">
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="
+online calculator tools,
+free calculators online,
+all in one calculator,
+multi purpose calculator website,
+finance calculator online,
+mortgage calculator,
+income needed for 300k mortgage,
+home loan calculator,
+mortgage affordability calculator,
+cost of living calculator,
+every state cost of living,
+state living cost comparison,
+budget calculator by state,
+fraction calculator,
+a calculator for fractions,
+decimal to fraction calculator,
+math problem solver online,
+bra size calculator,
+bra size finder tool,
+body measurement calculator,
+utility calculator tools,
+daily life calculators,
+smart calculator tools,
+fast online calculators free,
+web based calculator tools
+">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Critical Calculator</title>
+<link rel="icon" type="image/png" href="logo.png">
+    <style>
+        /* --- CORE SYSTEM --- */
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background: #fff; height: 100%;
+            display: flex; flex-direction: column;
+        }
+
+        /* FIXED HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; height: 60px; 
+            z-index: 10000; background: #fff; display: flex; 
+            justify-content: space-between; align-items: center; 
+            padding: 0 20px; border-bottom: 2px solid #000;
+            box-sizing: border-box;
+        }
+
+        /* BRAND GROUP (Logo + Text together) */
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Controls space between logo and title */
+            cursor: pointer;
+        }
+        #site-logo {
+            height: 35px;
+            width: auto;
+            display: block;
+        }
+        .brand-text { 
+            font-weight: 900; font-size: 1.1rem; 
+            color: #000; letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        /* DROPDOWN MENU */
+        .dropdown { position: relative; }
+        .dropbtn { 
+            background: #000; color: #fff; border: none; 
+            padding: 8px 14px; font-weight: 800; cursor: pointer; 
+            font-size: 0.7rem; text-transform: uppercase; border-radius: 4px;
+        }
+        .dropdown-content {
+            display: none; position: absolute; right: 0; top: 115%;
+            background-color: #fff; width: 250px; border: 2px solid #000; 
+            z-index: 10001; box-shadow: 6px 6px 0px #000;
+            max-height: 200px; overflow-y: auto; 
+        }
+        .dropdown-content.show { display: block; }
+        .dropdown-content a {
+            color: black; padding: 14px 18px; text-decoration: none; 
+            display: block; font-weight: 700; font-size: 0.85rem; 
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .dropdown-content a:hover { background-color: #000; color: #fff; }
+
+        /* CONTENT WRAPPER */
+        #main-wrapper {
+            margin-top: 60px;
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* MAIN HUB VIEW */
+        #hub-view { padding: 40px 20px; }
+        .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 40px; }
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 900px; }
+        .tool-card { 
+            border: 2px solid #000; padding: 30px; cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.2s;
+        }
+        .tool-card:hover { background: #000; color: #fff; }
+        .tool-card h2 { margin: 0; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; }
+        
+        /* VIEWPORT */
+        #tool-viewport {
+            width: 100%;
+            min-height: 850px;
+            border: none;
+            display: none;
+        }
+
+        .hidden { display: none !important; }
+
+        /* FOOTER */
+        footer {
+            flex-shrink: 0;
+            width: 100%; height: 70px; background: #000; color: #fff; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: bold; letter-spacing: 1px;
+        }
+
+        /* DESKTOP ADJUSTMENTS */
+        @media (min-width: 768px) {
+            header { height: 80px; padding: 0 5%; }
+            #main-wrapper { margin-top: 80px; }
+            .brand-text { font-size: 1.5rem; }
+            #site-logo { height: 45px; }
+            .hero-text { font-size: 6rem; }
+            .card-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-group" onclick="openHub()">
+            <img src="logo.png" alt="Logo" id="site-logo">
+            <span class="brand-text">CRITICALCALCULATOR</span>
+        </div>
+        <nav>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="javascript:void(0);" onclick="loadTool('calculator for bra size.html')">👙 Bra Size Finder</a>
+                    <a href="javascript:void(0);" onclick="loadTool('a calculator for fractions.html')">➗ Fraction Logic</a>
+                    <a href="javascript:void(0);" onclick="loadTool('every-state-living-cost-calculator.html')">📍 State Living Cost</a>
+                    <a href="javascript:void(0);" onclick="loadTool('income needed for 300k mortgage.html')">🏠 Mortgage Income</a>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="main-wrapper">
+        <main id="hub-view">
+            <div class="hero-text">CORE<br>UTILITIES.</div>
+            <div class="card-grid">
+                <div class="tool-card" onclick="loadTool('calculator for bra size.html')">
+                    <h2>👙 BRA SIZE FINDER</h2><span>→</span>
+                </div>
+                <div class="tool-card" onclick="loadTool('a calculator for fractions.html')">
+                    <h2>➗ FRACTION LOGIC</h2><span>→</span>
+                </div>
+                <div class="tool-card" onclick="loadTool('every-state-living-cost-calculator.html')">
+                    <h2>📍 STATE LIVING COST</h2><span>→</span>
+                </div>
+                <div class="tool-card" onclick="loadTool('income needed for 300k mortgage.html')">
+                    <h2>🏠 MORTGAGE INCOME</h2><span>→</span>
+                </div>
+            </div>
+        </main>
+
+        <iframe id="tool-viewport" name="tool-viewport"></iframe>
+    </div>
+
+    <footer>Powered by Critical Calculator — © 2026</footer>
+
+    <script>
+        const viewport = document.getElementById('tool-viewport');
+        const hub = document.getElementById('hub-view');
+        const dropdown = document.getElementById('myDropdown');
+
+        function toggleMenu(e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("show");
+        }
+
+        function closeMenu() {
+            dropdown.classList.remove("show");
+        }
+
+        function loadTool(fileName) {
+            closeMenu();
+            hub.classList.add('hidden');
+            viewport.style.display = "block";
+            viewport.src = fileName;
+            window.scrollTo(0, 0);
+        }
+
+        function openHub() {
+            closeMenu();
+            hub.classList.remove('hidden');
+            viewport.style.display = "none";
+            viewport.src = "about:blank"; 
+            window.scrollTo(0, 0);
+        }
+
+        // Close menu if clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                closeMenu();
+            }
+        }
+    </script>
+</body>
+</html>
