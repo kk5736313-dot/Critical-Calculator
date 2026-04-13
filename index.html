@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Calculator – Hub</title>
+    <style>
+        /* [PASTE THE MASTER CSS FROM STEP 1 HERE] */
+        .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 40px; }
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 900px; padding-bottom: 40px;}
+        .tool-card { border: 2px solid #000; padding: 30px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #000; }
+        .tool-card:hover { background: #000; color: #fff; }
+        @media (min-width: 768px) { .hero-text { font-size: 6rem; } .card-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand-group">
+            <img src="logo.png" id="site-logo">
+            <span class="brand-text">CRITICALCALCULATOR</span>
+        </a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="calculator-for-bra-size.html">👙 Bra Size Finder</a>
+                <a href="calculator-for-fractions.html">➗ Fraction Logic</a>
+                <a href="every-state-living-cost-calculator.html">📍 State Living Cost</a>
+                <a href="income-needed-mortgage-calculator.html">🏠 Mortgage Income</a>
+                <a href="calculator-for-bmi.html">⚖️ BMI Calculator</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="main-wrapper">
+        <div class="hero-text">CORE<br>UTILITIES.</div>
+        <div class="card-grid">
+            <a href="calculator-for-bra-size.html" class="tool-card"><h2>👙 BRA SIZE FINDER</h2><span>→</span></a>
+            <a href="calculator-for-fractions.html" class="tool-card"><h2>➗ FRACTION LOGIC</h2><span>→</span></a>
+            <a href="every-state-living-cost-calculator.html" class="tool-card"><h2>📍 STATE LIVING COST</h2><span>→</span></a>
+            <a href="income-needed-mortgage-calculator.html" class="tool-card"><h2>🏠 MORTGAGE INCOME</h2><span>→</span></a>
+            <a href="calculator-for-bmi.html" class="tool-card"><h2>⚖️ BMI CALCULATOR</h2><span>→</span></a>
+        </div>
+    </div>
+
+    <footer>© 2026 CRITICAL CALCULATOR</footer>
+
+    <script>
+        function toggleMenu(e) {
+            e.stopPropagation();
+            document.getElementById('myDropdown').classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                document.getElementById('myDropdown').classList.remove("show");
+            }
+        }
+    </script>
+</body>
+</html>
