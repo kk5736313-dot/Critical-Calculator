@@ -3,82 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CRITICALCALCULATOR | Professional Suite</title>
+    <title>Critical Calculator</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
-        /* 1. CORE SYSTEM */
+        /* --- 1. GLOBAL STYLES (Centers everything) --- */
         body, html { 
             margin: 0; padding: 0; font-family: 'Inter', sans-serif; 
             background: #fff; height: 100%; display: flex; flex-direction: column; 
         }
 
-        /* 2. HEADER - Centered Content */
-        header {
-            position: fixed; top: 0; left: 0; right: 0; height: 65px; 
-            z-index: 10000; background: #fff; border-bottom: 2px solid #000;
-            display: flex; justify-content: center;
+        /* --- 2. HEADER (Centered Content) --- */
+        header { 
+            position: fixed; top: 0; left: 0; right: 0; height: 70px; 
+            z-index: 10000; background: #fff; border-bottom: 2px solid #000; 
+            display: flex; justify-content: center; 
         }
-        .header-container {
+        .header-container { 
             width: 100%; max-width: 1000px; display: flex; 
-            justify-content: space-between; align-items: center; padding: 0 20px;
+            justify-content: space-between; align-items: center; padding: 0 20px; 
         }
-        .brand-group { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; color: #000; }
-        #site-logo { height: 35px; }
-        .brand-text { font-weight: 900; font-size: 1.1rem; text-transform: uppercase; }
+        .brand-group { 
+            display: flex; align-items: center; gap: 12px; cursor: pointer; 
+            text-decoration: none; color: #000; font-weight: 900; text-transform: uppercase; 
+        }
+        #site-logo { height: 40px; }
 
-        /* 3. TOOL TAB SCROLLER FIX */
+        /* --- 3. DROPDOWN + SCROLLER FIX --- */
         .dropdown { position: relative; }
         .dropbtn { 
-            background: #000; color: #fff; border: none; padding: 8px 14px; 
-            font-weight: 800; cursor: pointer; font-size: 0.7rem; border-radius: 4px;
+            background: #000; color: #fff; border: none; padding: 10px 16px; 
+            font-weight: 800; cursor: pointer; font-size: 0.75rem; border-radius: 4px; 
         }
-        .dropdown-content {
-            display: none; position: absolute; right: 0; top: 115%;
-            background-color: #fff; width: 250px; border: 2px solid #000; 
-            z-index: 10001; box-shadow: 6px 6px 0px #000;
-            max-height: 220px; /* Forces scroller after 4 items */
-            overflow-y: auto; 
+        .dropdown-content { 
+            display: none; position: absolute; right: 0; top: 115%; 
+            background: #fff; width: 260px; border: 2px solid #000; 
+            z-index: 10001; box-shadow: 6px 6px 0px #000; 
+            /* Scroller activates after ~4 items */
+            max-height: 220px; overflow-y: auto; 
         }
         .dropdown-content.show { display: block; }
-        .dropdown-content a {
-            color: black; padding: 14px 18px; text-decoration: none; 
-            display: block; font-weight: 700; border-bottom: 1px solid #f0f0f0;
+        .dropdown-content a { 
+            color: #000; padding: 14px 18px; text-decoration: none; 
+            display: block; font-weight: 700; border-bottom: 1px solid #f0f0f0; 
         }
-        .dropdown-content a:hover { background-color: #000; color: #fff; }
+        .dropdown-content a:hover { background: #000; color: #fff; }
 
-        /* 4. THE "BOX" (Iframe Container) */
-        #main-wrapper {
-            margin: 80px auto 20px auto; /* Centered with top spacing */
-            width: 95%; max-width: 1000px; flex: 1;
-            display: flex; flex-direction: column;
+        /* --- 4. MAIN WRAPPER (Centered) --- */
+        #main-wrapper { 
+            margin: 90px auto 40px auto; width: 100%; max-width: 1000px; 
+            padding: 0 20px; box-sizing: border-box; flex: 1; 
         }
-
-        /* This is the box where the other pages live */
-        #tool-viewport {
-            width: 100%; height: 600px; /* Reduced size box */
-            border: 2px solid #000; border-radius: 8px;
-            display: none; background: #fff;
-        }
-
-        /* 5. HUB VIEW (Main Menu) */
-        #hub-view { padding: 20px 0; }
-        .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 30px; }
+        .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 40px; }
         .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .tool-card { 
-            border: 2px solid #000; padding: 25px; cursor: pointer; 
-            display: flex; justify-content: space-between; align-items: center;
+            border: 2px solid #000; padding: 30px; text-decoration: none; 
+            color: #000; display: flex; justify-content: space-between; 
+            align-items: center; font-weight: 900; 
         }
         .tool-card:hover { background: #000; color: #fff; }
-        .hidden { display: none !important; }
 
-        /* 6. FOOTER */
-        footer {
+        /* --- 5. FOOTER --- */
+        footer { 
             width: 100%; height: 60px; background: #000; color: #fff; 
-            display: flex; align-items: center; justify-content: center; font-weight: bold;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; 
         }
-
-        @media (min-width: 768px) {
-            .hero-text { font-size: 5rem; }
-            .card-grid { grid-template-columns: 1fr 1fr; }
+        
+        @media (min-width: 768px) { 
+            .hero-text { font-size: 6rem; } 
+            .card-grid { grid-template-columns: 1fr 1fr; } 
         }
     </style>
 </head>
@@ -86,71 +78,73 @@
 
     <header>
         <div class="header-container">
-            <div class="brand-group" onclick="openHub()">
-                <img src="logo.png" alt="Logo" id="site-logo">
+            <a href="index.html" class="brand-group" onclick="navigate(event)">
+                <img src="logo.png" id="site-logo">
                 <span class="brand-text">CRITICALCALCULATOR</span>
-            </div>
+            </a>
             <div class="dropdown">
                 <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="javascript:void(0);" onclick="loadTool('calculator for bra size.html')">👙 Bra Size Finder</a>
-                    <a href="javascript:void(0);" onclick="loadTool('calculator-for-fractions.html')">➗ Fraction Logic</a>
-                    <a href="javascript:void(0);" onclick="loadTool('every-state-living-cost-calculator.html')">📍 State Living Cost</a>
-                    <a href="javascript:void(0);" onclick="loadTool('income-needed-mortgage-calculator.html')">🏠 Mortgage Income</a>
-                    <a href="javascript:void(0);" onclick="loadTool('calculator-for-bmi.html')">⚖️ BMI Calculator</a>
+                    <a href="calculator-for-bra-size.html" onclick="navigate(event)">👙 Bra Size Finder</a>
+                    <a href="calculator-for-fractions.html" onclick="navigate(event)">➗ Fraction Logic</a>
+                    <a href="every-state-living-cost-calculator.html" onclick="navigate(event)">📍 State Living Cost</a>
+                    <a href="income-needed-mortgage-calculator.html" onclick="navigate(event)">🏠 Mortgage Income</a>
+                    <a href="calculator-for-bmi.html" onclick="navigate(event)">⚖️ BMI Calculator</a>
                 </div>
             </div>
         </div>
     </header>
 
     <div id="main-wrapper">
-        <main id="hub-view">
+        <div id="content-area">
             <div class="hero-text">CORE<br>UTILITIES.</div>
             <div class="card-grid">
-                <div class="tool-card" onclick="loadTool('calculator for bra size.html')"><h2>👙 BRA SIZE FINDER</h2><span>→</span></div>
-                <div class="tool-card" onclick="loadTool('calculator-for-fractions.html')"><h2>➗ FRACTION LOGIC</h2><span>→</span></div>
-                <div class="tool-card" onclick="loadTool('every-state-living-cost-calculator.html')"><h2>📍 STATE LIVING COST</h2><span>→</span></div>
-                <div class="tool-card" onclick="loadTool('income-needed-mortgage-calculator.html')"><h2>🏠 MORTGAGE INCOME</h2><span>→</span></div>
-                <div class="tool-card" onclick="loadTool('calculator-for-bmi.html')"><h2>⚖️ BMI CALCULATOR</h2><span>→</span></div>
+                <a href="calculator-for-bra-size.html" class="tool-card" onclick="navigate(event)">BRA SIZE FINDER <span>→</span></a>
+                <a href="calculator-for-fractions.html" class="tool-card" onclick="navigate(event)">FRACTION LOGIC <span>→</span></a>
+                <a href="every-state-living-cost-calculator.html" class="tool-card" onclick="navigate(event)">STATE LIVING COST <span>→</span></a>
+                <a href="income-needed-mortgage-calculator.html" class="tool-card" onclick="navigate(event)">MORTGAGE INCOME <span>→</span></a>
+                <a href="calculator-for-bmi.html" class="tool-card" onclick="navigate(event)">BMI CALCULATOR <span>→</span></a>
             </div>
-        </main>
-
-        <iframe id="tool-viewport"></iframe>
+        </div>
     </div>
 
-    <footer>POWERED BY CRITICALCALCULATOR — 2026</footer>
+    <footer>© 2026 CRITICAL CALCULATOR</footer>
 
     <script>
-        const viewport = document.getElementById('tool-viewport');
-        const hub = document.getElementById('hub-view');
-        const dropdown = document.getElementById('myDropdown');
-
-        function toggleMenu(e) {
-            e.stopPropagation();
-            dropdown.classList.toggle("show");
+        function toggleMenu(e) { 
+            e.stopPropagation(); 
+            document.getElementById('myDropdown').classList.toggle("show"); 
         }
 
-        function loadTool(fileName) {
-            dropdown.classList.remove("show");
-            hub.classList.add('hidden');
-            viewport.style.display = "block";
-            viewport.src = fileName; // Loads the file with its OWN css inside the box
-            window.scrollTo(0, 0);
-        }
+        async function navigate(e) {
+            e.preventDefault();
+            const url = e.currentTarget.getAttribute('href');
+            
+            // Updates the browser URL bar like your screenshot
+            window.history.pushState({}, "", url);
+            document.getElementById('myDropdown').classList.remove("show");
 
-        function openHub() {
-            dropdown.classList.remove("show");
-            hub.classList.remove('hidden');
-            viewport.style.display = "none";
-            viewport.src = "about:blank"; 
-            window.scrollTo(0, 0);
-        }
+            if(url === 'index.html') { location.reload(); return; }
 
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                dropdown.classList.remove("show");
+            // This part fetches the other page and puts it in the middle
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                
+                // We take the contents of the <body> of the calculator page
+                const newContent = doc.querySelector('body').innerHTML;
+                document.getElementById('content-area').innerHTML = newContent;
+                window.scrollTo(0,0);
+            } catch (err) {
+                // If it fails, it just opens the page normally
+                window.location.href = url;
             }
         }
+
+        window.onpopstate = () => location.reload();
+        window.onclick = () => document.getElementById('myDropdown').classList.remove("show");
     </script>
 </body>
 </html>
