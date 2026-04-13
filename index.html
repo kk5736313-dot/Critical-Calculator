@@ -3,51 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Critical Calculator – Hub</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Critical Calculator</title>
     <style>
-        /* THE MASTER STYLE - COPY THIS TO EVERY PAGE */
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #fff; min-height: 100vh; display: flex; flex-direction: column; }
-        header { position: fixed; top: 0; width: 100%; height: 60px; background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom: 2px solid #000; box-sizing: border-box; z-index: 10000; }
-        .brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #000; }
+        /* --- CORE SYSTEM --- */
+        body, html { 
+            margin: 0; padding: 0; font-family: 'Inter', sans-serif; 
+            background: #fff; height: 100vh; display: flex; flex-direction: column; 
+        }
+
+        /* FIXED HEADER */
+        header {
+            position: fixed; top: 0; width: 100%; height: 60px; 
+            background: #fff; border-bottom: 2px solid #000;
+            z-index: 10000; display: flex; justify-content: center; /* Centers the inner container */
+        }
+
+        /* This container keeps Header items from hitting the corners */
+        .header-container {
+            width: 100%;
+            max-width: 1000px; /* Adjust this to how wide you want the content */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .brand-group { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; color: #000; }
         #site-logo { height: 35px; }
         .brand-text { font-weight: 900; font-size: 1.1rem; text-transform: uppercase; }
+
+        /* --- TOOL TAB DROPDOWN + SCROLLER --- */
         .dropdown { position: relative; }
-        .dropbtn { background: #000; color: #fff; border: none; padding: 8px 14px; font-weight: 800; cursor: pointer; border-radius: 4px; font-size: 0.7rem; }
-        .dropdown-content { display: none; position: absolute; right: 0; top: 115%; background: #fff; width: 260px; border: 2px solid #000; box-shadow: 6px 6px 0px #000; z-index: 10001; max-height: 250px; overflow-y: auto; }
+        .dropbtn { 
+            background: #000; color: #fff; border: none; padding: 8px 14px; 
+            font-weight: 800; cursor: pointer; border-radius: 4px; font-size: 0.7rem;
+        }
+        .dropdown-content {
+            display: none; position: absolute; right: 0; top: 115%;
+            background: #fff; width: 260px; border: 2px solid #000; 
+            box-shadow: 6px 6px 0px #000; z-index: 10001;
+            max-height: 220px; /* SCROLLER AFTER 4 ITEMS */
+            overflow-y: auto; 
+        }
         .dropdown-content.show { display: block; }
         .dropdown-content a { color: black; padding: 12px 15px; text-decoration: none; display: block; font-weight: 700; border-bottom: 1px solid #eee; }
         .dropdown-content a:hover { background: #000; color: #fff; }
-        #main-wrapper { margin-top: 80px; margin-bottom: 80px; flex: 1; padding: 0 20px; }
-        footer { position: fixed; bottom: 0; width: 100%; height: 60px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 10000; }
-        
-        /* HUB SPECIFIC STYLES */
+
+        /* --- CENTERED CONTENT AREA --- */
+        #page-content { 
+            flex: 1; 
+            margin: 80px auto 80px auto; /* 'auto' on left/right centers it */
+            width: 100%;
+            max-width: 1000px; /* Matches the header width */
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
         .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 40px; }
-        .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 900px; padding-bottom: 40px;}
-        .tool-card { border: 2px solid #000; padding: 30px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #000; transition: 0.2s; }
+        .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; padding-bottom: 40px; }
+        .tool-card { border: 2px solid #000; padding: 30px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #000; }
         .tool-card:hover { background: #000; color: #fff; }
-        @media (min-width: 768px) { header { height: 80px; } .hero-text { font-size: 6rem; } .card-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* FIXED FOOTER */
+        footer {
+            position: fixed; bottom: 0; width: 100%; height: 60px; 
+            background: #000; color: #fff; border-top: 1px solid #333;
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 0.75rem; z-index: 10000;
+        }
+
+        @media (min-width: 768px) {
+            header { height: 80px; }
+            .hero-text { font-size: 6rem; }
+            .card-grid { grid-template-columns: 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <a href="index.html" class="brand-group">
-            <img src="logo.png" id="site-logo">
-            <span class="brand-text">CRITICALCALCULATOR</span>
-        </a>
-        <div class="dropdown">
-            <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="calculator-for-bra-size.html">👙 Bra Size Finder</a>
-                <a href="calculator-for-fractions.html">➗ Fraction Logic</a>
-                <a href="every-state-living-cost-calculator.html">📍 State Living Cost</a>
-                <a href="income-needed-mortgage-calculator.html">🏠 Mortgage Income</a>
-                <a href="calculator-for-bmi.html">⚖️ BMI Calculator</a>
+        <div class="header-container">
+            <div class="brand-group" onclick="location.href='index.html'">
+                <img src="logo.png" id="site-logo">
+                <span class="brand-text">CRITICALCALCULATOR</span>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="calculator-for-bra-size.html">👙 Bra Size Finder</a>
+                    <a href="calculator-for-fractions.html">➗ Fraction Logic</a>
+                    <a href="every-state-living-cost-calculator.html">📍 State Living Cost</a>
+                    <a href="income-needed-mortgage-calculator.html">🏠 Mortgage Income</a>
+                    <a href="calculator-for-bmi.html">⚖️ BMI Calculator</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <div id="main-wrapper">
+    <main id="page-content">
         <div class="hero-text">CORE<br>UTILITIES.</div>
         <div class="card-grid">
             <a href="calculator-for-bra-size.html" class="tool-card"><h2>👙 BRA SIZE FINDER</h2><span>→</span></a>
@@ -56,13 +109,20 @@
             <a href="income-needed-mortgage-calculator.html" class="tool-card"><h2>🏠 MORTGAGE INCOME</h2><span>→</span></a>
             <a href="calculator-for-bmi.html" class="tool-card"><h2>⚖️ BMI CALCULATOR</h2><span>→</span></a>
         </div>
-    </div>
+    </main>
 
     <footer>© 2026 CRITICAL CALCULATOR</footer>
 
     <script>
-        function toggleMenu(e) { e.stopPropagation(); document.getElementById('myDropdown').classList.toggle("show"); }
-        window.onclick = function(event) { if (!event.target.matches('.dropbtn')) { document.getElementById('myDropdown').classList.remove("show"); } }
+        function toggleMenu(e) {
+            e.stopPropagation();
+            document.getElementById('myDropdown').classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                document.getElementById('myDropdown').classList.remove("show");
+            }
+        }
     </script>
 </body>
 </html>
