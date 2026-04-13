@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- SEO Title -->
+<title>Every State Cost of Living – Average Living Costs Across US</title>
+
+<!-- Meta Description -->
+<meta name="description" content="Compare the cost of living in every state. Find average expenses and use our calculator for easy state-by-state comparison.">
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="
+every state cost of living,
+cost of living in every state,
+average cost of living in every state,
+cost of living calculator state comparison,
+compare cost of living by state,
+cost of living by state USA,
+cheapest states to live in USA,
+most expensive states to live in,
+state cost of living comparison tool,
+living expenses by state,
+cost of living index by state,
+monthly cost of living by state,
+best states to live in affordable cost,
+housing cost by state USA,
+utilities cost by state,
+grocery cost by state USA,
+transportation cost by state,
+state wise living cost calculator,
+US states cost of living ranking
+">
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="Y7ktFPtlqlGMxY5kybtITvMBIgMd6I9_9Blfg7KFttY" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>What are the most costly states to live in? | 2026 Cost Finder</title>
+    
+    <meta name="description" content="Discover what are the most costly states to live in with our interactive 2026 calculator. Compare monthly rent, electricity, insurance, and food costs for all 50 U.S. states instantly.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. State Cost of Living Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #34495e;
+        }
+        #result {
+            margin-top: 30px;
+            text-align: left;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+            display: none;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .label { font-weight: bold; color: #555; }
+        .total { font-size: 1.2em; color: #27ae60; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>State Living Cost Finder</h2>
+    <p>Select a state to see estimated monthly costs:</p>
+    
+    <select id="stateSelect">
+        <option value="">-- Choose a State --</option>
+    </select>
+
+    <button onclick="displayData()">Show Costs</button>
+
+    <div id="result">
+        <h3 id="resStateName">State Name</h3>
+        <div class="data-row"><span class="label">Average Rent:</span> <span id="resRent"></span></div>
+        <div class="data-row"><span class="label">Utilities:</span> <span id="resUtils"></span></div>
+        <div class="data-row"><span class="label">Insurance:</span> <span id="resIns"></span></div>
+        <div class="data-row"><span class="label">Food & Misc:</span> <span id="resFood"></span></div>
+        <div class="data-row total"><span class="label">Total Monthly:</span> <span id="resTotal"></span></div>
+    </div>
+</div>
+
+<script>
+    const stateData = {
+        "Alabama": { rent: "$1,150", utils: "$380", ins: "$550", food: "$750", total: "$2,830" },
+        "Alaska": { rent: "$1,650", utils: "$520", ins: "$950", food: "$1,250", total: "$4,370" },
+        "Arizona": { rent: "$1,750", utils: "$410", ins: "$600", food: "$880", total: "$3,640" },
+        "Arkansas": { rent: "$1,050", utils: "$360", ins: "$540", food: "$720", total: "$2,670" },
+        "California": { rent: "$2,700", utils: "$420", ins: "$900", food: "$1,100", total: "$5,120" },
+        "Colorado": { rent: "$1,950", utils: "$340", ins: "$680", food: "$950", total: "$3,920" },
+        "Connecticut": { rent: "$1,900", utils: "$480", ins: "$780", food: "$920", total: "$4,080" },
+        "Delaware": { rent: "$1,650", utils: "$390", ins: "$720", food: "$850", total: "$3,610" },
+        "Florida": { rent: "$2,100", utils: "$430", ins: "$850", food: "$950", total: "$4,330" },
+        "Georgia": { rent: "$1,700", utils: "$410", ins: "$620", food: "$840", total: "$3,570" },
+        "Hawaii": { rent: "$2,950", utils: "$650", ins: "$820", food: "$1,400", total: "$5,820" },
+        "Idaho": { rent: "$1,550", utils: "$320", ins: "$580", food: "$850", total: "$3,300" },
+        "Illinois": { rent: "$1,750", utils: "$390", ins: "$700", food: "$900", total: "$3,740" },
+        "Indiana": { rent: "$1,250", utils: "$380", ins: "$580", food: "$780", total: "$2,990" },
+        "Iowa": { rent: "$1,100", utils: "$360", ins: "$570", food: "$750", total: "$2,780" },
+        "Kansas": { rent: "$1,150", utils: "$390", ins: "$590", food: "$760", total: "$2,890" },
+        "Kentucky": { rent: "$1,150", utils: "$420", ins: "$640", food: "$750", total: "$2,960" },
+        "Louisiana": { rent: "$1,300", utils: "$440", ins: "$850", food: "$800", total: "$3,390" },
+        "Maine": { rent: "$1,600", utils: "$480", ins: "$650", food: "$900", total: "$3,630" },
+        "Maryland": { rent: "$2,050", utils: "$410", ins: "$780", food: "$950", total: "$4,190" },
+        "Massachusetts": { rent: "$2,800", utils: "$460", ins: "$850", food: "$1,100", total: "$5,210" },
+        "Michigan": { rent: "$1,350", utils: "$390", ins: "$880", food: "$820", total: "$3,440" },
+        "Minnesota": { rent: "$1,600", utils: "$380", ins: "$680", food: "$880", total: "$3,540" },
+        "Mississippi": { rent: "$1,050", utils: "$420", ins: "$620", food: "$740", total: "$2,830" },
+        "Missouri": { rent: "$1,200", utils: "$410", ins: "$620", food: "$780", total: "$3,010" },
+        "Montana": { rent: "$1,550", utils: "$330", ins: "$650", food: "$900", total: "$3,430" },
+        "Nebraska": { rent: "$1,250", utils: "$360", ins: "$620", food: "$780", total: "$3,010" },
+        "Nevada": { rent: "$1,850", utils: "$380", ins: "$700", food: "$900", total: "$3,830" },
+        "New Hampshire": { rent: "$1,900", utils: "$470", ins: "$640", food: "$950", total: "$3,960" },
+        "New Jersey": { rent: "$2,300", utils: "$420", ins: "$950", food: "$1,050", total: "$4,720" },
+        "New Mexico": { rent: "$1,400", utils: "$350", ins: "$640", food: "$820", total: "$3,210" },
+        "New York": { rent: "$2,750", utils: "$440", ins: "$900", food: "$1,150", total: "$5,240" },
+        "North Carolina": { rent: "$1,650", utils: "$380", ins: "$620", food: "$850", total: "$3,500" },
+        "North Dakota": { rent: "$1,150", utils: "$340", ins: "$600", food: "$850", total: "$2,940" },
+        "Ohio": { rent: "$1,300", utils: "$400", ins: "$610", food: "$800", total: "$3,110" },
+        "Oklahoma": { rent: "$1,100", utils: "$410", ins: "$650", food: "$750", total: "$2,910" },
+        "Oregon": { rent: "$1,900", utils: "$330", ins: "$680", food: "$1,000", total: "$3,910" },
+        "Pennsylvania": { rent: "$1,600", utils: "$430", ins: "$720", food: "$880", total: "$3,630" },
+        "Rhode Island": { rent: "$1,950", utils: "$490", ins: "$740", food: "$950", total: "$4,130" },
+        "South Carolina": { rent: "$1,550", utils: "$410", ins: "$680", food: "$820", total: "$3,460" },
+        "South Dakota": { rent: "$1,250", utils: "$340", ins: "$620", food: "$820", total: "$3,030" },
+        "Tennessee": { rent: "$1,600", utils: "$370", ins: "$580", food: "$850", total: "$3,400" },
+        "Texas": { rent: "$1,650", utils: "$440", ins: "$700", food: "$880", total: "$3,670" },
+        "Utah": { rent: "$1,800", utils: "$320", ins: "$610", food: "$920", total: "$3,650" },
+        "Vermont": { rent: "$1,850", utils: "$500", ins: "$700", food: "$1,000", total: "$4,050" },
+        "Virginia": { rent: "$1,950", utils: "$390", ins: "$680", food: "$920", total: "$3,940" },
+        "Washington": { rent: "$2,250", utils: "$330", ins: "$720", food: "$1,050", total: "$4,350" },
+        "West Virginia": { rent: "$1,000", utils: "$400", ins: "$620", food: "$780", total: "$2,800" },
+        "Wisconsin": { rent: "$1,400", utils: "$380", ins: "$650", food: "$820", total: "$3,250" },
+        "Wyoming": { rent: "$1,350", utils: "$350", ins: "$700", food: "$900", total: "$3,300" }
+    };
+
+    // Populate dropdown
+    const select = document.getElementById('stateSelect');
+    Object.keys(stateData).forEach(state => {
+        let opt = document.createElement('option');
+        opt.value = state;
+        opt.innerHTML = state;
+        select.appendChild(opt);
+    });
+
+    function displayData() {
+        const state = select.value;
+        const resultDiv = document.getElementById('result');
+        
+        if (state) {
+            const data = stateData[state];
+            document.getElementById('resStateName').innerText = state;
+            document.getElementById('resRent').innerText = data.rent;
+            document.getElementById('resUtils').innerText = data.utils;
+            document.getElementById('resIns').innerText = data.ins;
+            document.getElementById('resFood').innerText = data.food;
+            document.getElementById('resTotal').innerText = data.total;
+            resultDiv.style.display = 'block';
+        } else {
+            alert("Please select a state first!");
+        }
+    }
+</script>
+
+</body>
+</html>

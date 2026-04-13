@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- SEO Title -->
+<title>A Calculator for Fractions – (Add, Subtract, Divide & Multiply)</title>
+
+<!-- Meta Description -->
+<meta name="description" content="Use our powerful calculator for fractions to add, subtract, multiply, and divide fractions instantly.">
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="
+a calculator for fractions,
+fraction calculator,
+a calculator that has fractions,
+a calculator that does fractions,
+1 3 * 5 as a fraction,
+1.5 as a fraction calculator,
+7 8 * 5 6 as a fraction,
+calculate fraction of a number,
+find fraction of a number calculator,
+dividing a fraction calculator,
+fraction to decimal calculator,
+decimal to fraction converter,
+simplify fractions calculator,
+multiply fractions calculator,
+add fractions calculator,
+subtract fractions calculator,
+fraction problem solver,
+mixed number to fraction calculator,
+improper fraction calculator,
+online fraction calculator free
+">
+    <meta charset="UTF-8">
+    <title>Fraction Calculator</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f9; }
+        .calc-card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .fraction-input { display: inline-block; vertical-align: middle; text-align: center; }
+        input { display: block; width: 50px; margin: 5px; padding: 5px; text-align: center; border: 1px solid #ccc; border-radius: 4px; }
+        .line { border-top: 2px solid #333; margin: 2px 5px; }
+        .operator, .equals { font-size: 1.5rem; font-weight: bold; margin: 0 15px; }
+        #result { color: #2c3e50; font-weight: bold; }
+        button { margin-top: 20px; width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="calc-card">
+    <h2>Fraction Calculator</h2>
+    
+    <div class="fraction-input">
+        <input type="number" id="n1" placeholder="Num">
+        <div class="line"></div>
+        <input type="number" id="d1" placeholder="Den">
+    </div>
+
+    <select id="op" class="operator">
+        <option value="+">+</option>
+        <option value="-">−</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+
+    <div class="fraction-input">
+        <input type="number" id="n2" placeholder="Num">
+        <div class="line"></div>
+        <input type="number" id="d2" placeholder="Den">
+    </div>
+
+    <span class="equals">=</span>
+
+    <div class="fraction-input">
+        <div id="res-num">?</div>
+        <div class="line"></div>
+        <div id="res-den">?</div>
+    </div>
+
+    <button onclick="calculate()">Calculate</button>
+</div>
+
+<script>
+    // Helper function to find Greatest Common Divisor
+    function gcd(a, b) {
+        return b ? gcd(b, a % b) : a;
+    }
+
+    function calculate() {
+        const n1 = parseInt(document.getElementById('n1').value);
+        const d1 = parseInt(document.getElementById('d1').value);
+        const n2 = parseInt(document.getElementById('n2').value);
+        const d2 = parseInt(document.getElementById('d2').value);
+        const op = document.getElementById('op').value;
+
+        if (isNaN(n1) || isNaN(d1) || isNaN(n2) || isNaN(d2)) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        if (d1 === 0 || d2 === 0) {
+            alert("Denominator cannot be zero.");
+            return;
+        }
+
+        let finalNum, finalDen;
+
+        if (op === "+") {
+            finalNum = n1 * d2 + n2 * d1;
+            finalDen = d1 * d2;
+        } else if (op === "-") {
+            finalNum = n1 * d2 - n2 * d1;
+            finalDen = d1 * d2;
+        } else if (op === "*") {
+            finalNum = n1 * n2;
+            finalDen = d1 * d2;
+        } else if (op === "/") {
+            finalNum = n1 * d2;
+            finalDen = d1 * n2;
+        }
+
+        // Simplify
+        const common = Math.abs(gcd(finalNum, finalDen));
+        document.getElementById('res-num').innerText = finalNum / common;
+        document.getElementById('res-den').innerText = finalDen / common;
+    }
+</script>
+
+</body>
+</html>
