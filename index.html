@@ -10,7 +10,6 @@
   <meta name="robots" content="index, follow">
 
   <style>
-    /* ---------- RESET & GLOBAL ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +23,7 @@
       line-height: 1.4;
     }
 
-    /* ---------- HEADER (exactly as criticalcalculator.online) ---------- */
+    /* ===== HEADER (exactly as criticalcalculator.online) ===== */
     .site-header {
       position: sticky;
       top: 0;
@@ -65,7 +64,7 @@
       text-transform: uppercase;
     }
 
-    /* DROPDOWN MENU WITH SCROLLER - exactly 4 items visible, then scroll */
+    /* DROPDOWN MENU WITH WORKING SCROLLER */
     .dropdown {
       position: relative;
     }
@@ -93,7 +92,7 @@
       border: 2px solid #000000;
       z-index: 1001;
       box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
-      /* SCROLLER: fixed height so after 4 items it scrolls */
+      /* SCROLLER: limited height + overflow auto */
       max-height: 280px;
       overflow-y: auto;
       overflow-x: hidden;
@@ -136,7 +135,7 @@
       display: block;
     }
 
-    /* ---------- MAIN LAYOUT (landing page) ---------- */
+    /* ===== MAIN LAYOUT (landing page) ===== */
     .main-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -152,7 +151,7 @@
       letter-spacing: -2px;
     }
 
-    /* tool grid: 2 columns on desktop, 1 on mobile */
+    /* responsive tool grid */
     .tool-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -160,7 +159,7 @@
       margin: 2rem 0;
     }
 
-    /* card style: black border, flex, exactly like reference */
+    /* card style */
     .tool-card {
       border: 2px solid #000000;
       padding: 1.8rem;
@@ -195,44 +194,23 @@
       display: none !important;
     }
 
-    /* iframe container for subpages */
+    /* iframe container (no back button) */
     .iframe-viewport {
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       width: 100%;
     }
 
     .tool-iframe {
       width: 100%;
       min-height: 700px;
-      height: calc(100vh - 200px);
+      height: calc(100vh - 140px);
       border: 1px solid #e2e8f0;
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
 
-    .back-button {
-      background: none;
-      border: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      margin-bottom: 1.2rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #000000;
-      padding: 6px 12px;
-      border-radius: 40px;
-      transition: 0.2s;
-    }
-
-    .back-button:hover {
-      background: #f0f0f0;
-      text-decoration: underline;
-    }
-
-    /* footer exactly as original */
+    /* footer */
     .site-footer {
       background: #000000;
       color: #ffffff;
@@ -244,6 +222,7 @@
       margin-top: 2rem;
     }
 
+    /* ===== MOBILE FRIENDLY TWEAKS ===== */
     @media (max-width: 700px) {
       .header-container {
         flex-direction: column;
@@ -255,6 +234,7 @@
       }
       .tool-iframe {
         min-height: 550px;
+        height: 70vh;
       }
       .brand-logo {
         height: 32px;
@@ -265,6 +245,10 @@
       .dropdown-content {
         width: 240px;
         max-height: 260px;
+        right: -10px;
+      }
+      .hero-text {
+        margin-bottom: 1.5rem;
       }
     }
   </style>
@@ -274,7 +258,6 @@
 <header class="site-header">
   <div class="header-container">
     <div class="brand-group" id="homeBtn">
-      <!-- using your own logo file: logo.png -->
       <img src="logo.png" alt="Critical Calculator Logo" class="brand-logo" id="siteLogo">
       <span class="brand-text">CRITICALCALCULATOR</span>
     </div>
@@ -286,7 +269,7 @@
         <a data-tool="bmi">⚖️ BMI Calculator</a>
         <a data-tool="living">📍 State Living Cost</a>
         <a data-tool="mortgage">🏠 Mortgage Income</a>
-        <!-- extra dummy item to demonstrate scrolling if needed (just to be safe) -->
+        <!-- extra item to force scroll (already 5 items, but adding one more ensures scroll) -->
         <a data-tool="mortgage" style="opacity:0.9;">📊 Budget Planner (soon)</a>
       </div>
     </div>
@@ -294,7 +277,7 @@
 </header>
 
 <div class="main-container" id="appContainer">
-  <!-- LANDING VIEW: tool grid + hero -->
+  <!-- LANDING VIEW -->
   <div id="landingView">
     <div class="hero-text">CORE<br>UTILITIES.</div>
     <div class="tool-grid" id="toolGrid">
@@ -306,9 +289,8 @@
     </div>
   </div>
 
-  <!-- IFRAME VIEW: for loading external calculator files -->
+  <!-- IFRAME VIEW (NO BACK BUTTON) -->
   <div id="iframeView" class="hidden">
-    <button class="back-button" id="backToHomeBtn">← Back to all tools</button>
     <div class="iframe-viewport">
       <iframe id="toolFrame" class="tool-iframe" title="Calculator tool" src="about:blank"></iframe>
     </div>
@@ -320,7 +302,7 @@
 </footer>
 
 <script>
-  // ---------- MAPPING: tool IDs → actual file names (must match uploaded files) ----------
+  // MAPPING: tool IDs → actual file names (must match uploaded files)
   const toolFileMap = {
     bra: "calculator for bra size.html",
     fraction: "a calculator for fractions.html",
@@ -329,7 +311,7 @@
     mortgage: "income needed for 300k mortgage.html"
   };
 
-  // Helper: get clean slug for sub-URL (e.g., /bra-calculator)
+  // clean slugs for sub-URLs
   function getSlugFromTool(toolId) {
     const slugs = {
       bra: "bra-size-calculator",
@@ -341,7 +323,7 @@
     return slugs[toolId] || toolId;
   }
 
-  // Update browser URL without reloading page (clean sub-url)
+  // update browser URL (sub-url appears in search bar)
   function updateSubUrl(toolId) {
     const slug = getSlugFromTool(toolId);
     let basePath = window.location.pathname.replace(/\/[^\/]*\/?$/, '');
@@ -350,10 +332,9 @@
     window.history.pushState({ toolId: toolId }, "", newUrl);
   }
 
-  // Load a specific calculator tool by ID
+  // load a calculator tool
   function loadTool(toolId) {
     if (!toolId || !toolFileMap[toolId]) {
-      console.error("Invalid tool:", toolId);
       alert("Tool configuration error. Please ensure all HTML files are uploaded.");
       return;
     }
@@ -362,21 +343,15 @@
     const landingView = document.getElementById("landingView");
     const toolFrame = document.getElementById("toolFrame");
 
-    // show iframe container, hide landing
     landingView.classList.add("hidden");
     iframeView.classList.remove("hidden");
-
-    // set iframe source
     toolFrame.src = fileName;
 
-    // update browser sub-url (clean slug)
     updateSubUrl(toolId);
-
-    // scroll to top for better UX
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Go back to landing page (home)
+  // go back to landing page (home)
   function goToLanding() {
     const landingView = document.getElementById("landingView");
     const iframeView = document.getElementById("iframeView");
@@ -385,13 +360,12 @@
     const toolFrame = document.getElementById("toolFrame");
     if (toolFrame) toolFrame.src = "about:blank";
 
-    // reset URL to base domain without trailing slug
     let cleanUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*\/?$/, '');
     if (!cleanUrl.endsWith('/')) cleanUrl += '/';
     window.history.pushState({}, document.title, cleanUrl);
   }
 
-  // Extract tool ID from a sub-url like /bra-size-calculator/ or /fraction-calculator
+  // extract tool ID from sub-url
   function getToolIdFromPath() {
     const path = window.location.pathname;
     const cleanPath = path.replace(/\/$/, "");
@@ -406,99 +380,73 @@
     return reverseMap[lastSegment] || null;
   }
 
-  // On page load: check if URL has sub-url and load appropriate tool
+  // on load: check URL and load tool if needed
   function checkUrlAndLoadTool() {
     const toolId = getToolIdFromPath();
     if (toolId && toolFileMap[toolId]) {
-      // load tool directly without adding extra history entry
       const landingView = document.getElementById("landingView");
       const iframeView = document.getElementById("iframeView");
       landingView.classList.add("hidden");
       iframeView.classList.remove("hidden");
-      const toolFrame = document.getElementById("toolFrame");
-      toolFrame.src = toolFileMap[toolId];
+      document.getElementById("toolFrame").src = toolFileMap[toolId];
     } else {
-      // default landing page
       goToLanding();
     }
   }
 
-  // ---------- EVENT LISTENERS ----------
-  // Tool cards click (landing page grid)
-  const cards = document.querySelectorAll(".tool-card");
-  cards.forEach(card => {
-    card.addEventListener("click", (e) => {
+  // ---- EVENT LISTENERS ----
+  // tool cards
+  document.querySelectorAll(".tool-card").forEach(card => {
+    card.addEventListener("click", () => {
       const tool = card.getAttribute("data-tool");
-      if (tool && toolFileMap[tool]) {
-        loadTool(tool);
-      } else {
-        alert("Tool coming soon. Please ensure all HTML files are uploaded.");
-      }
+      if (tool && toolFileMap[tool]) loadTool(tool);
+      else alert("Upload the corresponding HTML file.");
     });
   });
 
-  // Dropdown menu items
-  const dropdownItems = document.querySelectorAll(".dropdown-content a");
-  dropdownItems.forEach(item => {
+  // dropdown menu items
+  document.querySelectorAll(".dropdown-content a").forEach(item => {
     item.addEventListener("click", (e) => {
       const tool = item.getAttribute("data-tool");
-      if (tool && toolFileMap[tool]) {
-        loadTool(tool);
-      } else if (tool === null && item.innerText.includes("Budget")) {
-        alert("Budget Planner coming soon!");
-      } else {
-        alert("Please upload the corresponding HTML file.");
-      }
-      // close dropdown after selection
+      if (tool && toolFileMap[tool]) loadTool(tool);
+      else if (item.innerText.includes("Budget")) alert("Budget Planner coming soon!");
+      else alert("Please upload the required HTML file.");
       document.getElementById("dropdownMenu").classList.remove("show");
     });
   });
 
-  // Home button (brand group with logo)
+  // home button
   document.getElementById("homeBtn").addEventListener("click", () => {
     goToLanding();
-    // close dropdown if open
     document.getElementById("dropdownMenu").classList.remove("show");
   });
 
-  // Back button inside iframe view
-  const backBtn = document.getElementById("backToHomeBtn");
-  if (backBtn) {
-    backBtn.addEventListener("click", goToLanding);
-  }
-
-  // Dropdown toggle logic with scroller (CSS handles height)
+  // dropdown toggle
   const menuBtn = document.getElementById("menuBtn");
   const dropdownMenu = document.getElementById("dropdownMenu");
-
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     dropdownMenu.classList.toggle("show");
   });
-
-  // Close dropdown when clicking outside
   window.addEventListener("click", (e) => {
     if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
       dropdownMenu.classList.remove("show");
     }
   });
 
-  // Handle browser back/forward (popstate) to restore correct view
+  // handle back/forward buttons
   window.addEventListener("popstate", (event) => {
     const toolId = getToolIdFromPath();
     if (toolId && toolFileMap[toolId]) {
-      const landingView = document.getElementById("landingView");
-      const iframeView = document.getElementById("iframeView");
-      landingView.classList.add("hidden");
-      iframeView.classList.remove("hidden");
-      const toolFrame = document.getElementById("toolFrame");
-      toolFrame.src = toolFileMap[toolId];
+      document.getElementById("landingView").classList.add("hidden");
+      document.getElementById("iframeView").classList.remove("hidden");
+      document.getElementById("toolFrame").src = toolFileMap[toolId];
     } else {
       goToLanding();
     }
   });
 
-  // optional: handle logo image error fallback (if logo.png missing, show placeholder)
+  // logo fallback if logo.png missing
   const logoImg = document.getElementById("siteLogo");
   if (logoImg) {
     logoImg.onerror = function() {
@@ -515,26 +463,7 @@
     };
   }
 
-  // initial execution: read sub-url if any
   checkUrlAndLoadTool();
-
-  console.log("Critical Calculator ready — logo.png, dropdown with scroller (max-height 280px, scroll after 4 items), sub-URL routing active.");
 </script>
-
-<!-- 
-  ✅ FIXES APPLIED:
-  1. Removed extra logo icon — now uses your "logo.png" only.
-  2. Dropdown menu has SCROLLER: max-height: 280px; overflow-y: auto → after 4 items it scrolls.
-  3. Clean sub-URLs: /bra-size-calculator/ , /mortgage-calculator/ etc. Work on reload.
-  4. All external calculator files must be in same folder.
-
-  📁 REQUIRED FILES (upload to same directory as this index.html):
-     - logo.png (your own logo)
-     - calculator for bra size.html
-     - a calculator for fractions.html
-     - calculator-for-bmi.html
-     - every-state-living-cost-calculator.html
-     - income needed for 300k mortgage.html
--->
 </body>
 </html>
