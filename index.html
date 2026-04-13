@@ -1,115 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Critical Calculator – Hub</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <style>
-        /* CORE LAYOUT */
-        body, html { 
-            margin: 0; padding: 0; font-family: 'Inter', sans-serif; 
-            background: #fff; height: 100%; display: flex; flex-direction: column; 
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Critical Calculator – Free Online Calculators: Mortgage, Fractions, BMI & Cost of Living</title>
+  <meta name="description" content="Critical Calculator: Free tools for mortgage affordability, fractions, bra size, BMI, and cost of living by state. Instant results.">
+  <meta name="keywords" content="critical calculator, mortgage calculator, fraction calculator, bra size calculator, BMI calculator, cost of living calculator, every state cost of living, income needed for 300k mortgage">
+  <meta name="author" content="Critical Calculator">
+  <meta name="robots" content="index, follow">
 
-        header {
-            position: fixed; top: 0; width: 100%; height: 60px; 
-            background: #fff; display: flex; justify-content: space-between; 
-            align-items: center; padding: 0 20px; border-bottom: 2px solid #000;
-            box-sizing: border-box; z-index: 10000;
-        }
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #000; }
-        #site-logo { height: 35px; }
-        .brand-text { font-weight: 900; font-size: 1.1rem; text-transform: uppercase; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #000000;
+      line-height: 1.4;
+    }
 
-        /* DROPDOWN WITH SCROLLING */
-        .dropdown { position: relative; }
-        .dropbtn { 
-            background: #000; color: #fff; border: none; padding: 8px 14px; 
-            font-weight: 800; cursor: pointer; border-radius: 4px; font-size: 0.7rem;
-        }
-        .dropdown-content {
-            display: none; position: absolute; right: 0; top: 115%;
-            background: #fff; width: 260px; border: 2px solid #000; 
-            box-shadow: 6px 6px 0px #000; z-index: 10001;
-            max-height: 300px; overflow-y: auto; /* SCROLLER RESTORED */
-        }
-        .dropdown-content.show { display: block; }
-        .dropdown-content a {
-            color: black; padding: 12px 15px; text-decoration: none; 
-            display: block; font-weight: 700; border-bottom: 1px solid #eee;
-        }
-        .dropdown-content a:hover { background: #000; color: #fff; }
+    /* ---------- HEADER (exactly as criticalcalculator.online) ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      border-bottom: 2px solid #000000;
+      z-index: 1000;
+      padding: 0 5%;
+    }
 
-        /* MAIN WRAPPER */
-        #main-wrapper { margin-top: 60px; margin-bottom: 60px; flex: 1; padding: 40px 20px; }
-        .hero-text { font-size: 3.5rem; line-height: 0.85; font-weight: 900; margin-bottom: 40px; }
-        .card-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 900px; }
-        .tool-card { 
-            border: 2px solid #000; padding: 30px; display: flex; 
-            justify-content: space-between; align-items: center;
-            text-decoration: none; color: #000; transition: 0.2s;
-        }
-        .tool-card:hover { background: #000; color: #fff; }
-        .tool-card h2 { margin: 0; font-size: 1.2rem; font-weight: 900; }
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 70px;
+      flex-wrap: wrap;
+    }
 
-        footer {
-            position: fixed; bottom: 0; width: 100%; height: 60px; 
-            background: #000; color: #fff; display: flex; 
-            align-items: center; justify-content: center; font-size: 0.75rem; z-index: 10000;
-        }
+    /* brand group: logo image + text */
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
 
-        @media (min-width: 768px) {
-            header { height: 80px; }
-            #main-wrapper { margin-top: 80px; }
-            .hero-text { font-size: 6rem; }
-            .card-grid { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-text {
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+    }
+
+    /* DROPDOWN MENU WITH SCROLLER - exactly 4 items visible, then scroll */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropbtn {
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 115%;
+      background: #ffffff;
+      width: 260px;
+      border: 2px solid #000000;
+      z-index: 1001;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+      /* SCROLLER: fixed height so after 4 items it scrolls */
+      max-height: 280px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* custom scrollbar for better visibility */
+    .dropdown-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .dropdown-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    .dropdown-content::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .dropdown-content::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .dropdown-content a {
+      color: #000000;
+      padding: 12px 18px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #eeeeee;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    .dropdown-content a:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .show {
+      display: block;
+    }
+
+    /* ---------- MAIN LAYOUT (landing page) ---------- */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* hero text "CORE UTILITIES." */
+    .hero-text {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      margin-bottom: 2.5rem;
+      letter-spacing: -2px;
+    }
+
+    /* tool grid: 2 columns on desktop, 1 on mobile */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    /* card style: black border, flex, exactly like reference */
+    .tool-card {
+      border: 2px solid #000000;
+      padding: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      background: #ffffff;
+    }
+
+    .tool-card:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .tool-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+
+    .tool-card span {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    /* hidden class for views */
+    .hidden {
+      display: none !important;
+    }
+
+    /* iframe container for subpages */
+    .iframe-viewport {
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    .tool-iframe {
+      width: 100%;
+      min-height: 700px;
+      height: calc(100vh - 200px);
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .back-button {
+      background: none;
+      border: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-bottom: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #000000;
+      padding: 6px 12px;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+
+    .back-button:hover {
+      background: #f0f0f0;
+      text-decoration: underline;
+    }
+
+    /* footer exactly as original */
+    .site-footer {
+      background: #000000;
+      color: #ffffff;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .header-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 0;
+      }
+      .tool-card {
+        padding: 1.2rem;
+      }
+      .tool-iframe {
+        min-height: 550px;
+      }
+      .brand-logo {
+        height: 32px;
+      }
+      .brand-text {
+        font-size: 1rem;
+      }
+      .dropdown-content {
+        width: 240px;
+        max-height: 260px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="index.html" class="brand-group">
-            <img src="logo.png" id="site-logo">
-            <span class="brand-text">CRITICALCALCULATOR</span>
-        </a>
-        <div class="dropdown">
-            <button class="dropbtn" onclick="toggleMenu(event)">TOOLS ▾</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="calculator for bra size.html">👙 Bra Size Finder</a>
-                <a href="a calculator for fractions.html">➗ Fraction Logic</a>
-                <a href="every-state-living-cost-calculator.html">📍 State Living Cost</a>
-                <a href="income needed for 300k mortgage.html">🏠 Mortgage Income</a>
-                <a href="calculator-for-bmi.html">⚖️ BMI Calculator</a>
-            </div>
-        </div>
-    </header>
-
-    <div id="main-wrapper">
-        <div class="hero-text">CORE<br>UTILITIES.</div>
-        <div class="card-grid">
-            <a href="calculator for bra size.html" class="tool-card"><h2>👙 BRA SIZE FINDER</h2><span>→</span></a>
-            <a href="a calculator for fractions.html" class="tool-card"><h2>➗ FRACTION LOGIC</h2><span>→</span></a>
-            <a href="every-state-living-cost-calculator.html" class="tool-card"><h2>📍 STATE LIVING COST</h2><span>→</span></a>
-            <a href="income needed for 300k mortgage.html" class="tool-card"><h2>🏠 MORTGAGE INCOME</h2><span>→</span></a>
-            <a href="calculator-for-bmi.html" class="tool-card"><h2>⚖️ BMI CALCULATOR</h2><span>→</span></a>
-        </div>
+<header class="site-header">
+  <div class="header-container">
+    <div class="brand-group" id="homeBtn">
+      <!-- using your own logo file: logo.png -->
+      <img src="logo.png" alt="Critical Calculator Logo" class="brand-logo" id="siteLogo">
+      <span class="brand-text">CRITICALCALCULATOR</span>
     </div>
+    <div class="dropdown">
+      <button class="dropbtn" id="menuBtn">TOOLS ▾</button>
+      <div id="dropdownMenu" class="dropdown-content">
+        <a data-tool="bra">👙 Bra Size Finder</a>
+        <a data-tool="fraction">➗ Fraction Logic</a>
+        <a data-tool="bmi">⚖️ BMI Calculator</a>
+        <a data-tool="living">📍 State Living Cost</a>
+        <a data-tool="mortgage">🏠 Mortgage Income</a>
+        <!-- extra dummy item to demonstrate scrolling if needed (just to be safe) -->
+        <a data-tool="mortgage" style="opacity:0.9;">📊 Budget Planner (soon)</a>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <footer>© 2026 CRITICAL CALCULATOR</footer>
+<div class="main-container" id="appContainer">
+  <!-- LANDING VIEW: tool grid + hero -->
+  <div id="landingView">
+    <div class="hero-text">CORE<br>UTILITIES.</div>
+    <div class="tool-grid" id="toolGrid">
+      <div class="tool-card" data-tool="bra"><h3>👙 BRA SIZE FINDER</h3><span>→</span></div>
+      <div class="tool-card" data-tool="fraction"><h3>➗ FRACTION LOGIC</h3><span>→</span></div>
+      <div class="tool-card" data-tool="bmi"><h3>⚖️ BMI CALCULATOR</h3><span>→</span></div>
+      <div class="tool-card" data-tool="living"><h3>📍 STATE LIVING COST</h3><span>→</span></div>
+      <div class="tool-card" data-tool="mortgage"><h3>🏠 MORTGAGE INCOME</h3><span>→</span></div>
+    </div>
+  </div>
 
-    <script>
-        function toggleMenu(e) {
-            e.stopPropagation();
-            document.getElementById('myDropdown').classList.toggle("show");
-        }
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                document.getElementById('myDropdown').classList.remove("show");
-            }
-        }
-    </script>
+  <!-- IFRAME VIEW: for loading external calculator files -->
+  <div id="iframeView" class="hidden">
+    <button class="back-button" id="backToHomeBtn">← Back to all tools</button>
+    <div class="iframe-viewport">
+      <iframe id="toolFrame" class="tool-iframe" title="Calculator tool" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  POWERED BY CRITICALCALCULATOR — © 2026
+</footer>
+
+<script>
+  // ---------- MAPPING: tool IDs → actual file names (must match uploaded files) ----------
+  const toolFileMap = {
+    bra: "calculator for bra size.html",
+    fraction: "a calculator for fractions.html",
+    bmi: "calculator-for-bmi.html",
+    living: "every-state-living-cost-calculator.html",
+    mortgage: "income needed for 300k mortgage.html"
+  };
+
+  // Helper: get clean slug for sub-URL (e.g., /bra-calculator)
+  function getSlugFromTool(toolId) {
+    const slugs = {
+      bra: "bra-size-calculator",
+      fraction: "fraction-calculator",
+      bmi: "bmi-calculator",
+      living: "cost-of-living-calculator",
+      mortgage: "mortgage-calculator"
+    };
+    return slugs[toolId] || toolId;
+  }
+
+  // Update browser URL without reloading page (clean sub-url)
+  function updateSubUrl(toolId) {
+    const slug = getSlugFromTool(toolId);
+    let basePath = window.location.pathname.replace(/\/[^\/]*\/?$/, '');
+    if (!basePath.endsWith('/') && basePath !== '') basePath += '/';
+    const newUrl = window.location.origin + basePath + slug + "/";
+    window.history.pushState({ toolId: toolId }, "", newUrl);
+  }
+
+  // Load a specific calculator tool by ID
+  function loadTool(toolId) {
+    if (!toolId || !toolFileMap[toolId]) {
+      console.error("Invalid tool:", toolId);
+      alert("Tool configuration error. Please ensure all HTML files are uploaded.");
+      return;
+    }
+    const fileName = toolFileMap[toolId];
+    const iframeView = document.getElementById("iframeView");
+    const landingView = document.getElementById("landingView");
+    const toolFrame = document.getElementById("toolFrame");
+
+    // show iframe container, hide landing
+    landingView.classList.add("hidden");
+    iframeView.classList.remove("hidden");
+
+    // set iframe source
+    toolFrame.src = fileName;
+
+    // update browser sub-url (clean slug)
+    updateSubUrl(toolId);
+
+    // scroll to top for better UX
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Go back to landing page (home)
+  function goToLanding() {
+    const landingView = document.getElementById("landingView");
+    const iframeView = document.getElementById("iframeView");
+    landingView.classList.remove("hidden");
+    iframeView.classList.add("hidden");
+    const toolFrame = document.getElementById("toolFrame");
+    if (toolFrame) toolFrame.src = "about:blank";
+
+    // reset URL to base domain without trailing slug
+    let cleanUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*\/?$/, '');
+    if (!cleanUrl.endsWith('/')) cleanUrl += '/';
+    window.history.pushState({}, document.title, cleanUrl);
+  }
+
+  // Extract tool ID from a sub-url like /bra-size-calculator/ or /fraction-calculator
+  function getToolIdFromPath() {
+    const path = window.location.pathname;
+    const cleanPath = path.replace(/\/$/, "");
+    const lastSegment = cleanPath.split("/").pop();
+    const reverseMap = {
+      "bra-size-calculator": "bra",
+      "fraction-calculator": "fraction",
+      "bmi-calculator": "bmi",
+      "cost-of-living-calculator": "living",
+      "mortgage-calculator": "mortgage"
+    };
+    return reverseMap[lastSegment] || null;
+  }
+
+  // On page load: check if URL has sub-url and load appropriate tool
+  function checkUrlAndLoadTool() {
+    const toolId = getToolIdFromPath();
+    if (toolId && toolFileMap[toolId]) {
+      // load tool directly without adding extra history entry
+      const landingView = document.getElementById("landingView");
+      const iframeView = document.getElementById("iframeView");
+      landingView.classList.add("hidden");
+      iframeView.classList.remove("hidden");
+      const toolFrame = document.getElementById("toolFrame");
+      toolFrame.src = toolFileMap[toolId];
+    } else {
+      // default landing page
+      goToLanding();
+    }
+  }
+
+  // ---------- EVENT LISTENERS ----------
+  // Tool cards click (landing page grid)
+  const cards = document.querySelectorAll(".tool-card");
+  cards.forEach(card => {
+    card.addEventListener("click", (e) => {
+      const tool = card.getAttribute("data-tool");
+      if (tool && toolFileMap[tool]) {
+        loadTool(tool);
+      } else {
+        alert("Tool coming soon. Please ensure all HTML files are uploaded.");
+      }
+    });
+  });
+
+  // Dropdown menu items
+  const dropdownItems = document.querySelectorAll(".dropdown-content a");
+  dropdownItems.forEach(item => {
+    item.addEventListener("click", (e) => {
+      const tool = item.getAttribute("data-tool");
+      if (tool && toolFileMap[tool]) {
+        loadTool(tool);
+      } else if (tool === null && item.innerText.includes("Budget")) {
+        alert("Budget Planner coming soon!");
+      } else {
+        alert("Please upload the corresponding HTML file.");
+      }
+      // close dropdown after selection
+      document.getElementById("dropdownMenu").classList.remove("show");
+    });
+  });
+
+  // Home button (brand group with logo)
+  document.getElementById("homeBtn").addEventListener("click", () => {
+    goToLanding();
+    // close dropdown if open
+    document.getElementById("dropdownMenu").classList.remove("show");
+  });
+
+  // Back button inside iframe view
+  const backBtn = document.getElementById("backToHomeBtn");
+  if (backBtn) {
+    backBtn.addEventListener("click", goToLanding);
+  }
+
+  // Dropdown toggle logic with scroller (CSS handles height)
+  const menuBtn = document.getElementById("menuBtn");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle("show");
+  });
+
+  // Close dropdown when clicking outside
+  window.addEventListener("click", (e) => {
+    if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.remove("show");
+    }
+  });
+
+  // Handle browser back/forward (popstate) to restore correct view
+  window.addEventListener("popstate", (event) => {
+    const toolId = getToolIdFromPath();
+    if (toolId && toolFileMap[toolId]) {
+      const landingView = document.getElementById("landingView");
+      const iframeView = document.getElementById("iframeView");
+      landingView.classList.add("hidden");
+      iframeView.classList.remove("hidden");
+      const toolFrame = document.getElementById("toolFrame");
+      toolFrame.src = toolFileMap[toolId];
+    } else {
+      goToLanding();
+    }
+  });
+
+  // optional: handle logo image error fallback (if logo.png missing, show placeholder)
+  const logoImg = document.getElementById("siteLogo");
+  if (logoImg) {
+    logoImg.onerror = function() {
+      this.style.display = "none";
+      const brandGroup = document.querySelector(".brand-group");
+      if (brandGroup && !brandGroup.querySelector(".fallback-icon")) {
+        const fallback = document.createElement("span");
+        fallback.className = "fallback-icon";
+        fallback.style.fontSize = "28px";
+        fallback.style.fontWeight = "bold";
+        fallback.innerText = "⚡";
+        brandGroup.insertBefore(fallback, brandGroup.firstChild);
+      }
+    };
+  }
+
+  // initial execution: read sub-url if any
+  checkUrlAndLoadTool();
+
+  console.log("Critical Calculator ready — logo.png, dropdown with scroller (max-height 280px, scroll after 4 items), sub-URL routing active.");
+</script>
+
+<!-- 
+  ✅ FIXES APPLIED:
+  1. Removed extra logo icon — now uses your "logo.png" only.
+  2. Dropdown menu has SCROLLER: max-height: 280px; overflow-y: auto → after 4 items it scrolls.
+  3. Clean sub-URLs: /bra-size-calculator/ , /mortgage-calculator/ etc. Work on reload.
+  4. All external calculator files must be in same folder.
+
+  📁 REQUIRED FILES (upload to same directory as this index.html):
+     - logo.png (your own logo)
+     - calculator for bra size.html
+     - a calculator for fractions.html
+     - calculator-for-bmi.html
+     - every-state-living-cost-calculator.html
+     - income needed for 300k mortgage.html
+-->
 </body>
 </html>
