@@ -184,7 +184,7 @@ web based calculator tools
                     <h2>🏠 MORTGAGE INCOME</h2><span>→</span>
                 </div>
 		<div class="tool-card" onclick="loadTool('calculator-for-bmi.html')">
-                    <h2>🩺Bmi calculator</h2><span>→</span>
+                    <h2>🩺Bmi Calculotor</h2><span>→</span>
                 </div>
             </div>
         </main>
@@ -209,9 +209,11 @@ web based calculator tools
         closeMenu();
         hub.classList.add('hidden');
         viewport.style.display = "block";
-        viewport.src = fileName;
         
-        // This creates a URL like: criticalcalculator.online/#/calculator-for-bmi
+        // FIX: Replaces iframe content without adding a "blank" step in history
+        viewport.contentWindow.location.replace(fileName);
+        
+        // Updates the address bar with a Hash
         const cleanName = fileName.replace('.html', '');
         window.location.hash = '/' + cleanName;
         
@@ -222,15 +224,15 @@ web based calculator tools
         closeMenu();
         hub.classList.remove('hidden');
         viewport.style.display = "none";
-        viewport.src = "about:blank"; 
         
-        // This clears the name from the bar when you go home
+        // FIX: Clears the iframe without adding an extra history step
+        viewport.contentWindow.location.replace("about:blank");
+        
         window.location.hash = '';
-        
         window.scrollTo(0, 0);
     }
 
-    // This checks the URL when the page loads (in case someone refreshes)
+    // Handles page refresh and direct links
     window.addEventListener('load', function() {
         const currentHash = window.location.hash;
         if (currentHash && currentHash.includes('/')) {
@@ -239,7 +241,7 @@ web based calculator tools
         }
     });
 
-    // Handle clicking the browser back button
+    // Handles the browser "Back" button
     window.addEventListener('hashchange', function() {
         if (!window.location.hash || window.location.hash === '#') {
             openHub();
@@ -252,7 +254,6 @@ web based calculator tools
         }
     };
 </script>
-
     <footer>Powered by Critical Calculator — © 2026</footer>
 
     </body>
