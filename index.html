@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="prefetch" href="calculator-for-bmi.html">
+<link rel="prefetch" href="calculator-for-fractions.html">
+<link rel="prefetch" href="income-needed-mortgage-calculator.html">
+<link rel="prefetch" href="every-state-living-cost-calculator.html">
 <!-- SEO Title -->
 <title>Critical Calculator – Free Online Calculators for Finance, Math & Lifestyle</title>
 
@@ -195,6 +199,7 @@ web based calculator tools
     const viewport = document.getElementById('tool-viewport');
     const hub = document.getElementById('hub-view');
     const dropdown = document.getElementById('myDropdown');
+    let lastTool = ""; // This tracks what is already loaded to save time
 
     function toggleMenu(e) {
         if (e) e.stopPropagation();
@@ -210,13 +215,15 @@ web based calculator tools
         hub.classList.add('hidden');
         viewport.style.display = "block";
         
-        // FIX: Replaces iframe content without adding a "blank" step in history
-        viewport.contentWindow.location.replace(fileName);
+        // SPEED FIX: Only re-load if it's a new tool. 
+        // Also uses 'replace' to fix the "Back button" blank page issue.
+        if (lastTool !== fileName) {
+            viewport.contentWindow.location.replace(fileName);
+            lastTool = fileName;
+        }
         
-        // Updates the address bar with a Hash
         const cleanName = fileName.replace('.html', '');
         window.location.hash = '/' + cleanName;
-        
         window.scrollTo(0, 0);
     }
 
@@ -225,14 +232,11 @@ web based calculator tools
         hub.classList.remove('hidden');
         viewport.style.display = "none";
         
-        // FIX: Clears the iframe without adding an extra history step
-        viewport.contentWindow.location.replace("about:blank");
-        
         window.location.hash = '';
         window.scrollTo(0, 0);
     }
 
-    // Handles page refresh and direct links
+    // Handles page refresh: if user refreshes on #/bmi, it opens BMI
     window.addEventListener('load', function() {
         const currentHash = window.location.hash;
         if (currentHash && currentHash.includes('/')) {
@@ -241,7 +245,7 @@ web based calculator tools
         }
     });
 
-    // Handles the browser "Back" button
+    // Handles the browser "Back" button: goes back to hub if hash is cleared
     window.addEventListener('hashchange', function() {
         if (!window.location.hash || window.location.hash === '#') {
             openHub();
