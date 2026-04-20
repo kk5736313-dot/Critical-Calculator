@@ -24,7 +24,7 @@
         .header-link { font-size:.95rem; font-weight:700; padding:12px 0; }
         .menu { position:relative; }
         .menu-button { border:0; cursor:pointer; padding:12px 18px; border-radius:999px; font-size:.95rem; font-weight:800; background:var(--text); color:#fff; box-shadow:0 12px 28px rgba(30,58,51,.18); }
-        .menu-panel { position:absolute; top:calc(100% + 14px); right:0; width:min(340px, calc(100vw - 32px)); padding:10px; border-radius:24px; background:rgba(255,255,255,.98); border:1px solid rgba(30,58,51,.08); box-shadow:var(--shadow); display:none; }
+        .menu-panel {max-height: 320px; overflow-y: auto; position:absolute; top:calc(100% + 14px); right:0; width:min(340px, calc(100vw - 32px)); padding:10px; border-radius:24px; background:rgba(255,255,255,.98); border:1px solid rgba(30,58,51,.08); box-shadow:var(--shadow); display:none; }
         .menu.open .menu-panel { display:block; }
         .menu-link { display:flex; flex-direction:column; gap:4px; padding:14px 16px; border-radius:18px; }
         .menu-link:hover { background:#effaf4; }
