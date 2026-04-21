@@ -1,528 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>CD Rate Calculator | Certificate of Deposit Tool</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CD Rate Calculator | Certificate of Deposit Tool | Critical Calculator</title>
+  <meta name="description" content="Estimate your Certificate of Deposit earnings with compound interest, APY, and maturity balance. Free CD rate calculator with monthly, daily, and annual compounding.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:     '#0f766e',
+            'brand-dark': '#134e4a',
+            accent:    '#f59e0b',
+            bg:        '#f5efe4',
+            muted:     '#5b6472',
+          },
+          fontFamily: {
+            sans: ["system-ui","Segoe UI","Inter","Roboto","Helvetica Neue","sans-serif"],
+          },
+          boxShadow: {
+            card: '0 24px 60px rgba(15,23,42,0.14)',
+          },
+          maxWidth: {
+            shell: '1180px',
+          }
         }
+      }
+    }
+  </script>
+  <style>
+    /* ── Site-wide CSS variables (same as every other page) ── */
+    :root {
+      --bg: #f5efe4;
+      --text: #1f2937;
+      --muted: #5b6472;
+      --line: rgba(31,41,55,.12);
+      --brand: #0f766e;
+      --brand-dark: #134e4a;
+      --accent: #f59e0b;
+      --shadow: 0 24px 60px rgba(15,23,42,.14);
+      --max: 1180px;
+    }
 
-        body {
-            background: linear-gradient(145deg, #e9f0fc 0%, #dbe6f2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
+    /* ── Body gradient (exact match to other pages) ── */
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left,  rgba(245,158,11,.22), transparent 24%),
+        radial-gradient(circle at top right, rgba(15,118,110,.22), transparent 28%),
+        linear-gradient(180deg, #fff8ed 0%, var(--bg) 45%, #eef7f5 100%);
+      min-height: 100vh;
+      font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+    }
 
-        /* main card container */
-        .calculator-card {
-            max-width: 860px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(0px);
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2), 0 8px 16px -8px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
+    a { color: inherit; text-decoration: none; }
 
-        /* header area */
-        .card-header {
-            background: #0a2b3e;
-            padding: 1.6rem 2rem;
-            color: white;
-        }
+    /* ── Shell (max-width container) ── */
+    .shell { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
 
-        .card-header h1 {
-            font-size: 1.9rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* ── Sticky header ── */
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(255,248,237,.86);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header .shell {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 16px; min-height: 82px;
+    }
 
-        .card-header h1::before {
-            content: "🏦";
-            font-size: 1.8rem;
-        }
+    /* ── Brand logo ── */
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #fff; font-size: 1.1rem;
+    }
+    .brand-copy { display: flex; flex-direction: column; line-height: 1.05; }
+    .brand-copy strong { font-size: 1rem; }
+    .brand-copy small { font-size: .72rem; margin-top: 4px; color: var(--muted); text-transform: none; letter-spacing: .02em; }
 
-        .card-header p {
-            margin-top: 0.5rem;
-            opacity: 0.85;
-            font-size: 0.95rem;
-            font-weight: 400;
-        }
+    /* ── Header actions & menu ── */
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .header-link { font-size: .95rem; font-weight: 700; padding: 12px 0; }
+    .menu { position: relative; }
+    .menu-button {
+      border: 0; cursor: pointer; padding: 12px 18px;
+      border-radius: 999px; font-size: .95rem; font-weight: 800;
+      background: var(--text); color: #fff;
+      box-shadow: 0 12px 28px rgba(31,41,55,.18);
+    }
+    .menu-panel {
+      position: absolute; top: calc(100% + 14px); right: 0;
+      width: min(340px, calc(100vw - 32px));
+      padding: 10px; border-radius: 24px;
+      background: rgba(255,255,255,.98);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: var(--shadow);
+      display: none;
+      max-height: 320px; overflow-y: auto;
+    }
+    .menu.open .menu-panel { display: block; }
+    .menu-link { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 18px; }
+    .menu-link:hover { background: #f4f7f8; }
+    .menu-link span { color: var(--muted); }
 
-        /* main content */
-        .card-content {
-            padding: 2rem 2rem 2rem 2rem;
-        }
+    /* ── Breadcrumbs ── */
+    .breadcrumbs { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: .92rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumbs a:hover { text-decoration: underline; }
 
-        /* input grid layout */
-        .input-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.6rem;
-            margin-bottom: 2rem;
-        }
+    /* ── Page wrapper ── */
+    .page { padding: 42px 0 72px; }
 
-        .input-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    /* ── Eyebrow label ── */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      font-size: .78rem; color: var(--muted); margin-bottom: 14px;
+    }
+    .eyebrow::before { content: ""; width: 36px; height: 2px; background: var(--accent); border-radius: 999px; }
 
-        .input-field label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #1f3b4c;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+    /* ── Page title ── */
+    .page-title { margin: 0; font-size: clamp(2.2rem, 5vw, 4rem); line-height: .98; letter-spacing: -.05em; }
+    .page-copy { line-height: 1.7; margin-top: 14px; color: var(--muted); }
 
-        .input-field label i {
-            font-style: normal;
-            font-weight: 400;
-            font-size: 1rem;
-        }
+    /* ── Calculator card ── */
+    .calculator-card {
+      max-width: 860px;
+      width: 100%;
+      background: rgba(255,255,255,.97);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,.2), 0 8px 16px -8px rgba(0,0,0,.05);
+      overflow: hidden;
+      margin-top: 32px;
+    }
 
-        .input-field input, .input-field select {
-            background: #f9fbfd;
-            border: 1px solid #cbdbe0;
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #0a2b3e;
-            transition: all 0.2s;
-            outline: none;
-        }
+    /* ── Card header (dark navy bar) ── */
+    .card-header { background: #0a2b3e; padding: 1.6rem 2rem; color: white; }
+    .card-header h2 {
+      font-size: 1.9rem; font-weight: 600; letter-spacing: -.3px;
+      display: flex; align-items: center; gap: 10px; margin: 0;
+    }
+    .card-header h2::before { content: "🏦"; font-size: 1.8rem; }
+    .card-header p { margin-top: .5rem; opacity: .85; font-size: .95rem; font-weight: 400; }
 
-        .input-field input:focus, .input-field select:focus {
-            border-color: #2c7da0;
-            box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.2);
-            background: white;
-        }
+    /* ── Card body ── */
+    .card-content { padding: 2rem; }
 
-        .input-field input::placeholder {
-            color: #a0b3c2;
-            font-weight: 400;
-        }
+    /* ── Input grid ── */
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem; margin-bottom: 2rem;
+    }
+    .input-field { display: flex; flex-direction: column; gap: .5rem; }
+    .input-field label {
+      font-weight: 600; font-size: .85rem; text-transform: uppercase;
+      letter-spacing: .5px; color: #1f3b4c;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .input-field input,
+    .input-field select {
+      background: #f9fbfd;
+      border: 1px solid #cbdbe0;
+      border-radius: 1.2rem;
+      padding: .8rem 1rem;
+      font-size: 1rem; font-weight: 500; color: #0a2b3e;
+      transition: all .2s; outline: none;
+    }
+    .input-field input:focus,
+    .input-field select:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 3px rgba(44,125,160,.2);
+      background: white;
+    }
+    .input-field input::placeholder { color: #a0b3c2; font-weight: 400; }
+    .helper-text { font-size: .7rem; color: #5f7d95; margin-top: .25rem; }
 
-        .helper-text {
-            font-size: 0.7rem;
-            color: #5f7d95;
-            margin-top: 0.25rem;
-        }
+    /* ── Results panel ── */
+    .results-panel {
+      background: #f0f5fa; border-radius: 1.5rem;
+      padding: 1.5rem; margin: 1.2rem 0 1.5rem;
+      border: 1px solid #dee6ef;
+    }
+    .results-header {
+      font-size: .9rem; font-weight: 700; color: #144d66;
+      letter-spacing: .3px; margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px dashed #bfd2e2; padding-bottom: .6rem;
+    }
+    .result-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline; flex-wrap: wrap;
+      padding: .75rem 0; border-bottom: 1px solid #e2eaf1;
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-weight: 600; color: #1f4e6e; font-size: .95rem; }
+    .result-value { font-weight: 700; font-size: 1.35rem; color: #0e2f3f; letter-spacing: -.2px; }
+    .highlight { color: #1f7b4d; font-size: 1.5rem; }
+    .apy-value { background: #e7edf3; padding: .2rem .6rem; border-radius: 2rem; font-size: 1rem; }
 
-        /* results panel */
-        .results-panel {
-            background: #f0f5fa;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin: 1.2rem 0 1.5rem 0;
-            border: 1px solid #dee6ef;
-        }
+    /* ── Error message ── */
+    .error-message {
+      background: #ffe9e6; border-left: 5px solid #d9534f;
+      padding: .9rem 1.2rem; border-radius: 1rem;
+      color: #b33; font-weight: 500; font-size: .9rem; margin-top: 1rem;
+    }
 
-        .results-header {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #144d66;
-            letter-spacing: 0.3px;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px dashed #bfd2e2;
-            padding-bottom: 0.6rem;
-        }
+    /* ── Disclaimer note ── */
+    .note {
+      font-size: .7rem; color: #6a7e94; text-align: center;
+      margin-top: 1rem; border-top: 1px solid #dee6ef; padding-top: 1rem;
+    }
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e2eaf1;
-        }
+    /* ── Reset button ── */
+    .reset-btn {
+      background: white; border: 1.5px solid #2c7da0; color: #2c7da0;
+      padding: .6rem 1.4rem; border-radius: 2rem;
+      font-weight: 600; font-size: .8rem; cursor: pointer;
+      transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .reset-btn:hover { background: #e3f0f5; border-color: #1f5e7a; transform: scale(.98); }
 
-        .result-row:last-child {
-            border-bottom: none;
-        }
+    /* ── SEO content section ── */
+    .seo-section {
+      max-width: 900px; margin: 42px auto 0; padding: 28px;
+      background: rgba(255,255,255,.8);
+      border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow);
+    }
+    .seo-section h2 { margin: 0 0 14px; font-size: 1.7rem; }
+    .seo-section h3 { margin: 24px 0 10px; font-size: 1.15rem; }
+    .seo-section p, .seo-section li { line-height: 1.8; color: var(--text); }
+    .seo-section ul { margin: 0; padding-left: 18px; }
+    .faq-item { padding: 14px 0; border-top: 1px solid var(--line); }
+    .faq-item:first-of-type { border-top: 0; }
+    .faq-item strong { display: block; margin-bottom: 6px; }
 
-        .result-label {
-            font-weight: 600;
-            color: #1f4e6e;
-            font-size: 0.95rem;
-        }
+    /* ── Related tools ── */
+    .related-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .related-tools a {
+      padding: 10px 14px; border-radius: 999px;
+      background: #fff; border: 1px solid var(--line); font-weight: 700;
+    }
+    .related-tools a:hover { text-decoration: underline; }
 
-        .result-value {
-            font-weight: 700;
-            font-size: 1.35rem;
-            color: #0e2f3f;
-            letter-spacing: -0.2px;
-        }
+    /* ── Footer ── */
+    footer { padding: 24px 0 40px; }
+    .footer-copy { text-align: center; font-size: .92rem; color: var(--muted); }
 
-        .highlight {
-            color: #1f7b4d;
-            font-size: 1.5rem;
-        }
-
-        .apy-value {
-            background: #e7edf3;
-            padding: 0.2rem 0.6rem;
-            border-radius: 2rem;
-            font-size: 1rem;
-        }
-
-        .error-message {
-            background: #ffe9e6;
-            border-left: 5px solid #d9534f;
-            padding: 0.9rem 1.2rem;
-            border-radius: 1rem;
-            color: #b33;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .note {
-            font-size: 0.7rem;
-            color: #6a7e94;
-            text-align: center;
-            margin-top: 1rem;
-            border-top: 1px solid #dee6ef;
-            padding-top: 1rem;
-        }
-
-        .reset-btn {
-            background: white;
-            border: 1.5px solid #2c7da0;
-            color: #2c7da0;
-            padding: 0.6rem 1.4rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 0.4rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .reset-btn:hover {
-            background: #e3f0f5;
-            border-color: #1f5e7a;
-            transform: scale(0.98);
-        }
-
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        @media (max-width: 620px) {
-            .card-content {
-                padding: 1.5rem;
-            }
-            .result-value {
-                font-size: 1.1rem;
-            }
-            .result-label {
-                font-size: 0.85rem;
-            }
-        }
-    </style>
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      .brand-copy small, .header-link { display: none; }
+    }
+    @media (max-width: 620px) {
+      .card-content { padding: 1.5rem; }
+      .result-value { font-size: 1.1rem; }
+      .result-label { font-size: .85rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="calculator-card">
-    <div class="card-header">
-        <h1>CD Rate Calculator</h1>
-        <p>Estimate earnings on a Certificate of Deposit · Compound interest · Maturity balance</p>
+  <!-- ════════════════════════════════════════════
+       SITE HEADER — identical to all other pages
+       ════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">CC</span>
+        <span class="brand-copy">
+          <strong>Critical Calculator</strong>
+          <small>Simple tools for everyday numbers</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <a class="header-link" href="index.html">Home</a>
+        <div class="menu" id="toolMenu">
+          <button class="menu-button" id="menuButton" type="button" aria-expanded="false">Tools</button>
+          <div class="menu-panel">
+            <a class="menu-link" href="bmi-calculator.html">
+              <strong>BMI Calculator</strong>
+              <span>Check body mass index quickly.</span>
+            </a>
+            <a class="menu-link" href="bra-size-calculator.html">
+              <strong>Bra Size Calculator</strong>
+              <span>Estimate your starting bra size.</span>
+            </a>
+            <a class="menu-link" href="fraction-calculator.html">
+              <strong>Fraction Calculator</strong>
+              <span>Solve fraction equations fast.</span>
+            </a>
+            <a class="menu-link" href="state-living-cost-calculator.html">
+              <strong>State Living Cost Calculator</strong>
+              <span>Compare monthly state living costs.</span>
+            </a>
+            <a class="menu-link" href="mortgage-income-calculator.html">
+              <strong>Mortgage Income Calculator</strong>
+              <span>Estimate monthly mortgage affordability.</span>
+            </a>
+            <a class="menu-link" href="hold-calculator-for-cd-rates.html">
+              <strong>CD Rate Calculator</strong>
+              <span>Estimate Certificate of Deposit earnings.</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="card-content">
-        <div class="input-grid">
-            <!-- Principal -->
-            <div class="input-field">
-                <label>💰 Deposit amount (Principal)</label>
-                <input type="number" id="principalInput" value="10000" step="100" min="0" placeholder="e.g., 10000">
-                <div class="helper-text">Initial investment, USD</div>
-            </div>
+  <!-- ════════════════════════════════════════════
+       PAGE CONTENT
+       ════════════════════════════════════════════ -->
+  <main class="page">
+    <div class="shell">
 
-            <!-- Interest Rate (APR) -->
-            <div class="input-field">
-                <label>📈 Annual interest rate (APR)</label>
-                <input type="number" id="rateInput" value="4.5" step="0.1" min="0" placeholder="e.g., 4.5">
-                <div class="helper-text">Nominal annual rate (%)</div>
-            </div>
+      <!-- Breadcrumb -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>CD Rate Calculator</span>
+      </nav>
 
-            <!-- Term in months -->
-            <div class="input-field">
-                <label>⏱️ CD term (months)</label>
-                <input type="number" id="termMonthsInput" value="12" step="1" min="0" placeholder="e.g., 12">
-                <div class="helper-text">3, 6, 12, 18, 24+ months</div>
-            </div>
+      <!-- Page intro -->
+      <div style="max-width:760px; margin-bottom:26px;">
+        <p class="eyebrow">Finance Tool</p>
+        <h1 class="page-title">CD Rate Calculator</h1>
+        <p class="page-copy">
+          Estimate earnings on a Certificate of Deposit. Enter your deposit, rate, and term to see your maturity balance, total interest earned, and effective APY instantly.
+        </p>
+      </div>
 
-            <!-- Compounding frequency -->
-            <div class="input-field">
-                <label>🔄 Compounding frequency</label>
-                <select id="compoundingSelect">
-                    <option value="1">Annually (1x/year)</option>
-                    <option value="2">Semi-Annually (2x/year)</option>
-                    <option value="4">Quarterly (4x/year)</option>
-                    <option value="12" selected>Monthly (12x/year)</option>
-                    <option value="365">Daily (365x/year)</option>
-                </select>
-                <div class="helper-text">How often interest is reinvested</div>
-            </div>
+      <!-- ── Calculator card ── -->
+      <div class="calculator-card">
+
+        <!-- Card header (dark navy) -->
+        <div class="card-header">
+          <h2>CD Rate Calculator</h2>
+          <p>Estimate earnings on a Certificate of Deposit · Compound interest · Maturity balance</p>
         </div>
 
-        <div class="flex-between">
-            <div></div>
+        <!-- Card body -->
+        <div class="card-content">
+
+          <!-- Inputs -->
+          <div class="input-grid">
+
+            <div class="input-field">
+              <label>💰 Deposit amount (Principal)</label>
+              <input type="number" id="principalInput" value="10000" step="100" min="0" placeholder="e.g., 10000">
+              <div class="helper-text">Initial investment, USD</div>
+            </div>
+
+            <div class="input-field">
+              <label>📈 Annual interest rate (APR)</label>
+              <input type="number" id="rateInput" value="4.5" step="0.1" min="0" placeholder="e.g., 4.5">
+              <div class="helper-text">Nominal annual rate (%)</div>
+            </div>
+
+            <div class="input-field">
+              <label>⏱️ CD term (months)</label>
+              <input type="number" id="termMonthsInput" value="12" step="1" min="0" placeholder="e.g., 12">
+              <div class="helper-text">3, 6, 12, 18, 24+ months</div>
+            </div>
+
+            <div class="input-field">
+              <label>🔄 Compounding frequency</label>
+              <select id="compoundingSelect">
+                <option value="1">Annually (1×/year)</option>
+                <option value="2">Semi-Annually (2×/year)</option>
+                <option value="4">Quarterly (4×/year)</option>
+                <option value="12" selected>Monthly (12×/year)</option>
+                <option value="365">Daily (365×/year)</option>
+              </select>
+              <div class="helper-text">How often interest is reinvested</div>
+            </div>
+
+          </div>
+
+          <!-- Reset button -->
+          <div style="display:flex; justify-content:flex-end;">
             <button class="reset-btn" id="resetBtn">⟳ Reset to defaults</button>
-        </div>
+          </div>
 
-        <!-- dynamic results area -->
-        <div id="resultsContainer">
+          <!-- Results panel -->
+          <div id="resultsContainer">
             <div class="results-panel">
-                <div class="results-header">
-                    📊 CD maturity summary
-                </div>
-                <div class="result-row">
-                    <span class="result-label">🏁 Final balance (at maturity)</span>
-                    <span class="result-value" id="finalBalance">$0.00</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">✨ Total interest earned</span>
-                    <span class="result-value highlight" id="totalInterest">$0.00</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">📅 Equivalent term (years)</span>
-                    <span class="result-value" id="termYears">1.00 yrs</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">🏆 Annual Percentage Yield (APY)</span>
-                    <span class="result-value apy-value" id="apyValue">0.00%</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">🔁 Compounding periods / year</span>
-                    <span class="result-value" id="compoundPeriods">12</span>
-                </div>
+              <div class="results-header">📊 CD maturity summary</div>
+              <div class="result-row">
+                <span class="result-label">🏁 Final balance (at maturity)</span>
+                <span class="result-value" id="finalBalance">$0.00</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">✨ Total interest earned</span>
+                <span class="result-value highlight" id="totalInterest">$0.00</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">📅 Equivalent term (years)</span>
+                <span class="result-value" id="termYears">1.000 yrs</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">🏆 Annual Percentage Yield (APY)</span>
+                <span class="result-value apy-value" id="apyValue">0.000%</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">🔁 Compounding periods / year</span>
+                <span class="result-value" id="compoundPeriods">12</span>
+              </div>
             </div>
-        </div>
-        <div id="errorMsgContainer"></div>
-        <div class="note">
-            ⚡ Estimated earnings assume interest compounds and remains in CD until maturity. Actual bank CDs may vary. APY is effective annual yield based on nominal rate & compounding.
-        </div>
-    </div>
-</div>
+          </div>
 
-<script>
-    (function() {
-        // DOM elements
-        const principalInput = document.getElementById('principalInput');
-        const rateInput = document.getElementById('rateInput');
-        const termMonthsInput = document.getElementById('termMonthsInput');
-        const compoundingSelect = document.getElementById('compoundingSelect');
-        
-        // result fields
-        const finalBalanceSpan = document.getElementById('finalBalance');
-        const totalInterestSpan = document.getElementById('totalInterest');
-        const termYearsSpan = document.getElementById('termYears');
-        const apyValueSpan = document.getElementById('apyValue');
-        const compoundPeriodsSpan = document.getElementById('compoundPeriods');
-        const errorContainer = document.getElementById('errorMsgContainer');
-        
-        // Helper: format USD
-        const formatCurrency = (value) => {
-            if (isNaN(value)) return '$0.00';
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value);
-        };
-        
-        // Helper: format percentage with 2-3 decimals
-        const formatPercent = (value) => {
-            if (isNaN(value)) return '0.00%';
-            return value.toFixed(3) + '%';
-        };
-        
-        // core calculation
-        function computeCD() {
-            // get raw values
-            let principal = parseFloat(principalInput.value);
-            let annualRatePercent = parseFloat(rateInput.value);
-            let termMonths = parseFloat(termMonthsInput.value);
-            let compoundingKey = compoundingSelect.value;
-            
-            // reset any previous error
-            errorContainer.innerHTML = '';
-            
-            // validation
-            let isValid = true;
-            let errorMessages = [];
-            
-            if (isNaN(principal)) {
-                isValid = false;
-                errorMessages.push("❌ Please enter a valid deposit amount (principal).");
-            } else if (principal < 0) {
-                isValid = false;
-                errorMessages.push("❌ Principal cannot be negative.");
-            }
-            
-            if (isNaN(annualRatePercent)) {
-                isValid = false;
-                errorMessages.push("❌ Please enter a valid annual interest rate (APR).");
-            } else if (annualRatePercent < 0) {
-                isValid = false;
-                errorMessages.push("❌ Interest rate cannot be negative.");
-            }
-            
-            if (isNaN(termMonths)) {
-                isValid = false;
-                errorMessages.push("❌ Please enter a valid term (months).");
-            } else if (termMonths < 0) {
-                isValid = false;
-                errorMessages.push("❌ Term months cannot be negative.");
-            }
-            
-            if (!isValid) {
-                // show error and clear numeric results with dashes
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.innerHTML = errorMessages.join('<br>');
-                errorContainer.appendChild(errorDiv);
-                // reset results to empty / dash style
-                finalBalanceSpan.innerText = formatCurrency(0);
-                totalInterestSpan.innerText = formatCurrency(0);
-                termYearsSpan.innerText = '— yrs';
-                apyValueSpan.innerText = '—%';
-                compoundPeriodsSpan.innerText = compoundingKey === '1' ? '1' : (compoundingKey === '2' ? '2' : (compoundingKey === '4' ? '4' : (compoundingKey === '12' ? '12' : '365')));
-                return false;
-            }
-            
-            // --- valid inputs: proceed calculation ---
-            const r = annualRatePercent / 100;           // decimal APR
-            let n = 1;                                   // compounding periods per year
-            switch (compoundingKey) {
-                case '1': n = 1; break;
-                case '2': n = 2; break;
-                case '4': n = 4; break;
-                case '12': n = 12; break;
-                case '365': n = 365; break;
-                default: n = 12;
-            }
-            
-            const years = termMonths / 12;
-            // compound interest formula: A = P * (1 + r/n)^(n*t)
-            let finalAmount = 0;
-            let totalInterest = 0;
-            let apyDecimal = 0;
-            
-            if (years === 0 || principal === 0) {
-                finalAmount = principal;
-                totalInterest = 0;
-                // APY still computed from rate if principal zero but rate positive
-                if (r === 0 || n === 0) apyDecimal = 0;
-                else apyDecimal = Math.pow(1 + r / n, n) - 1;
-            } else {
-                // compute with floating precision
-                const base = 1 + (r / n);
-                const exponent = n * years;
-                finalAmount = principal * Math.pow(base, exponent);
-                totalInterest = finalAmount - principal;
-                // APY calculation (annual effective yield)
-                apyDecimal = Math.pow(1 + r / n, n) - 1;
-            }
-            
-            // guard against tiny floating errors (negative interest due to rounding)
-            if (totalInterest < 0 && totalInterest > -0.01) totalInterest = 0;
-            if (finalAmount < 0 && finalAmount > -0.01) finalAmount = 0;
-            
-            const apyPercent = apyDecimal * 100;
-            
-            // update UI fields
-            finalBalanceSpan.innerText = formatCurrency(finalAmount);
-            totalInterestSpan.innerText = formatCurrency(totalInterest);
-            
-            // term years display (nice formatting)
-            if (termMonths === 0) {
-                termYearsSpan.innerText = '0.00 yrs';
-            } else {
-                termYearsSpan.innerText = years.toFixed(3) + ' yrs';
-            }
-            
-            apyValueSpan.innerText = apyPercent.toFixed(3) + '%';
-            compoundPeriodsSpan.innerText = n;
-            
-            return true;
+          <!-- Error area -->
+          <div id="errorMsgContainer"></div>
+
+          <!-- Disclaimer -->
+          <p class="note">
+            ⚡ Estimated earnings assume interest compounds and remains in the CD until maturity. Actual bank CDs may vary. APY is the effective annual yield based on the nominal rate and compounding frequency.
+          </p>
+
+        </div><!-- /card-content -->
+      </div><!-- /calculator-card -->
+
+      <!-- ── SEO content section ── -->
+      <div class="seo-section">
+        <h2>How to use this free CD rate calculator</h2>
+        <p>
+          This CD rate calculator helps you estimate how much interest a Certificate of Deposit will earn by maturity. Enter your deposit amount, the annual interest rate offered by your bank, the term in months, and the compounding frequency. The tool instantly shows your final balance, total interest earned, and the effective APY so you can compare CD offers accurately.
+        </p>
+        <p>
+          Whether you are searching for <em>best CD rates 2025</em>, <em>1-year CD calculator</em>, or <em>compound interest on CD</em>, this tool covers all common CD terms from 3 months to 60 months and supports daily, monthly, quarterly, semi-annual, and annual compounding.
+        </p>
+
+        <h3>What is a Certificate of Deposit?</h3>
+        <p>
+          A Certificate of Deposit is a savings product offered by banks and credit unions. You deposit a fixed amount for a set term and receive a guaranteed interest rate. CDs are FDIC-insured up to $250,000 per depositor, making them one of the safest ways to grow savings.
+        </p>
+
+        <h3>CD interest formula</h3>
+        <p>
+          The calculator uses the standard compound interest formula:
+          <strong>A = P × (1 + r/n)<sup>n×t</sup></strong>, where P is the principal, r is the nominal annual rate as a decimal, n is the number of compounding periods per year, and t is the term in years.
+        </p>
+
+        <h3>What is APY and why does it matter?</h3>
+        <p>
+          APY (Annual Percentage Yield) is the effective annual return after compounding is applied. A CD advertised at 4.5% APR compounded monthly actually earns a slightly higher APY of about 4.594%. Always compare CDs using APY, not just the stated rate, so you get an accurate picture of what you will actually earn.
+        </p>
+
+        <h3>Frequently asked questions</h3>
+        <div class="faq-item">
+          <strong>Is this result guaranteed?</strong>
+          <p>This is an estimate for planning purposes. Actual CD earnings depend on the bank's exact terms, any early withdrawal penalties, and whether interest is paid out or left to compound.</p>
+        </div>
+        <div class="faq-item">
+          <strong>What compounding frequency should I choose?</strong>
+          <p>Most bank CDs compound daily or monthly. Daily compounding earns slightly more than monthly. Check your bank's disclosure documents for the exact frequency before comparing offers.</p>
+        </div>
+        <div class="faq-item">
+          <strong>What happens if I withdraw early?</strong>
+          <p>Most CDs charge an early withdrawal penalty, often 60 to 180 days of interest. This calculator assumes you hold the CD to full maturity without any withdrawals.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Can I use this for high-yield savings or money market accounts?</strong>
+          <p>Yes — the compound interest formula works the same way. Just enter the APY advertised by the account as the annual rate and set compounding to daily or monthly.</p>
+        </div>
+
+        <!-- Related tools -->
+        <div class="related-tools">
+          <a href="mortgage-income-calculator.html">Mortgage Income Calculator</a>
+          <a href="state-living-cost-calculator.html">State Living Cost Calculator</a>
+          <a href="fraction-calculator.html">Fraction Calculator</a>
+        </div>
+      </div>
+
+    </div><!-- /shell -->
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       SITE FOOTER — identical to all other pages
+       ════════════════════════════════════════════ -->
+  <footer>
+    <div class="shell">
+      <p class="footer-copy">Critical Calculator hub for quick access to health, math, finance, and lifestyle tools.</p>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       JAVASCRIPT
+       ════════════════════════════════════════════ -->
+  <script>
+    /* ── Header menu toggle ── */
+    const menu       = document.getElementById('toolMenu');
+    const menuButton = document.getElementById('menuButton');
+
+    function closeMenu() {
+      menu.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+
+    menuButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isOpen = menu.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target)) closeMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    /* ── CD Calculator logic ── */
+    (function () {
+      const principalInput   = document.getElementById('principalInput');
+      const rateInput        = document.getElementById('rateInput');
+      const termMonthsInput  = document.getElementById('termMonthsInput');
+      const compoundingSelect= document.getElementById('compoundingSelect');
+
+      const finalBalanceSpan  = document.getElementById('finalBalance');
+      const totalInterestSpan = document.getElementById('totalInterest');
+      const termYearsSpan     = document.getElementById('termYears');
+      const apyValueSpan      = document.getElementById('apyValue');
+      const compoundPeriodsSpan = document.getElementById('compoundPeriods');
+      const errorContainer    = document.getElementById('errorMsgContainer');
+
+      const formatCurrency = (v) =>
+        isNaN(v) ? '$0.00' :
+        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
+          minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+
+      function computeCD() {
+        const principal    = parseFloat(principalInput.value);
+        const aprPercent   = parseFloat(rateInput.value);
+        const termMonths   = parseFloat(termMonthsInput.value);
+        const nKey         = compoundingSelect.value;
+
+        errorContainer.innerHTML = '';
+
+        /* validation */
+        const errors = [];
+        if (isNaN(principal)  || principal  < 0) errors.push('❌ Please enter a valid deposit amount (principal).');
+        if (isNaN(aprPercent) || aprPercent < 0) errors.push('❌ Please enter a valid annual interest rate (APR).');
+        if (isNaN(termMonths) || termMonths < 0) errors.push('❌ Please enter a valid term in months.');
+
+        if (errors.length) {
+          const div = document.createElement('div');
+          div.className = 'error-message';
+          div.innerHTML = errors.join('<br>');
+          errorContainer.appendChild(div);
+          finalBalanceSpan.textContent  = '$0.00';
+          totalInterestSpan.textContent = '$0.00';
+          termYearsSpan.textContent     = '— yrs';
+          apyValueSpan.textContent      = '—%';
+          compoundPeriodsSpan.textContent = nKey;
+          return;
         }
-        
-        // update all fields and recalc, also show any info
-        function refreshCalculator() {
-            computeCD();
+
+        /* compounding periods per year */
+        const nMap = { '1': 1, '2': 2, '4': 4, '12': 12, '365': 365 };
+        const n    = nMap[nKey] || 12;
+        const r    = aprPercent / 100;
+        const t    = termMonths / 12;
+
+        /* APY = (1 + r/n)^n - 1 */
+        const apyDecimal = Math.pow(1 + r / n, n) - 1;
+
+        let finalAmount, totalInterest;
+        if (t === 0 || principal === 0) {
+          finalAmount   = principal;
+          totalInterest = 0;
+        } else {
+          finalAmount   = principal * Math.pow(1 + r / n, n * t);
+          totalInterest = finalAmount - principal;
         }
-        
-        // set default values for a typical CD scenario
-        function setDefaultValues() {
-            principalInput.value = "10000";
-            rateInput.value = "4.5";
-            termMonthsInput.value = "12";
-            compoundingSelect.value = "12";   // monthly compounding
-            refreshCalculator();
-        }
-        
-        // attach event listeners to all interactive elements
-        function bindEvents() {
-            principalInput.addEventListener('input', refreshCalculator);
-            rateInput.addEventListener('input', refreshCalculator);
-            termMonthsInput.addEventListener('input', refreshCalculator);
-            compoundingSelect.addEventListener('change', refreshCalculator);
-            
-            const resetBtn = document.getElementById('resetBtn');
-            if (resetBtn) {
-                resetBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    setDefaultValues();
-                });
-            }
-        }
-        
-        // additional step: validate rate display on load and check for decimals edgecases
-        function init() {
-            bindEvents();
-            // Ensure that all fields have coherent defaults + run first calculation
-            // if fields are empty due to any reason, set backup fallback values
-            if (principalInput.value === "" || isNaN(parseFloat(principalInput.value))) principalInput.value = "10000";
-            if (rateInput.value === "" || isNaN(parseFloat(rateInput.value))) rateInput.value = "4.5";
-            if (termMonthsInput.value === "" || isNaN(parseFloat(termMonthsInput.value))) termMonthsInput.value = "12";
-            if (!compoundingSelect.value) compoundingSelect.value = "12";
-            
-            refreshCalculator();
-        }
-        
-        init();
+
+        /* guard tiny floating-point negatives */
+        if (totalInterest < 0 && totalInterest > -0.01) totalInterest = 0;
+        if (finalAmount   < 0 && finalAmount   > -0.01) finalAmount   = 0;
+
+        finalBalanceSpan.textContent    = formatCurrency(finalAmount);
+        totalInterestSpan.textContent   = formatCurrency(totalInterest);
+        termYearsSpan.textContent       = t === 0 ? '0.000 yrs' : t.toFixed(3) + ' yrs';
+        apyValueSpan.textContent        = (apyDecimal * 100).toFixed(3) + '%';
+        compoundPeriodsSpan.textContent = n;
+      }
+
+      function setDefaults() {
+        principalInput.value    = '10000';
+        rateInput.value         = '4.5';
+        termMonthsInput.value   = '12';
+        compoundingSelect.value = '12';
+        computeCD();
+      }
+
+      /* event listeners */
+      principalInput.addEventListener('input',    computeCD);
+      rateInput.addEventListener('input',         computeCD);
+      termMonthsInput.addEventListener('input',   computeCD);
+      compoundingSelect.addEventListener('change',computeCD);
+      document.getElementById('resetBtn').addEventListener('click', function (e) {
+        e.preventDefault(); setDefaults();
+      });
+
+      /* initialise */
+      if (!principalInput.value  || isNaN(parseFloat(principalInput.value)))  principalInput.value  = '10000';
+      if (!rateInput.value       || isNaN(parseFloat(rateInput.value)))        rateInput.value       = '4.5';
+      if (!termMonthsInput.value || isNaN(parseFloat(termMonthsInput.value)))  termMonthsInput.value = '12';
+      if (!compoundingSelect.value) compoundingSelect.value = '12';
+      computeCD();
     })();
-</script>
+  </script>
+
 </body>
 </html>
