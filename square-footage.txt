@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=square-footage-calculator-for-flooring.html">
+    <title>Redirecting...</title>
+    <link rel="canonical" href="square-footage-calculator-for-flooring.html">
+</head>
+<body>
+    <p>Redirecting to <a href="bmi-square-footage-calculator-for-flooring.html</a>.</p>
+</body>
+</html>
