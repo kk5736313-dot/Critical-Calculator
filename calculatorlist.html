@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculator Title | Critical Calculator</title>
+<meta name="description" content="Page description for SEO">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (EMPTY PLACEHOLDER) */
+.tool-card{
+  margin-top:32px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Page Name
+</nav>
+
+<!-- TITLE -->
+
+<h1 class="page-title">All Calculator's</h1>
+<p class="page-copy">
+This is the page holding all the Calculator's this website has.
+</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+
+<div class="tool-card">
+
+  <main class="page">
+        <div class="shell">
+            <h1 class="text-4xl font-black tracking-tight">Calculator Directory</h1>
+            <p class="text-muted mt-2">Explore our full suite of professional-grade calculation tools.</p>
+            
+            <div class="grid">
+                <a href="bmi-calculator.html" class="tool-card">
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate Body Mass Index with metric or imperial units.</p>
+                </a>
+                <a href="bra-size-calculator.html" class="tool-card">
+                    <h3>Bra Size Calculator</h3>
+                    <p>Estimate your band and cup size quickly at home.</p>
+                </a>
+                <a href="calculator-for-cd-rates.html" class="tool-card">
+                    <h3>CD Calculator</h3>
+                    <p>Compare interest rates and monthly returns for bank CDs.</p>
+                </a>
+                <a href="fraction-calculator.html" class="tool-card">
+                    <h3>Fraction Calculator</h3>
+                    <p>Add, subtract, multiply, and divide fractions easily.</p>
+                </a>
+                <a href="mortgage-income-calculator.html" class="tool-card">
+                    <h3>Mortgage Income Calculator</h3>
+                    <p>Estimate monthly mortgage costs and affordability.</p>
+                </a>
+                <a href="state-living-cost-calculator.html" class="tool-card">
+                    <h3>State Living Cost Calculator</h3>
+                    <p>Compare estimated monthly living costs across U.S. states.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<section class="seo-section">
+  <h2>How to use this calculator</h2>
+  <p>Explain usage in simple words.</p>
+
+  <h3>Formula used</h3>
+  <p>Explain formula here.</p>
+
+  <h3>FAQ</h3>
+  <p>Answer common questions.</p>
+</section>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+
+</body>
+</html>
