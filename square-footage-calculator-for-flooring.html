@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Square footage calculator for flooring</title>
+<meta name="description" content="Calculate square footage for flooring instantly with the Critical Calculator tool. Includes waste factors for tile, hardwood, and carpet projects.">
+<meta name="keywords" content="flooring calculator square feet, how to calculate square footage for flooring, calculate square feet for tile, how to figure square footage for flooring, carpet sq ft calculator, how to figure out square footage for flooring, floor plan square footage calculator, calculate square footage from floor plan, how do you measure square feet for flooring, calculate hardwood flooring square footage">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+ .seo-section { max-width:900px; margin:42px auto 0; padding:28px; background:rgba(255,255,255,.86); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); }
+        .seo-section h2 { margin:0 0 14px; font-size:1.7rem; }
+        .seo-section h3 { margin:24px 0 10px; font-size:1.15rem; }
+        .seo-section p, .seo-section li { line-height:1.8; }
+        .seo-section ul { margin:0; padding-left:18px; }
+
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+.related-tools a {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-weight: 700;
+}
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (EMPTY PLACEHOLDER) */
+.tool-card{
+  margin-top:32px;
+ 
+
+  padding: 0;
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+body {
+      background: linear-gradient(145deg, #e9eef3 0%, #dce3ec 100%);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tool-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* main card */
+    .calculator-card {
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(0px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* header */
+    .tool-header {
+      background: #2c5f2d;
+      background: linear-gradient(135deg, #2c5f2d 0%, #1e3a2f 100%);
+      padding: 1.8rem 2rem;
+      color: white;
+    }
+
+    .tool-header h1 {
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tool-header h1 i {
+      font-size: 2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .tool-header p {
+      margin-top: 10px;
+      opacity: 0.9;
+      font-weight: 400;
+      font-size: 1rem;
+      max-width: 85%;
+    }
+
+    /* content */
+    .tool-content {
+      padding: 2rem 2rem 2rem 2rem;
+    }
+
+    /* rooms section */
+    .rooms-section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 5px solid #2c5f2d;
+      padding-left: 1rem;
+      color: #1e2f2c;
+    }
+
+    .rooms-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* individual room card */
+    .room-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+      padding: 1.4rem 1.6rem;
+      transition: box-shadow 0.2s;
+      border: 1px solid #e9edf2;
+    }
+
+    .room-card:hover {
+      box-shadow: 0 12px 22px -10px rgba(0, 0, 0, 0.1);
+      border-color: #cddfc9;
+    }
+
+    .room-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px dashed #e2e8f0;
+    }
+
+    .room-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      background: #f0f4f9;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      color: #2c5f2d;
+    }
+
+    .delete-room-btn {
+      background: none;
+      border: none;
+      color: #9eabb8;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: 0.2s;
+      padding: 6px 10px;
+      border-radius: 40px;
+    }
+
+    .delete-room-btn:hover {
+      color: #dc2626;
+      background: #fee2e2;
+    }
+
+    /* dimension row */
+    .dimension-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      row-gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .input-group {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #5b6e8c;
+      margin-bottom: 0.3rem;
+    }
+
+    .feet-inch-wrapper {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 0.2rem 0.2rem 0.2rem 0.8rem;
+      border: 1px solid #e2edf2;
+      transition: 0.15s;
+    }
+
+    .feet-inch-wrapper:focus-within {
+      border-color: #2c5f2d;
+      box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.2);
+    }
+
+    .feet-inch-wrapper input {
+      border: none;
+      background: transparent;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.6rem 0;
+      width: 70px;
+      outline: none;
+      font-family: 'Inter', monospace;
+    }
+
+    .feet-inch-wrapper span {
+      font-weight: 500;
+      color: #5a6e7a;
+      font-size: 0.85rem;
+    }
+
+    .room-area-indicator {
+      background: #eff6ef;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2c5f2d;
+    }
+
+    .room-area-indicator i {
+      font-size: 0.9rem;
+    }
+
+    .error-msg {
+      font-size: 0.7rem;
+      color: #e03a3a;
+      margin-top: 5px;
+      font-weight: 500;
+      display: block;
+    }
+
+    /* buttons */
+    .add-room-btn {
+      background: white;
+      border: 2px solid #2c5f2d;
+      color: #2c5f2d;
+      padding: 0.7rem 1.5rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 0.25rem;
+    }
+
+    .add-room-btn:hover {
+      background: #2c5f2d;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* settings panel */
+    .settings-panel {
+     display: flex;
+  flex-wrap: nowrap; /* Prevent stacking on tablets */
+  gap: 1.5rem;
+  align-items: flex-start;
+    }
+
+    .setting-item {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    .setting-item label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+
+    .setting-item input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #cfdfe9;
+      font-weight: 500;
+      font-size: 1rem;
+      background: white;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .setting-item input:focus {
+      border-color: #2c5f2d;
+      box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.15);
+    }
+
+    /* results area */
+    .results-area {
+      background: linear-gradient(115deg, #fefcf5 0%, #f9f7f0 100%);
+      border-radius: 1.5rem;
+      padding: 1.5rem 2rem;
+      margin-top: 1rem;
+      border: 1px solid #efe6d5;
+    }
+
+    .results-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .result-card {
+      background: white;
+      padding: 1rem 1.8rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      border-bottom: 3px solid #2c5f2d;
+    }
+
+    .result-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #6a7c8f;
+    }
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1e2f2c;
+      line-height: 1.2;
+      margin-top: 8px;
+      word-break: break-word;
+    }
+
+    .result-value small {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: none;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 1.8rem;
+      font-size: 0.75rem;
+      color: #6c7f8f;
+      padding-bottom: 0.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .tool-content {
+        padding: 1rem;
+      }
+      .result-value {
+        font-size: 1rem;
+      }
+      .dimension-row {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .settings-panel {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Square footage calculator for flooring
+</nav>
+
+<!-- TITLE -->
+
+<h1 class="page-title">Square footage calculator for flooring</h1>
+<p class="page-copy">
+Ready to upgrade your floors? Our Square Footage Calculator takes the guesswork out of your renovation project. Whether you are installing sleek hardwood, durable tile, or cozy carpet, getting an accurate measurement is the first step to a flawless finish and a balanced budget.</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+
+<div class="tool-card">
+
+  <div class="tool-container">
+  <div class="calculator-card">
+    <div class="tool-header">
+      <h1>
+        <i class="fas fa-calculator"></i> 
+        Flooring Square Footage Calculator
+      </h1>
+      <p><i class="fas fa-hard-hat"></i> Plan your flooring project — add multiple rooms, include waste factor, and estimate total cost. Get precise material needs.</p>
+    </div>
+    <div class="tool-content">
+      <!-- rooms dynamic container -->
+      <div class="rooms-section">
+        <div class="section-title">
+          <i class="fas fa-door-open"></i> Rooms / Areas
+        </div>
+        <div id="roomsContainer" class="rooms-grid">
+          <!-- rooms will be dynamically injected but we'll keep one default via JS -->
+        </div>
+        <button id="addRoomBtn" class="add-room-btn"><i class="fas fa-plus-circle"></i> Add another room</button>
+      </div>
+
+      <!-- global settings -->
+      <div class="settings-panel">
+        <div class="setting-item">
+          <label><i class="fas fa-chart-line"></i> Waste factor</label>
+          <input type="number" id="wasteFactor" value="10" step="1" min="0" max="40"> <span style="font-size:0.8rem; margin-left:5px;">%</span>
+        </div>
+        <div class="setting-item">
+          <label><i class="fas fa-dollar-sign"></i> Cost per sq.ft</label>
+          <input type="number" id="costPerSqft" value="3.50" step="0.10" min="0" placeholder="0.00">
+        </div>
+      </div>
+
+      <!-- live results -->
+      <div class="results-area">
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-label">TOTAL AREA (no waste)</div>
+            <div class="result-value" id="totalAreaDisplay">0 <small>sq ft</small></div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">WASTE ADDITION</div>
+            <div class="result-value" id="wasteAmountDisplay">0 <small>sq ft</small></div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">FLOORING NEEDED</div>
+            <div class="result-value" id="totalWithWasteDisplay">0 <small>sq ft</small></div>
+          </div>
+          <div class="result-card">
+            <div class="result-label">ESTIMATED TOTAL COST</div>
+            <div class="result-value" id="totalCostDisplay">$0.00</div>
+          </div>
+        </div>
+        <hr>
+        <div style="font-size: 0.75rem; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <span><i class="fas fa-ruler-combined"></i> Dimensions in feet & inches</span>
+          <span><i class="fas fa-percent"></i> Waste factor includes cuts & pattern match</span>
+        </div>
+      </div>
+      <footer>
+        <i class="fas fa-arrows-alt"></i> Accurate for rectangles. For complex shapes, split into multiple rectangles.
+      </footer>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<section class="seo-section">
+                <h2>How to Use the Flooring Calculator</h2>
+                <p>Using this tool is straightforward. Follow these steps to get an accurate estimate for your project:</p>
+                    <ul>
+                    <li>● Measure the Room: Use a tape measure to find the length and width of the floor area you plan to cover.</li>
+                    <li>● Input Dimensions: Enter these numbers into the "Length" and "Width" fields in the calculator.</li>
+                    <li>● Add Waste Factor (Optional): It is standard practice to add 10% to 15% extra for cutting, errors, and future repairs. Most calculators have a "Waste" percentage field for this.</li>
+                    <li>● Calculate: Click the "Calculate" button to see the total square footage and the number of flooring boxes required.</li>
+
+                </ul>
+                <h3>The Formula</h3>
+                <p>To find the area of a rectangular room, we use a simple geometric formula:</p>
+		<p><em>Area = Length x times Width</em></p>
+		<p>If you are accounting for waste, the formula adjusts to:</p>
+		<p><em>Total Square Footage = (Length x times Width) x times (1 + Waste Percentage)</em></p>
+		<p>For example, if a room is 10 feet by 10 feet with a 10% waste factor:</p>
+		<ul>
+                    <li>● Measure the Room: Use a tape measure to find the length and width of the floor area you plan to cover.</li>
+                    <li>● Input Dimensions: Enter these numbers into the "Length" and "Width" fields in the calculator.</li>
+                </ul>
+
+
+                <h3>FAQ</h3>
+                <div class="faq-item"><strong>How to calculate square footage for flooring?</strong><span>To calculate square footage, simply multiply the length of the space by the width. If your room isn't a perfect rectangle, break it into smaller rectangular sections, calculate the area for each, and then add those totals together.</span></div><br>
+
+                <div class="faq-item"><strong>How to measure square footage for flooring?</strong><span>A flooring calculator square feet tool helps you determine exactly how much material (like laminate, tile, or hardwood) you need to purchase. It prevents you from overspending on extra materials or, conversely, running out of supplies in the middle of your installation.</span></div><br>
+
+                <div class="faq-item"><strong>What is a flooring calculator square feet used for?</strong><span>A flooring calculator square feet tool helps you determine exactly how much material (like laminate, tile, or hardwood) you need to purchase. It prevents you from overspending on extra materials or, conversely, running out of supplies in the middle of your installation.</span></div><br>
+
+		<p><strong>Quick Tip: When buying flooring, check the "sq. ft. per box" listed on the product. Divide your total calculated square footage by the box size to know exactly how many boxes to add to your cart.</strong></p><br>
+                <div class="related-tools">
+                    <a href="bmi-calculator.html">BMI Calculator</a>
+                    <a href="fraction-calculator.html">Fraction Calculator</a>
+                    <a href="state-living-cost-calculator.html">State Living Cost Calculator</a>
+                </div>
+            </section>
+</div>
+</main>
+<script>
+  (function() {
+    // DOM elements
+    const roomsContainer = document.getElementById('roomsContainer');
+    const addRoomBtn = document.getElementById('addRoomBtn');
+    const wasteInput = document.getElementById('wasteFactor');
+    const costInput = document.getElementById('costPerSqft');
+
+    // Helper: create a fresh room object with default dimensions (10ft x 10ft)
+    function createDefaultRoomElement(roomIndex) {
+      const roomDiv = document.createElement('div');
+      roomDiv.className = 'room-card';
+      roomDiv.setAttribute('data-room-idx', roomIndex);
+      
+      // inner HTML structure
+      roomDiv.innerHTML = `
+        <div class="room-header">
+          <span class="room-title"><i class="fas fa-border-all"></i> Room ${roomIndex}</span>
+          <button class="delete-room-btn" title="Remove room"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div class="dimension-row">
+          <div class="input-group">
+            <label><i class="fas fa-arrows-alt-h"></i> LENGTH</label>
+            <div class="feet-inch-wrapper">
+              <input type="number" step="any" min="0" value="10" class="length-feet" placeholder="Feet">
+              <span>ft</span>
+              <input type="number" min="0" max="11" value="0" class="length-inches" placeholder="Inches">
+              <span>in</span>
+            </div>
+            <div class="error-msg length-error" style="display: none;">Invalid length (feet ≥0, inches 0-11)</div>
+          </div>
+          <div class="input-group">
+            <label><i class="fas fa-arrows-alt-v"></i> WIDTH</label>
+            <div class="feet-inch-wrapper">
+              <input type="number" step="any" min="0" value="10" class="width-feet" placeholder="Feet">
+              <span>ft</span>
+              <input type="number" min="0" max="11" value="0" class="width-inches" placeholder="Inches">
+              <span>in</span>
+            </div>
+            <div class="error-msg width-error" style="display: none;">Invalid width (feet ≥0, inches 0-11)</div>
+          </div>
+          <div class="room-area-indicator">
+            <i class="fas fa-vector-square"></i> Area: <span class="room-area-value">0.00</span> sq ft
+          </div>
+        </div>
+      `;
+      return roomDiv;
+    }
+
+    // function to refresh all rooms indexes (labels for display)
+    function updateRoomLabels() {
+      const rooms = document.querySelectorAll('.room-card');
+      rooms.forEach((room, idx) => {
+        const titleSpan = room.querySelector('.room-title');
+        if (titleSpan) {
+          titleSpan.innerHTML = `<i class="fas fa-border-all"></i> Room ${idx+1}`;
+        }
+        room.setAttribute('data-room-idx', idx+1);
+      });
+    }
+
+    // core calculation: parse room dimensions & update each room's area display + global totals
+    function calculateAndUpdate() {
+      const roomCards = document.querySelectorAll('.room-card');
+      let totalAreaSqft = 0;
+      const roomsData = [];
+
+      // First pass: compute each room area, show errors, update individual area display
+      roomCards.forEach(roomCard => {
+        // get length feet/inches
+        const lengthFeetInput = roomCard.querySelector('.length-feet');
+        const lengthInchesInput = roomCard.querySelector('.length-inches');
+        const widthFeetInput = roomCard.querySelector('.width-feet');
+        const widthInchesInput = roomCard.querySelector('.width-inches');
+        const lengthErrorSpan = roomCard.querySelector('.length-error');
+        const widthErrorSpan = roomCard.querySelector('.width-error');
+        const roomAreaSpan = roomCard.querySelector('.room-area-value');
+
+        let lengthFeet = parseFloat(lengthFeetInput.value);
+        let lengthInches = parseFloat(lengthInchesInput.value);
+        let widthFeet = parseFloat(widthFeetInput.value);
+        let widthInches = parseFloat(widthInchesInput.value);
+
+        // validation flags
+        let validLength = true;
+        let validWidth = true;
+
+        if (isNaN(lengthFeet)) lengthFeet = 0;
+        if (isNaN(lengthInches)) lengthInches = 0;
+        if (isNaN(widthFeet)) widthFeet = 0;
+        if (isNaN(widthInches)) widthInches = 0;
+
+        // sanitize negatives
+        if (lengthFeet < 0) { lengthFeet = 0; lengthFeetInput.value = 0; validLength = false; }
+        if (lengthInches < 0) { lengthInches = 0; lengthInchesInput.value = 0; validLength = false; }
+        if (widthFeet < 0) { widthFeet = 0; widthFeetInput.value = 0; validWidth = false; }
+        if (widthInches < 0) { widthInches = 0; widthInchesInput.value = 0; validWidth = false; }
+
+        // inches boundary
+        if (lengthInches > 11) { lengthInches = 11; lengthInchesInput.value = 11; validLength = false; }
+        if (widthInches > 11) { widthInches = 11; widthInchesInput.value = 11; validWidth = false; }
+
+        // show/hide error messages
+        if (lengthErrorSpan) {
+          if (!validLength || (lengthFeetInput.value < 0) || (lengthInchesInput.value > 11) || (lengthInchesInput.value < 0) || (lengthFeet < 0)) {
+            if (lengthFeet < 0 || lengthInches < 0 || lengthInches > 11) {
+              lengthErrorSpan.style.display = 'block';
+            } else {
+              lengthErrorSpan.style.display = 'none';
+            }
+          } else {
+            lengthErrorSpan.style.display = 'none';
+          }
+        }
+        if (widthErrorSpan) {
+          if (!validWidth || (widthFeetInput.value < 0) || (widthInchesInput.value > 11) || (widthInchesInput.value < 0) || (widthFeet < 0)) {
+            widthErrorSpan.style.display = 'block';
+          } else {
+            widthErrorSpan.style.display = 'none';
+          }
+        }
+
+        // convert to feet decimal
+        const lengthDecimal = lengthFeet + (lengthInches / 12);
+        const widthDecimal = widthFeet + (widthInches / 12);
+        
+        let roomArea = 0;
+        let areaValid = true;
+        if (lengthDecimal <= 0 || widthDecimal <= 0) areaValid = false;
+        if (!validLength || !validWidth) areaValid = false;
+        if (areaValid && lengthDecimal > 0 && widthDecimal > 0) {
+          roomArea = lengthDecimal * widthDecimal;
+        } else {
+          roomArea = 0;
+        }
+        
+        // round area
+        roomArea = Math.round(roomArea * 100) / 100;
+        if (roomAreaSpan) roomAreaSpan.innerText = roomArea.toFixed(2);
+        
+        if (areaValid && roomArea > 0) {
+          totalAreaSqft += roomArea;
+        }
+        roomsData.push({ area: roomArea, valid: areaValid });
+      });
+
+      // get waste & cost values
+      let wastePercent = parseFloat(wasteInput.value);
+      if (isNaN(wastePercent)) wastePercent = 0;
+      wastePercent = Math.min(Math.max(wastePercent, 0), 50);
+      wasteInput.value = wastePercent;
+
+      let costPerSqft = parseFloat(costInput.value);
+      if (isNaN(costPerSqft)) costPerSqft = 0;
+      if (costPerSqft < 0) costPerSqft = 0;
+      costInput.value = costPerSqft.toFixed(2);
+
+      // total with waste
+      const wasteAmount = totalAreaSqft * (wastePercent / 100);
+      const totalWithWaste = totalAreaSqft + wasteAmount;
+      const totalCost = totalWithWaste * costPerSqft;
+
+      // Update UI elements
+      document.getElementById('totalAreaDisplay').innerHTML = `${totalAreaSqft.toFixed(2)} <small>sq ft</small>`;
+      document.getElementById('wasteAmountDisplay').innerHTML = `${wasteAmount.toFixed(2)} <small>sq ft</small>`;
+      document.getElementById('totalWithWasteDisplay').innerHTML = `${totalWithWaste.toFixed(2)} <small>sq ft</small>`;
+      
+      if (costPerSqft > 0) {
+        document.getElementById('totalCostDisplay').innerHTML = `$${totalCost.toFixed(2)}`;
+      } else {
+        document.getElementById('totalCostDisplay').innerHTML = `— (set price)`;
+      }
+    }
+
+    // attach events to all room inputs (using event delegation on container)
+    function bindGlobalEvents() {
+      // Event delegation for any input/change inside roomsContainer
+      roomsContainer.addEventListener('input', (e) => {
+        const target = e.target;
+        if (target.matches('.length-feet, .length-inches, .width-feet, .width-inches')) {
+          // clamp inches for this specific input if needed
+          if (target.classList.contains('length-inches') || target.classList.contains('width-inches')) {
+            let val = parseFloat(target.value);
+            if (!isNaN(val)) {
+              if (val > 11) target.value = 11;
+              if (val < 0) target.value = 0;
+            }
+          }
+          if (target.classList.contains('length-feet') || target.classList.contains('width-feet')) {
+            let val = parseFloat(target.value);
+            if (!isNaN(val) && val < 0) target.value = 0;
+          }
+          calculateAndUpdate();
+        }
+      });
+      
+      // waste & cost changes
+      wasteInput.addEventListener('input', () => calculateAndUpdate());
+      costInput.addEventListener('input', () => calculateAndUpdate());
+      
+      // delete room delegation
+      roomsContainer.addEventListener('click', (e) => {
+        const deleteBtn = e.target.closest('.delete-room-btn');
+        if (deleteBtn) {
+          const roomCard = deleteBtn.closest('.room-card');
+          const allRooms = document.querySelectorAll('.room-card');
+          if (allRooms.length <= 1) {
+            // prevent deletion of last room
+            const tempErr = document.createElement('div');
+            tempErr.style.position = 'fixed';
+            tempErr.style.bottom = '20px';
+            tempErr.style.left = '50%';
+            tempErr.style.transform = 'translateX(-50%)';
+            tempErr.style.backgroundColor = '#dc2626';
+            tempErr.style.color = 'white';
+            tempErr.style.padding = '10px 20px';
+            tempErr.style.borderRadius = '40px';
+            tempErr.style.fontSize = '0.85rem';
+            tempErr.style.zIndex = '999';
+            tempErr.innerText = '⚠️ At least one room is required';
+            document.body.appendChild(tempErr);
+            setTimeout(() => tempErr.remove(), 2000);
+            return;
+          }
+          roomCard.remove();
+          updateRoomLabels();
+          calculateAndUpdate();
+        }
+      });
+    }
+
+    // Add new room with default 10x10 values
+    function addNewRoom() {
+      const currentRooms = document.querySelectorAll('.room-card');
+      const newIndex = currentRooms.length + 1;
+      const newRoom = createDefaultRoomElement(newIndex);
+      // default dimensions are already 10ft 0in both
+      roomsContainer.appendChild(newRoom);
+      updateRoomLabels();
+      calculateAndUpdate();
+    }
+
+    // initialize default rooms (one room)
+    function initDefaultRooms() {
+      roomsContainer.innerHTML = '';
+      const firstRoom = createDefaultRoomElement(1);
+      roomsContainer.appendChild(firstRoom);
+      updateRoomLabels();
+      calculateAndUpdate();
+    }
+
+    // additional clamping on blur to ensure inches max
+    function addBlurClamping() {
+      roomsContainer.addEventListener('blur', (e) => {
+        const target = e.target;
+        if (target.matches('.length-inches, .width-inches')) {
+          let val = parseInt(target.value);
+          if (!isNaN(val)) {
+            if (val > 11) target.value = 11;
+            if (val < 0) target.value = 0;
+          } else if (target.value === '') {
+            target.value = 0;
+          }
+          calculateAndUpdate();
+        }
+        if (target.matches('.length-feet, .width-feet')) {
+          let val = parseFloat(target.value);
+          if (isNaN(val)) target.value = 0;
+          if (val < 0) target.value = 0;
+          calculateAndUpdate();
+        }
+      }, true);
+    }
+
+    // setup event listeners
+    addRoomBtn.addEventListener('click', () => addNewRoom());
+    bindGlobalEvents();
+    addBlurClamping();
+    initDefaultRooms();
+  })();
+</script>
+
+<!-- FOOTER -->
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+
+</body>
+</html>
