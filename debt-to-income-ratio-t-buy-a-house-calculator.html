@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Debt to Income Ratio to Buy a House Calculator</title>
+
+<meta name="description" content="Calculate your DTI, understand lender limits, and find out how much home you can afford before applying.">
+
+<meta name="keywords" content="debt to income calculator, mortgage debt to income ratio calculator, debt to income ratio for mortgage approval, calculate debt to income ratio for mortgage, calculate my dti for mortgage">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculator Title | Critical Calculator</title>
+<meta name="description" content="Page description for SEO">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+.related-tools { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.related-tools { margin-top:22px; }
+        .related-tools a { padding:10px 14px; border-radius:999px; background:#fff; border:1px solid var(--line); font-weight:700; }
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (EMPTY PLACEHOLDER) */
+.tool-card{
+  margin-top:32px;
+  padding:28px;
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+ /* main card container */
+        .calculator-card {
+            max-width: 1320px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* header */
+        .card-header {
+            background: #0a2b3e;
+            padding: 1.8rem 2rem;
+            color: white;
+        }
+
+        .card-header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .card-header h1 span {
+            background: #ffb347;
+            font-size: 1rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            color: #1e2f3a;
+            font-weight: 500;
+        }
+
+        .card-header p {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 0.6rem;
+            max-width: 80%;
+        }
+
+        /* two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: #ffffff;
+        }
+
+        /* input panels */
+        .input-panel {
+            background: #f9fafc;
+            border-radius: 1.5rem;
+            padding: 1.6rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e6edf4;
+        }
+
+        .input-panel h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a2c3e;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-panel h2 i {
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .subhead {
+            font-size: 0.85rem;
+            color: #5c6f87;
+            border-left: 3px solid #ffb347;
+            padding-left: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-weight: 600;
+            color: #1f3b4c;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .tooltip-icon {
+            font-size: 0.75rem;
+            background: #dce5ef;
+            color: #1f3b4c;
+            border-radius: 30px;
+            padding: 0.2rem 0.5rem;
+            cursor: help;
+            transition: 0.1s;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            font-size: 1rem;
+            border: 1.5px solid #dce3ec;
+            border-radius: 1rem;
+            background: white;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ffb347;
+            box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
+        }
+
+        .hint-text {
+            font-size: 0.7rem;
+            color: #6c7e97;
+            margin-top: 0.4rem;
+        }
+
+        .annual-row {
+            background: #f0f3f8;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .results-panel {
+            background: #f9fafc;
+            border-radius: 1.5rem;
+            padding: 1.6rem;
+            border: 1px solid #e6edf4;
+        }
+
+        .result-block {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eef2f8;
+        }
+
+        .dti-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .dti-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .dti-value {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .rating-badge {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            background: #e2e8f0;
+            border-radius: 40px;
+            height: 8px;
+            width: 100%;
+            margin: 12px 0 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #ffb347;
+            width: 0%;
+            height: 100%;
+            border-radius: 40px;
+            transition: width 0.2s ease;
+        }
+
+        .qualify-message {
+            margin-top: 12px;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .max-afford {
+            background: #fef6e6;
+            padding: 0.9rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .max-afford p {
+            margin: 6px 0;
+        }
+
+        hr {
+            margin: 0.8rem 0;
+            border: 0;
+            height: 1px;
+            background: #e6edf4;
+        }
+
+        button.example-btn {
+            background: white;
+            border: 1.5px solid #cddae9;
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #1f3b4c;
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        button.example-btn:hover {
+            background: #ffb34710;
+            border-color: #ffb347;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 850px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+                padding: 1.5rem;
+            }
+            .card-header p {
+                max-width: 100%;
+            }
+            .dti-value {
+                font-size: 1.6rem;
+            }
+        }
+
+        .error-text {
+            color: #c2410c;
+            font-size: 0.75rem;
+            margin-top: 0.3rem;
+        }
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Mortgage DTI Analyzer
+</nav>
+
+<!-- TITLE -->
+
+<h1 class="page-title">Debt to Income ratio to Buy a House calculator</h1>
+<p class="page-copy">
+A Debt-to-Income (DTI) Ratio to Buy a House Calculator helps you understand how much of your monthly income goes toward paying debts, including your future home loan. By comparing your total monthly debt with your income, it shows whether you can afford a house and if you meet typical lender requirements for mortgage approval.
+</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+
+<div class="tool-card">
+
+  <div class="calculator-card">
+    <div class="card-header">
+        <h1>
+            🏡 Mortgage DTI Analyzer 
+            <span>US Lending Standards</span>
+        </h1>
+        <p>Debt-to-Income ratio is a key factor for mortgage approval. Calculate front-end (housing) & back-end (total debt) ratios to see if you meet typical US lender requirements.</p>
+    </div>
+
+    <div class="two-col">
+        <!-- LEFT: INPUT SECTION -->
+        <div class="input-panel">
+            <h2>📋 Your Financial Profile</h2>
+            <div class="subhead">Gross income & monthly obligations</div>
+
+            <!-- Gross Monthly Income (primary) -->
+            <div class="input-group">
+                <label>
+                    💵 Gross Monthly Income <span class="tooltip-icon" title="Pre-tax income before any deductions. Include salary, bonuses, commissions, self-employment">ⓘ</span>
+                </label>
+                <input type="number" id="monthlyIncome" class="input-field" placeholder="e.g., 6500" value="5800" step="100">
+                <div class="hint-text">Before taxes & deductions</div>
+            </div>
+
+            <!-- Annual income helper - syncs to monthly field -->
+            <div class="annual-row">
+                <label>📅 Or Gross Annual Income (optional)</label>
+                <input type="number" id="annualIncomeHelper" class="input-field" placeholder="Annual gross income" step="1000" value="">
+                <div class="hint-text">👉 Enter annual amount → automatically updates monthly income above</div>
+            </div>
+
+            <!-- Proposed Housing Payment (PITI + HOA) -->
+            <div class="input-group">
+                <label>
+                    🏠 Proposed Monthly Housing Payment <span class="tooltip-icon" title="Principal, Interest, Taxes, Insurance + HOA / MIP if any">ⓘ</span>
+                </label>
+                <input type="number" id="housingPayment" class="input-field" placeholder="PITI + HOA" value="1700" step="50">
+                <div class="hint-text">Total housing cost: mortgage payment + property taxes + homeowners insurance + HOA fees</div>
+            </div>
+
+            <!-- Other Monthly Debt Payments -->
+            <div class="input-group">
+                <label>
+                    💳 Other Monthly Debt Payments <span class="tooltip-icon" title="Minimum payments: car loans, student loans, credit cards, personal loans, alimony, child support">ⓘ</span>
+                </label>
+                <input type="number" id="otherDebts" class="input-field" placeholder="Car, student, credit cards, etc." value="750" step="50">
+                <div class="hint-text">Excluding housing — only recurring minimum debt obligations</div>
+            </div>
+
+            <button class="example-btn" id="loadExampleBtn">🎯 Load typical example (income $6k, housing $1.8k, debts $800)</button>
+        </div>
+
+        <!-- RIGHT: RESULTS & INSIGHTS -->
+        <div class="results-panel">
+            <h2>📊 DTI Analysis</h2>
+            <div class="subhead">Front-end (housing) & Back-end (total debt) ratios</div>
+
+            <div id="resultContainer">
+                <!-- Front end block -->
+                <div class="result-block">
+                    <div class="dti-metric">
+                        <span class="dti-label">🏡 Front-End DTI (Housing only)</span>
+                        <span class="dti-value" id="frontEndValue">0%</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="frontFill" style="width:0%"></div></div>
+                    <div id="frontRating" class="rating-badge">—</div>
+                    <div id="frontMsg" class="qualify-message" style="background:#f1f5f9; margin-top:10px;"></div>
+                </div>
+
+                <!-- Back end block -->
+                <div class="result-block">
+                    <div class="dti-metric">
+                        <span class="dti-label">📉 Back-End DTI (Total debt + housing)</span>
+                        <span class="dti-value" id="backEndValue">0%</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="backFill" style="width:0%"></div></div>
+                    <div id="backRating" class="rating-badge">—</div>
+                    <div id="qualifyText" class="qualify-message" style="background:#fff0db;"></div>
+                </div>
+
+                <!-- Max affordable housing based on DTI limits -->
+                <div class="max-afford" id="affordabilityBox">
+                    <strong>🏷️ Maximum affordable housing payment (based on back-end DTI):</strong>
+                    <p>🔹 <span id="max36">—</span> to keep ≤36% DTI (ideal conventional)</p>
+                    <p>🔸 <span id="max43">—</span> to keep ≤43% DTI (common max for qualified mortgages)</p>
+                    <p style="font-size:0.7rem; margin-top:4px;">⚠️ Based on your other debts & income. Negative means debts already exceed limit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<section class="seo-section">
+  <h2>How to use this calculator</h2>
+  <p>Enter your gross monthly income (before tax). Then add your expected housing payment (including mortgage, taxes, insurance, and HOA if any). After that, enter your other monthly debts like car loans, credit cards, or student loans.</p><br>
+
+<p>The calculator will instantly show your front-end DTI (housing only) and back-end DTI (total debt). These numbers help you understand if you can afford a house and whether you meet typical lender requirements.</p><br>
+
+  <h3>Formula used</h3>
+  <p><strong>This calculator uses two main formulas:</strong></p><br>
+
+● Front-End DTI (Housing Ratio)<br>
+= (Monthly Housing Payment ÷ Gross Monthly Income) × 100<br>
+● Back-End DTI (Total Debt Ratio)<br>
+= (Monthly Housing Payment + Other Debts ÷ Gross Monthly Income) × 100<br>
+
+The back-end DTI is the most important one, as lenders use it to decide your mortgage eligibility.</p><br>
+
+  <h3>FAQ</h3>
+  <p>1. What is a good DTI ratio to buy a house?
+● A DTI below 36% is considered ideal. Most lenders accept up to 43%, but lower is always better.</p><br>
+
+<p>2. What is the difference between front-end and back-end DTI?
+● Front-end DTI includes only housing costs, while back-end DTI includes all your debts plus housing.</p><br>
+
+<p>3. Does DTI affect mortgage approval?
+● Yes, DTI is one of the most important factors lenders use to approve or reject your loan.</p><br>
+
+<p>4. Can I get a loan with a high DTI?
+● It’s possible, but harder. You may need a higher credit score, larger down payment, or a co-applicant.</p><br>
+
+<p>5. What counts as debt in DTI?
+● Car loans, credit card payments, student loans, personal loans, and any fixed monthly obligations are included.<br></p>
+
+<div class="related-tools">
+                    <a href="mortgage-income-calculator.html">Estimate your Mortgage</a>
+               </div>
+</section>
+  
+
+
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+<script>
+    // DOM elements
+    const monthlyIncomeInput = document.getElementById('monthlyIncome');
+    const annualHelperInput = document.getElementById('annualIncomeHelper');
+    const housingPaymentInput = document.getElementById('housingPayment');
+    const otherDebtsInput = document.getElementById('otherDebts');
+    
+    // result fields
+    const frontEndSpan = document.getElementById('frontEndValue');
+    const backEndSpan = document.getElementById('backEndValue');
+    const frontFill = document.getElementById('frontFill');
+    const backFill = document.getElementById('backFill');
+    const frontRatingSpan = document.getElementById('frontRating');
+    const frontMsgDiv = document.getElementById('frontMsg');
+    const backRatingSpan = document.getElementById('backRating');
+    const qualifyTextDiv = document.getElementById('qualifyText');
+    const max36Span = document.getElementById('max36');
+    const max43Span = document.getElementById('max43');
+
+    // Helper: format currency
+    function formatUSD(value) {
+        if (isNaN(value)) return '$0';
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+    }
+
+    // Core calculation & UI update
+    function updateDTI() {
+        // get raw values
+        let grossMonthly = parseFloat(monthlyIncomeInput.value);
+        let housing = parseFloat(housingPaymentInput.value);
+        let otherDebts = parseFloat(otherDebtsInput.value);
+        
+        // validation / NaN handling
+        if (isNaN(grossMonthly)) grossMonthly = 0;
+        if (isNaN(housing)) housing = 0;
+        if (isNaN(otherDebts)) otherDebts = 0;
+        
+        // Ensure non-negative
+        grossMonthly = Math.max(0, grossMonthly);
+        housing = Math.max(0, housing);
+        otherDebts = Math.max(0, otherDebts);
+        
+        // Error state if income <= 0
+        const errorContainer = document.getElementById('affordabilityBox');
+        if (grossMonthly <= 0) {
+            frontEndSpan.innerText = '—';
+            backEndSpan.innerText = '—';
+            frontFill.style.width = '0%';
+            backFill.style.width = '0%';
+            frontRatingSpan.innerText = '⚠️ Invalid income';
+            frontMsgDiv.innerHTML = 'Enter a valid monthly gross income (> $0) to calculate DTI.';
+            backRatingSpan.innerText = 'No data';
+            qualifyTextDiv.innerHTML = '❌ Monthly income must be greater than zero.';
+            max36Span.innerText = formatUSD(0);
+            max43Span.innerText = formatUSD(0);
+            return;
+        }
+        
+        // compute ratios
+        const frontEndRatio = (housing / grossMonthly) * 100;
+        const backEndRatio = ((housing + otherDebts) / grossMonthly) * 100;
+        
+        // update displayed values (round to 1 decimal)
+        frontEndSpan.innerText = frontEndRatio.toFixed(1) + '%';
+        backEndSpan.innerText = backEndRatio.toFixed(1) + '%';
+        
+        // progress bars (capped at 70% for visual clarity, but show real % up to 100)
+        let frontPercent = Math.min(100, frontEndRatio);
+        let backPercent = Math.min(100, backEndRatio);
+        frontFill.style.width = frontPercent + '%';
+        backFill.style.width = backPercent + '%';
+        
+        // 1) Front-end rating & message
+        let frontRating = '';
+        let frontColorHint = '';
+        let frontMessage = '';
+        if (frontEndRatio <= 28) {
+            frontRating = '✅ Excellent (≤28%)';
+            frontMessage = '✔️ Ideal conventional range — lenders view housing cost as very manageable.';
+        } else if (frontEndRatio <= 36) {
+            frontRating = '👍 Acceptable (28-36%)';
+            frontMessage = '✔️ Moderate front-end DTI — most lenders can work with this, especially with strong credit.';
+        } else if (frontEndRatio <= 43) {
+            frontRating = '⚠️ Elevated (>36%)';
+            frontMessage = '⚠️ Higher housing ratio — may require higher down payment or compensating factors.';
+        } else {
+            frontRating = '🔴 High (over 43%)';
+            frontMessage = '🔻 Housing costs consume significant income. Consider lower-priced home or larger down payment.';
+        }
+        frontRatingSpan.innerText = frontRating;
+        frontMsgDiv.innerHTML = frontMessage;
+        
+        // 2) Back-end rating & qualification assessment
+        let backRating = '';
+        let qualificationMsg = '';
+        let progressColor = '';
+        if (backEndRatio <= 36) {
+            backRating = '🏆 Low Risk (≤36%)';
+            qualificationMsg = '✅ Strong qualification! Most conventional and government loans available. Excellent DTI.';
+            progressColor = '#2b9348';
+        } else if (backEndRatio <= 43) {
+            backRating = '📌 Acceptable (36-43%)';
+            qualificationMsg = '✔️ Within typical QM limit (43%). Many lenders approve with good credit & reserves.';
+            progressColor = '#ffb347';
+        } else if (backEndRatio <= 50) {
+            backRating = '⚠️ Borderline (43-50%)';
+            qualificationMsg = '⚠️ May limit options. Conventional loans may require extra reserves or lower LTV. FHA/VA possible with compensating factors.';
+            progressColor = '#e67e22';
+        } else {
+            backRating = '🔴 High Risk ( >50% )';
+            qualificationMsg = '❌ Unlikely to qualify for most mortgages. Reduce debts or increase income before applying.';
+            progressColor = '#c2410c';
+        }
+        backRatingSpan.innerText = backRating;
+        qualifyTextDiv.innerHTML = qualificationMsg;
+        qualifyTextDiv.style.background = backEndRatio <= 43 ? '#e6f4ea' : '#ffefe5';
+        
+        // 3) Max affordable housing payment based on back-end DTI goals (36% and 43%)
+        let maxHousing36 = (grossMonthly * 0.36) - otherDebts;
+        let maxHousing43 = (grossMonthly * 0.43) - otherDebts;
+        
+        if (maxHousing36 < 0) {
+            max36Span.innerHTML = `<span style="color:#c2410c;">⚠️ No room (debts already exceed 36% of income)</span>`;
+        } else {
+            max36Span.innerHTML = formatUSD(maxHousing36) + ` <span style="font-size:0.7rem;">/ month</span>`;
+        }
+        
+        if (maxHousing43 < 0) {
+            max43Span.innerHTML = `<span style="color:#c2410c;">⚠️ Debts exceed 43% limit</span>`;
+        } else {
+            max43Span.innerHTML = formatUSD(maxHousing43) + ` <span style="font-size:0.7rem;">/ month</span>`;
+        }
+        
+        // Optional: add front-end max suggestion remark
+        if (frontEndRatio > 28 && grossMonthly > 0) {
+            const idealFrontMax = grossMonthly * 0.28;
+            if (housing > idealFrontMax) {
+                frontMsgDiv.innerHTML += `<br><small>💡 To reach ideal front-end DTI (28%), housing payment should be ≤ ${formatUSD(idealFrontMax)}.</small>`;
+            }
+        }
+    }
+    
+    // Sync annual income to monthly field (one-way)
+    function syncAnnualToMonthly() {
+        let annualVal = parseFloat(annualHelperInput.value);
+        if (!isNaN(annualVal) && annualVal > 0) {
+            let monthlyCalc = annualVal / 12;
+            monthlyIncomeInput.value = Math.round(monthlyCalc);
+            updateDTI();
+        } else if (annualHelperInput.value === '' || (isNaN(annualVal))) {
+            // do nothing, keep monthly as is
+            return;
+        } else if (annualVal <= 0) {
+            // if zero or negative, ignore but keep
+            return;
+        }
+    }
+    
+    // Load example data for demonstration
+    function loadExample() {
+        monthlyIncomeInput.value = "6000";
+        housingPaymentInput.value = "1800";
+        otherDebtsInput.value = "800";
+        annualHelperInput.value = "";   // clear annual helper field to avoid confusion
+        updateDTI();
+    }
+    
+    // Add event listeners to all relevant inputs
+    function bindEvents() {
+        monthlyIncomeInput.addEventListener('input', function() {
+            // if user manually edits monthly, clear annual helper field for consistency
+            annualHelperInput.value = '';
+            updateDTI();
+        });
+        housingPaymentInput.addEventListener('input', updateDTI);
+        otherDebtsInput.addEventListener('input', updateDTI);
+        annualHelperInput.addEventListener('input', function() {
+            syncAnnualToMonthly();
+        });
+        document.getElementById('loadExampleBtn').addEventListener('click', loadExample);
+    }
+    
+    // initial update
+    function init() {
+        bindEvents();
+        // set initial values (monthly prefill already in HTML)
+        // ensure annual helper blank
+        annualHelperInput.value = '';
+        updateDTI();
+        // Additional: if monthly income present, compute from there
+    }
+    
+    init();
+</script>
+
+</body>
+</html>
