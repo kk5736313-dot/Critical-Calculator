@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BMI Calculator by Age and Gender Tool</title>
+
+<meta name="description" content="Use our BMI Calculator by Age and Gender to check your BMI using age, gender, height, and weight. Get accurate results with BMI adjusted for age and gender and personalized health insights instantly.">
+
+<meta name="keywords" content="age gender height weight calculator, average bmi by age and gender, bmi age gender calculator, bmi adjusted for age and gender, bmi calculator according to age and gender, bmi calculator by gender and age, bmi calculator with frame size and gender and age">
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (EMPTY PLACEHOLDER) */
+.tool-card{
+  margin-top:32px;
+
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+
+/* main card */
+    .card {
+      max-width: 750px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    /* header */
+    .header {
+      background: #1e2f5e;
+      padding: 1.8rem 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .header h1 span {
+      background: #eab308;
+      font-size: 1.2rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      color: #1e2f5e;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      margin-top: 0.6rem;
+      opacity: 0.85;
+    }
+
+    /* content */
+    .content {
+      padding: 2rem 2rem 2rem 2rem;
+    }
+
+    /* unit toggle */
+    .unit-toggle {
+      background: #f0f4fa;
+      border-radius: 3rem;
+      display: inline-flex;
+      padding: 0.25rem;
+      margin-bottom: 1.8rem;
+      box-shadow: inset 0 1px 3px #0001, 0 1px 2px white;
+    }
+
+    .unit-btn {
+      border: none;
+      background: transparent;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      border-radius: 3rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      color: #1f2f4e;
+    }
+
+    .unit-btn.active {
+      background: #1e2f5e;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group label i {
+      font-style: normal;
+      font-weight: normal;
+      background: #e2e8f0;
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    input, select {
+      padding: 0.85rem 1rem;
+      border-radius: 1.2rem;
+      border: 1.5px solid #e2e8f0;
+      background: white;
+      font-size: 1rem;
+      transition: 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #1e2f5e;
+      box-shadow: 0 0 0 3px rgba(30, 47, 94, 0.2);
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 1rem;
+      background: #f8fafc;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      border: 1.5px solid #e2e8f0;
+    }
+
+    .gender-options label {
+      font-weight: 500;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-calc {
+      background: #1e2f5e;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 3rem;
+      margin: 1.8rem 0 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    }
+
+    .btn-calc:hover {
+      background: #0f1f42;
+      transform: scale(0.98);
+    }
+
+    /* result panel */
+    .result-panel {
+      background: #f1f5f9;
+      border-radius: 1.5rem;
+      padding: 1.4rem;
+      margin-top: 1rem;
+      transition: all 0.2s;
+      border-left: 6px solid #1e2f5e;
+    }
+
+    .bmi-value {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .bmi-category {
+      font-weight: 600;
+      margin-top: 6px;
+      font-size: 1.2rem;
+    }
+
+    .interpretation {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 0.9rem;
+      color: #1e293b;
+    }
+
+    .extra-note {
+      background: #fffbeb;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      color: #92400e;
+      border-left: 4px solid #eab308;
+    }
+
+    .error-text {
+      color: #b91c1c;
+      background: #fee2e2;
+      padding: 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+    }
+
+    .scale-info {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #475569;
+      text-align: center;
+    }
+
+    hr {
+      margin: 0.8rem 0;
+      border: 0;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    @media (max-width: 580px) {
+      .content {
+        padding: 1.5rem;
+      }
+      .header h1 {
+        font-size: 1.5rem;
+      }
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Bmi Calculator by Age and Gender
+</nav>
+
+<!-- TITLE -->
+
+<h1 class="page-title">Bmi Calculator by Age and Gender
+</h1>
+<p class="page-copy">
+BMI Calculator by Age and Gender means a tool that calculates your Body Mass Index (BMI) using height and weight, and then adjusts the result based on your age and gender to give a more accurate health status.</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+
+<div class="tool-card">
+
+  <div class="card">
+  <div class="header">
+    <h1>
+      📊 BMI Compass
+      <span>Age + Gender</span>
+    </h1>
+    <p>Personalized insight based on your age, gender, and body metrics</p>
+  </div>
+  <div class="content">
+    <!-- Unit toggle -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div class="unit-toggle" id="unitToggle">
+        <button class="unit-btn active" data-unit="metric">📏 Metric (kg/cm)</button>
+        <button class="unit-btn" data-unit="imperial">⚖️ Imperial (lbs/in)</button>
+      </div>
+      <small style="color:#4a5568;">💡 BMI = weight ÷ height²</small>
+    </div>
+
+    <!-- Form fields -->
+    <div class="form-grid">
+      <div class="input-group">
+        <label><i>⚖️</i> Weight</label>
+        <input type="number" id="weightInput" step="any" placeholder="70" value="70">
+        <span id="weightUnit" style="font-size: 0.7rem; margin-top: -0.2rem;">kg</span>
+      </div>
+      <div class="input-group">
+        <label><i>📏</i> Height</label>
+        <input type="number" id="heightInput" step="any" placeholder="170" value="170">
+        <span id="heightUnit" style="font-size: 0.7rem; margin-top: -0.2rem;">cm</span>
+      </div>
+      <div class="input-group">
+        <label><i>🎂</i> Age (years)</label>
+        <input type="number" id="ageInput" min="2" max="120" step="1" value="32">
+      </div>
+      <div class="input-group">
+        <label><i>⚧</i> Gender</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="male" checked> Male</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-calc" id="calcBtn">🔍 CALCULATE BMI & ANALYSIS</button>
+
+    <!-- Result area -->
+    <div id="resultArea">
+      <div class="result-panel" id="resultPanel" style="display: none;">
+        <div class="bmi-value" id="bmiNumber">--</div>
+        <div class="bmi-category" id="bmiCategory">---</div>
+        <div id="ageGenderNote" style="margin-top: 6px; font-size: 0.85rem; font-weight: 500;"></div>
+        <div class="interpretation" id="interpretText"></div>
+        <div class="extra-note" id="extraNote"></div>
+      </div>
+      <div id="errorMsg"></div>
+    </div>
+
+    <div class="scale-info">
+      <hr>
+      <strong>📌 Standard BMI ranges (adults)</strong>: Underweight < 18.5 | Normal 18.5–24.9 | Overweight 25–29.9 | Obese ≥ 30<br>
+      <span>✨ For minors (<18y) & elderly (65+), this tool adds special guidance based on age & gender.</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<section class="seo-section">
+  <h2>How to use this calculator</h2>
+  <p><strong>Enter your weight, height, age, and gender in the input fields.</strong></p><br>
+  <p><strong>Next, choose your preferred unit (Metric or Imperial) if needed. Click the Calculate BMI & Analysis button to instantly get the result.</strong></p><br>
+
+<h3>The calculator will show:</h3>
+  <p><strong>● Your BMI value</strong></p><br>
+  <p><strong>● Your BMI category (Underweight, Normal, Overweight, or Obese)</strong></p><br>
+  <p><strong>● A personalized analysis based on your age and gender</strong></p><br>
+
+<h2>Make sure all values are valid and greater than zero to avoid errors.</h2>
+
+
+  <h3>Formula used</h3>
+  <p><strong>To calculate BMI, the calculator follows this formula:</strong></p><br>
+
+  <p><strong>BMI = Weight ÷ Height²</strong></p><br>
+	  <p><em>● In Metric: weight (kg) ÷ height (m²)</em></p><br>
+	  <p><em>● In Imperial: weight (lbs) ÷ height (in²) × 703</em></p><br>
+
+  <p><strong>The result is then interpreted based on:</strong></p><br>
+  <p><strong>● Standard BMI ranges (adults)</p><br>
+  <p><strong>● Age-specific guidance (children & seniors)</p><br>
+  <p><strong>● Gender-based insights</p><br>
+
+  <h3>FAQ</h3>
+  <p><strong>1. <em>Can I use this tool for children and teens?</em></strong></p><br>
+	<p>Yes, but for users under 18, BMI is interpreted using age and gender percentiles, not just the number.<p><br>
+
+  <p><strong>2. <em>Is this calculator accurate for all body types?</em></strong></p><br>
+	<p>BMI is a general health indicator. It does not consider muscle mass or body composition, so athletes may get slightly misleading results.<p><br>
+
+
+  <p><strong>3. <em>How does this BMI calculator work?</em></strong></p><br>
+	<p>It calculates BMI using your height and weight, then analyzes it using age and gender to give a more personalized health interpretation.<p><br>
+
+
+  <p><strong>4. <em>Can I use this calculator for weight loss planning?</em></strong></p><br>
+	<p>Yes, it gives a good starting point to understand your current health status, but for detailed planning, consult a professional.<p><br>
+
+<p><strong>5. <em>Why are age and gender important in BMI?</em></strong></p><br>
+	<p>Because body composition changes with age and differs between males and females, making the result more meaningful when these factors are included.<p><br>
+
+<h2><em>Try:<em></h2>
+		<div class="related-tools">
+                    <a href="bmi-calculator.html">BMI Calculator</a>
+                </div>
+</section>
+
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+<script>// ---------- DOM elements ----------
+  const unitBtns = document.querySelectorAll('.unit-btn');
+  const weightInput = document.getElementById('weightInput');
+  const heightInput = document.getElementById('heightInput');
+  const weightUnitSpan = document.getElementById('weightUnit');
+  const heightUnitSpan = document.getElementById('heightUnit');
+  const ageInput = document.getElementById('ageInput');
+  const genderRadios = document.querySelectorAll('input[name="gender"]');
+  const calcBtn = document.getElementById('calcBtn');
+  const resultPanel = document.getElementById('resultPanel');
+  const bmiNumberSpan = document.getElementById('bmiNumber');
+  const bmiCategorySpan = document.getElementById('bmiCategory');
+  const ageGenderNoteSpan = document.getElementById('ageGenderNote');
+  const interpretTextSpan = document.getElementById('interpretText');
+  const extraNoteSpan = document.getElementById('extraNote');
+  const errorMsgDiv = document.getElementById('errorMsg');
+
+  let currentUnit = 'metric';   // 'metric' or 'imperial'
+
+  // Helper: Update labels & placeholders based on unit
+  function updateUnitLabels() {
+    if (currentUnit === 'metric') {
+      weightUnitSpan.innerText = 'kilograms (kg)';
+      heightUnitSpan.innerText = 'centimeters (cm)';
+      weightInput.placeholder = 'e.g., 70';
+      heightInput.placeholder = 'e.g., 170';
+    } else {
+      weightUnitSpan.innerText = 'pounds (lbs)';
+      heightUnitSpan.innerText = 'inches (in)';
+      weightInput.placeholder = 'e.g., 154';
+      heightInput.placeholder = 'e.g., 67 (5\'7″ ≈ 67 in)';
+    }
+  }
+
+  // Convert between metric and imperial when toggling (preserve numeric values)
+  function convertValuesOnToggle() {
+    let weightVal = parseFloat(weightInput.value);
+    let heightVal = parseFloat(heightInput.value);
+    if (isNaN(weightVal) || isNaN(heightVal)) {
+      // If invalid, don't convert but we keep them
+      updateUnitLabels();
+      return;
+    }
+    if (currentUnit === 'metric') {
+      // From imperial to metric
+      // weight: lbs -> kg  (divide 2.20462)
+      // height: inches -> cm (multiply 2.54)
+      let newWeight = weightVal / 2.20462;
+      let newHeight = heightVal * 2.54;
+      weightInput.value = newWeight.toFixed(1);
+      heightInput.value = newHeight.toFixed(1);
+    } else {
+      // From metric to imperial
+      // kg -> lbs
+      // cm -> inches
+      let newWeight = weightVal * 2.20462;
+      let newHeight = heightVal / 2.54;
+      weightInput.value = newWeight.toFixed(1);
+      heightInput.value = newHeight.toFixed(1);
+    }
+    updateUnitLabels();
+  }
+
+  // Unit toggle event
+  unitBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const newUnit = btn.dataset.unit;
+      if (newUnit === currentUnit) return;
+      // update active style
+      unitBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // store old unit before switch
+      const oldUnit = currentUnit;
+      currentUnit = newUnit;
+      // convert values intelligently
+      if (oldUnit !== currentUnit) {
+        convertValuesOnToggle();
+      } else {
+        updateUnitLabels();
+      }
+      // Clear any previous error / result to avoid confusion
+      resultPanel.style.display = 'none';
+      errorMsgDiv.innerHTML = '';
+    });
+  });
+
+  // get selected gender
+  function getSelectedGender() {
+    for (let radio of genderRadios) {
+      if (radio.checked) return radio.value;
+    }
+    return 'male';
+  }
+
+  // compute BMI and interpretation based on age, gender
+  function computeBMIAndInterpretation() {
+    // reset error and hide old result
+    errorMsgDiv.innerHTML = '';
+    resultPanel.style.display = 'none';
+
+    // 1. get values
+    let weight = parseFloat(weightInput.value);
+    let height = parseFloat(heightInput.value);
+    let age = parseInt(ageInput.value);
+    let gender = getSelectedGender();
+
+    // validations
+    if (isNaN(weight) || weight <= 0) {
+      showError('⚠️ Please enter a valid weight (>0).');
+      return;
+    }
+    if (isNaN(height) || height <= 0) {
+      showError('⚠️ Please enter a valid height (>0).');
+      return;
+    }
+    if (isNaN(age) || age < 2 || age > 120) {
+      showError('👶 Age must be between 2 and 120 years (BMI charts for children from 2+).');
+      return;
+    }
+
+    // convert to metric if imperial
+    let weightKg, heightM;
+    if (currentUnit === 'metric') {
+      weightKg = weight;
+      heightM = height / 100;   // cm -> meters
+    } else {
+      // imperial: weight(lbs) -> kg, height(inches) -> meters
+      weightKg = weight / 2.20462;
+      let heightInMeters = (height * 0.0254);
+      heightM = heightInMeters;
+    }
+
+    if (heightM <= 0.5 || heightM > 2.7) {
+      showError('📏 Unrealistic height value. Please check (min 50cm / 20in, max 270cm).');
+      return;
+    }
+
+    let bmi = weightKg / (heightM * heightM);
+    bmi = parseFloat(bmi.toFixed(1));
+
+    // ---- BUILD RESULT TEXT BASED ON AGE + GENDER ----
+    let category = '';
+    let interpretationMsg = '';
+    let extraGuidance = '';
+
+    // standard adult classification function (18+)
+    const getAdultCategory = (bmiVal) => {
+      if (bmiVal < 18.5) return 'Underweight';
+      if (bmiVal >= 18.5 && bmiVal <= 24.9) return 'Normal weight';
+      if (bmiVal >= 25 && bmiVal <= 29.9) return 'Overweight';
+      return 'Obese';
+    };
+
+    // conditional by age group
+    if (age >= 18) {
+      // ADULT (18+)
+      let baseCategory = getAdultCategory(bmi);
+      category = baseCategory;
+      // health interpretation string
+      if (bmi < 18.5) interpretationMsg = `Your BMI indicates underweight. Balanced nutrition and medical guidance can help achieve healthy weight.`;
+      else if (bmi >= 18.5 && bmi <= 24.9) interpretationMsg = `Your BMI is within the healthy range. Maintain with active lifestyle and balanced diet.`;
+      else if (bmi >= 25 && bmi <= 29.9) interpretationMsg = `Overweight range. Small changes in diet & exercise may reduce health risks.`;
+      else interpretationMsg = `Obese range. Consider consulting a healthcare provider for a tailored weight management plan.`;
+
+      // Age-specific nuance for older adults (65+)
+      if (age >= 65) {
+        extraGuidance = `🧓 Senior (${age} years): Research suggests that for adults over 65, a BMI between 23 and 27 may be associated with better health outcomes. Your BMI: ${bmi}. Discuss with your doctor for personalized advice.`;
+        if (bmi >= 23 && bmi <= 27) {
+          interpretationMsg += ` As an older adult, your BMI falls in a favorable range for healthy aging.`;
+        } else if (bmi < 23) {
+          interpretationMsg += ` For older adults, being slightly underweight may increase frailty risk.`;
+        } else if (bmi > 27) {
+          interpretationMsg += ` For seniors, higher BMI may affect mobility and metabolic health. Regular check-ups advised.`;
+        }
+      } else {
+        extraGuidance = `💪 Standard adult BMI categories apply. Maintaining muscle mass is beneficial for everyone. Gender-specific body composition not reflected in BMI.`;
+      }
+
+      // Gender-related comment (light educational)
+      if (gender === 'female') {
+        extraGuidance += ` Women often have higher essential body fat; BMI is still a useful screening tool.`;
+      } else if (gender === 'male') {
+        extraGuidance += ` Men tend to have higher muscle mass, so BMI may sometimes misclassify athletic individuals.`;
+      } else {
+        extraGuidance += ` BMI doesn't differentiate between muscle/fat; consider body composition analysis.`;
+      }
+
+      ageGenderNoteSpan.innerHTML = `🧑 Adult · ${gender === 'female' ? 'Woman' : gender === 'male' ? 'Man' : 'Gender diverse'} · Age ${age} years`;
+    } 
+    else {
+      // CHILDREN / TEENS (2-17 years)
+      // Pediatric disclaimer: BMI raw value must be interpreted via percentiles by age & gender
+      category = `BMI = ${bmi} (pediatric reference)`;
+      let genderDisplay = gender === 'female' ? 'girl' : (gender === 'male' ? 'boy' : 'child');
+      interpretationMsg = `Because you are ${age} years old (${genderDisplay}), BMI is interpreted using age- and gender-specific growth charts. 
+      This BMI number alone does not provide a weight category. For kids & teens, doctors compare BMI percentile with peers of same age and gender.`;
+      
+      // additional advice
+      if (bmi < 14) {
+        interpretationMsg += ` Your BMI is relatively low for most children. Share this with your pediatrician.`;
+      } else if (bmi > 25 && age < 18) {
+        interpretationMsg += ` Higher BMI might warrant monitoring, but always rely on pediatric BMI percentile curves for accurate assessment.`;
+      }
+      extraGuidance = `📈 For children (2–17y), healthy weight is defined between 5th and 85th percentile. Gender-specific curves are essential. This tool records gender (${gender}) and age to recommend specialized evaluation. Consult your family doctor for a complete growth assessment.`;
+      ageGenderNoteSpan.innerHTML = `🧒 Pediatric profile · ${gender === 'female' ? 'Girl' : gender === 'male' ? 'Boy' : 'Child'} · Age ${age} years`;
+    }
+
+    // display bmi value and category according to context
+    bmiNumberSpan.innerText = bmi;
+    if (age >= 18) {
+      bmiCategorySpan.innerHTML = `${category} (${bmi})`;
+    } else {
+      bmiCategorySpan.innerHTML = `📊 Pediatric BMI = ${bmi} · Needs percentile evaluation by age & gender`;
+    }
+    
+    interpretTextSpan.innerHTML = interpretationMsg;
+    extraNoteSpan.innerHTML = extraGuidance;
+    
+    // additional contextual element for gender+age
+    if (age >= 18) {
+      let healthyNote = (bmi >= 18.5 && bmi <= 24.9) ? '✅ Great! Stay active.' : (bmi < 18.5 ? '🥗 Consider nutrient-rich foods.' : '🏃‍♂️ Gradual lifestyle adjustments can help.');
+      interpretTextSpan.innerHTML += `<br><br>📌 ${healthyNote}`;
+    } else {
+      interpretTextSpan.innerHTML += `<br><br>👩‍⚕️ Always discuss child's BMI percentile with a pediatrician for accurate health screening.`;
+    }
+
+    resultPanel.style.display = 'block';
+  }
+
+  function showError(msg) {
+    errorMsgDiv.innerHTML = `<div class="error-text">${msg}</div>`;
+    resultPanel.style.display = 'none';
+  }
+
+  // Also include chance to reset display on input change?
+  calcBtn.addEventListener('click', () => {
+    computeBMIAndInterpretation();
+  });
+
+  // initial label set
+  updateUnitLabels();
+
+  // Page load demo: optional but ensures standard output consistency, but not needed on load - but we can prefill current values with metric demo but already set.
+  // Also on load set gender default: make sure "male" is selected. Also add listener to clear errors when input changes.
+  const clearErrorOnInput = () => {
+    errorMsgDiv.innerHTML = '';
+    resultPanel.style.display = 'none';
+  };
+  weightInput.addEventListener('input', clearErrorOnInput);
+  heightInput.addEventListener('input', clearErrorOnInput);
+  ageInput.addEventListener('input', clearErrorOnInput);
+  document.querySelectorAll('input[name="gender"]').forEach(r => r.addEventListener('change', clearErrorOnInput));
+  
+  // If user wants to have quick interactive demo, but we also show something after page? optional but not intrusive.
+  // Add helper to compute default welcome? But we can initially compute with default values to show tool working.
+  window.addEventListener('DOMContentLoaded', () => {
+    // Show a quick initial calculation for demo purposes, so the user sees example output based on age/gender
+    setTimeout(() => {
+      computeBMIAndInterpretation();
+    }, 100);
+  });
+</script>
+</body>
+</html>
