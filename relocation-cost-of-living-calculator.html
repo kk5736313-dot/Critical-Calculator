@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Relocation Cost of Living Calculator USA</title>
+<meta name="description" content="Relocation cost of living calculator USA – compare moving costs between US cities. Find equivalent salary needed, monthly expenses, and cost difference. Smart relocation planning.">
+<meta name="keywords" content="relocation cost of living calculator USA, relocation calculator by zip code, salary relocation calculator, moving cities cost of living calculator, relocation cost of living comparison calculator, cost of living comparison, salary relocation tool, move to new city">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculator Title | Critical Calculator</title>
+<meta name="description" content="Page description for SEO">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (EMPTY PLACEHOLDER) */
+.tool-card{
+  margin-top:32px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+/* Header & SEO */
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb4d);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subhead {
+      color: #2c3e66;
+      margin-bottom: 2rem;
+      border-left: 4px solid #fdbb4d;
+      padding-left: 1rem;
+      font-weight: 500;
+    }
+
+    /* Card grid */
+    .card {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      transition: all 0.2s;
+    }
+
+    .flex-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #1f2b48;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+
+    select, input {
+      padding: 1rem;
+      border-radius: 1.5rem;
+      border: 1px solid #cfdfed;
+      background: #ffffff;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      outline: none
+    }
+
+    select:focus, input:focus {
+      border-color: #fdbb4d;
+      box-shadow: 0 0 0 3px rgba(253, 187, 77, 0.2);
+    }
+
+    button {
+      background: #1a2a6c;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-top: 1.8rem;
+      align-self: flex-end;
+    }
+
+    button:hover {
+      background: #0f1b4a;
+      transform: translateY(-2px);
+    }
+
+    .result-highlight {
+      background: #eef5ff;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      border: 1px solid #cbdde9;
+    }
+.related-tools a {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-weight: 700;
+}
+    .equivalent-salary {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1f7546;
+      background: #e3f5e9;
+      display: inline-block;
+      padding: 0.2rem 1.8rem;
+      border-radius: 3rem;
+      margin: 0.5rem 0;
+    }
+
+    .diff-badge {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .two-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .expense-table {
+      flex: 1.5;
+      overflow-x: auto;
+    }
+
+    .chart-container {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    th {
+      background: #f0f4f9;
+      padding: 0.9rem 0.5rem;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 0.7rem 0.5rem;
+      border-bottom: 1px solid #e2edf2;
+      text-align: center;
+    }
+
+    .category-name {
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .top-cities {
+      background: #fefaf0;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .cheap-exp {
+      flex: 1;
+      background: #ffffffd9;
+      border-radius: 1rem;
+      padding: 0.8rem;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #4a5b6e;
+    }
+
+    @media (max-width: 780px) {
+      .card {
+        padding: 1.2rem;
+      }
+      .equivalent-salary {
+        font-size: 1.8rem;
+      }
+    }
+    button.share-btn {
+      background: #2c5f2d;
+      margin-left: 1rem;
+      margin-top: 0;
+    }
+    .flex-row-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    hr {
+      margin: 1rem 0;
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Relocation cost of Living Calculatore
+</nav>
+
+<!-- TITLE -->
+
+<h1 class="page-title">Relocation cost of Living Calculator</h1>
+<p class="page-copy">
+A Relocation Cost of Living Calculator helps you compare expenses between two cities and understand how much your lifestyle will cost after moving. It shows how your salary needs to change based on differences in housing, food, transport, and other daily expenses. This makes it easier to plan your move and avoid financial surprises.</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+
+<div class="tool-card">
+
+  <div class="container">
+  <h1>🏙️ Relocation Cost of Living Calculator 🇺🇸</h1>
+  <div class="subhead">Compare any two US cities – find the salary you need after moving. Based on real cost indices (housing, food, transport, healthcare + more).</div>
+
+  <!-- main calculator card -->
+  <div class="card">
+    <div class="flex-form">
+      <div class="input-group">
+        <label>📍 Current City</label>
+        <select id="currentCity"></select>
+      </div>
+      <div class="input-group">
+        <label>✈️ Target City</label>
+        <select id="targetCity"></select>
+      </div>
+      <div class="input-group">
+        <label>💰 Current Salary (USD)</label>
+        <input type="number" id="salary" placeholder="e.g., 75000" value="75000">
+      </div>
+      <div class="input-group">
+        <label>🏠 Monthly Rent (optional)</label>
+        <input type="number" id="rent" placeholder="e.g., 1800" step="100">
+      </div>
+      <div class="input-group">
+        <label>✨ Lifestyle Level</label>
+        <select id="lifestyle">
+          <option value="budget">💚 Budget (save on food & misc)</option>
+          <option value="moderate" selected>⭐ Moderate (balanced)</option>
+          <option value="luxury">💎 Luxury (higher dining & leisure)</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row-btns">
+      <button id="calculateBtn">📊 Calculate Relocation</button>
+      <button id="shareBtn" class="share-btn">🔗 Copy shareable link</button>
+    </div>
+  </div>
+
+  <!-- results section -->
+  <div class="card" id="resultsSection" style="display: none;">
+    <div class="result-highlight">
+      <div>🎯 Equivalent Salary in <span id="targetCityName">Target</span> to maintain lifestyle</div>
+      <div class="equivalent-salary" id="eqSalary">$0</div>
+      <div class="diff-badge" id="costDiffMsg">Cost difference: --%</div>
+      <div id="yearlyDiffMsg" style="margin-top: 0.3rem; font-size:0.9rem;">Yearly change: --</div>
+    </div>
+
+    <div class="two-columns">
+      <div class="expense-table">
+        <h3>📋 Monthly expense breakdown</h3>
+        <table id="expenseTable">
+          <thead>
+            <tr><th>Category</th><th>📍 Current City</th><th>✈️ Target City</th></tr>
+          </thead>
+          <tbody id="expenseTbody">
+            <tr><td colspan="3">Calculate to see data</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart-container">
+        <h3>📊 Category comparison</h3>
+        <canvas id="expenseChart" width="400" height="300" style="max-width:100%; height:auto;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- bonus: top expensive vs cheapest -->
+  <div class="card">
+    <h2>🏆 Most Expensive vs Most Affordable Cities (Overall Index)</h2>
+    <div class="top-cities" id="topCitiesList"></div>
+  </div>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<section class="seo-section">
+  <h3>FAQ</h3>
+  <p><strong>1. <em>How is equivalent salary calculated?</em></strong></p><br>
+	<p>Equivalent Salary = Current Salary × (Target City Index / Current City Index) using weighted cost-of-living indices.<p><br>
+
+  <p><strong>2. <em>What does lifestyle level do?</em></strong></p><br>
+	<p>Budget reduces food & miscellaneous expenses by 10%, luxury increases them by 20% to reflect spending habits.<p><br>
+
+
+  <p><strong>3. <em>Where does city data come from?</em></strong></p><br>
+	<p>We use a curated dataset of 25+ major US cities with separate indices for housing, food, transport, utilities, healthcare, and misc.<p><br>
+
+
+  <p><strong>4. <em>Can I use my actual rent?</em></strong></p><br>
+	<p>Yes, the optional monthly rent overrides the housing estimate for both cities (target rent scaled by housing index ratio).<p><br>
+
+<p><strong>5. <em>Is this tool accurate?</em></strong></p><br>
+	<p>It provides a reliable comparison based on relative cost indices; always check local market details.</p
+><br>
+  
+<p><strong>6. <em>Does the calculator include taxes?</em></strong></p><br>
+	<p>No, the equivalent salary formula is based on pre-tax cost-of-living indices. Taxes vary by state and local jurisdiction; we recommend consulting a tax professional for net income comparisons.<p><br>
+
+<p><strong>7. <em>Can I compare cities outside the USA?</em></strong></p><br>
+	<p>Currently, this tool focuses on major US cities only. The dataset includes 26 cities with custom cost indices. For international comparisons, a different index base would be required.<p><br>
+
+
+<p><strong>8. <em>How accurate are the monthly expense breakdowns?</em></strong></p><br>
+	<p>Expenses are derived from national averages scaled by each city’s category index (housing, food, etc.). They provide a realistic benchmark but may vary based on individual habits, family size, and exact neighborhood.<p><br>
+
+
+<p><strong>9. <em>Why does the "Lifestyle Level" only affect food and miscellaneous?</em></strong></p><br>
+	<p>Housing, transport, utilities, and healthcare are less flexible month-to-month. Food and discretionary spending (misc) are where most people adjust their budget between economy and luxury lifestyles.<p><br>
+
+
+<p><strong>10. <em>What if my current rent is very different from the index?</em></strong></p><br>
+	<p>Use the optional "Monthly Rent" field. For the current city it replaces the housing estimate; for the target city it scales the rent based on the housing index ratio – giving a more personalized result.<p><br>
+
+
+
+
+
+
+
+
+
+
+<p><em>📍 Internal link placeholder: Compare more cities | Relocation guide</em></p><br>
+
+<h2><em>Try:<em></h2>
+		<div class="related-tools">
+                    <a href="state-living-cost-calculator.html">Every state Living cost Calculator</a>
+                </div>
+</section>
+
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+<script>
+  // --------------------------------------------------------------
+  // 1. DATASET: 26 Major US cities with overall index + category indices
+  // --------------------------------------------------------------
+  const citiesData = [
+    { name: "New York, NY", overall: 187, housing: 300, food: 125, transport: 130, utilities: 115, healthcare: 115, misc: 140 },
+    { name: "San Francisco, CA", overall: 195, housing: 320, food: 128, transport: 128, utilities: 110, healthcare: 125, misc: 150 },
+    { name: "Los Angeles, CA", overall: 152, housing: 210, food: 115, transport: 118, utilities: 108, healthcare: 112, misc: 125 },
+    { name: "Chicago, IL", overall: 105, housing: 95, food: 100, transport: 105, utilities: 100, healthcare: 100, misc: 100 },
+    { name: "Houston, TX", overall: 92, housing: 85, food: 95, transport: 95, utilities: 95, healthcare: 95, misc: 90 },
+    { name: "Phoenix, AZ", overall: 95, housing: 90, food: 99, transport: 100, utilities: 97, healthcare: 98, misc: 94 },
+    { name: "Philadelphia, PA", overall: 102, housing: 92, food: 103, transport: 103, utilities: 105, healthcare: 102, misc: 97 },
+    { name: "San Antonio, TX", overall: 86, housing: 78, food: 90, transport: 89, utilities: 91, healthcare: 88, misc: 84 },
+    { name: "San Diego, CA", overall: 148, housing: 210, food: 118, transport: 116, utilities: 114, healthcare: 115, misc: 122 },
+    { name: "Dallas, TX", overall: 98, housing: 92, food: 97, transport: 98, utilities: 96, healthcare: 97, misc: 96 },
+    { name: "Austin, TX", overall: 109, housing: 118, food: 104, transport: 100, utilities: 99, healthcare: 103, misc: 107 },
+    { name: "Seattle, WA", overall: 148, housing: 195, food: 120, transport: 115, utilities: 105, healthcare: 117, misc: 130 },
+    { name: "Denver, CO", overall: 118, housing: 132, food: 108, transport: 106, utilities: 100, healthcare: 105, misc: 112 },
+    { name: "Boston, MA", overall: 158, housing: 205, food: 122, transport: 120, utilities: 118, healthcare: 125, misc: 135 },
+    { name: "Miami, FL", overall: 122, housing: 145, food: 112, transport: 112, utilities: 108, healthcare: 110, misc: 118 },
+    { name: "Atlanta, GA", overall: 96, housing: 90, food: 98, transport: 99, utilities: 97, healthcare: 96, misc: 95 },
+    { name: "Portland, OR", overall: 115, housing: 128, food: 110, transport: 102, utilities: 98, healthcare: 108, misc: 112 },
+    { name: "Detroit, MI", overall: 82, housing: 70, food: 88, transport: 92, utilities: 94, healthcare: 90, misc: 85 },
+    { name: "Minneapolis, MN", overall: 99, housing: 95, food: 101, transport: 99, utilities: 96, healthcare: 100, misc: 98 },
+    { name: "Nashville, TN", overall: 97, housing: 94, food: 98, transport: 96, utilities: 95, healthcare: 97, misc: 96 },
+    { name: "Salt Lake City, UT", overall: 103, housing: 108, food: 102, transport: 99, utilities: 97, healthcare: 101, misc: 102 },
+    { name: "St. Louis, MO", overall: 85, housing: 74, food: 92, transport: 93, utilities: 91, healthcare: 92, misc: 87 },
+    { name: "Tampa, FL", overall: 94, housing: 92, food: 96, transport: 96, utilities: 98, healthcare: 95, misc: 93 },
+    { name: "Pittsburgh, PA", overall: 88, housing: 78, food: 93, transport: 94, utilities: 96, healthcare: 93, misc: 89 },
+    { name: "Sacramento, CA", overall: 118, housing: 140, food: 110, transport: 108, utilities: 110, healthcare: 112, misc: 115 },
+    { name: "Las Vegas, NV", overall: 99, housing: 102, food: 98, transport: 100, utilities: 96, healthcare: 99, misc: 97 }
+  ];
+
+  // populate dropdowns
+  const currentSelect = document.getElementById('currentCity');
+  const targetSelect = document.getElementById('targetCity');
+  function populateCities() {
+    citiesData.forEach(city => {
+      const opt1 = document.createElement('option');
+      opt1.value = city.name;
+      opt1.textContent = city.name;
+      const opt2 = document.createElement('option');
+      opt2.value = city.name;
+      opt2.textContent = city.name;
+      currentSelect.appendChild(opt1);
+      targetSelect.appendChild(opt2);
+    });
+    // default selections
+    currentSelect.value = "New York, NY";
+    targetSelect.value = "Austin, TX";
+  }
+  populateCities();
+
+  // helper to get city object
+  function getCityByName(name) {
+    return citiesData.find(c => c.name === name);
+  }
+
+  // baseline national avg monthly costs (USD) - moderate single person
+  const BASELINE_HOUSING = 1500;
+  const BASELINE_FOOD = 400;
+  const BASELINE_TRANSPORT = 150;
+  const BASELINE_UTILITIES = 200;
+  const BASELINE_HEALTHCARE = 250;
+  const BASELINE_MISC = 300;
+
+  // apply lifestyle multipliers to food & misc
+  function applyLifestyle(amount, category, lifestyle) {
+    if (lifestyle === 'budget') {
+      if (category === 'food') return amount * 0.9;
+      if (category === 'misc') return amount * 0.9;
+    }
+    if (lifestyle === 'luxury') {
+      if (category === 'food') return amount * 1.2;
+      if (category === 'misc') return amount * 1.2;
+    }
+    return amount;
+  }
+
+  // compute monthly expenses for a city (index obj, optional customRentOverride, lifestyle)
+  function computeMonthlyExpenses(cityObj, customRent, lifestyle, isTarget = false, currentCityObjForRent = null, currentRentValue = null) {
+    // base estimate from indices
+    let housingEstimate = BASELINE_HOUSING * (cityObj.housing / 100);
+    let foodEstimate = BASELINE_FOOD * (cityObj.food / 100);
+    let transportEstimate = BASELINE_TRANSPORT * (cityObj.transport / 100);
+    let utilitiesEstimate = BASELINE_UTILITIES * (cityObj.utilities / 100);
+    let healthcareEstimate = BASELINE_HEALTHCARE * (cityObj.healthcare / 100);
+    let miscEstimate = BASELINE_MISC * (cityObj.misc / 100);
+
+    // Rent override logic: for current city if customRent given, override housing.
+    // For target city: if customRent provided (current rent) and currentCityObj exists, scale.
+    if (customRent && customRent > 0) {
+      if (!isTarget) { // current city: user provided rent -> replace estimate
+        housingEstimate = customRent;
+      } else if (isTarget && currentCityObjForRent && currentRentValue && currentRentValue > 0) {
+        // target rent scaling based on housing index ratio
+        const ratio = cityObj.housing / currentCityObjForRent.housing;
+        housingEstimate = currentRentValue * ratio;
+      }
+    }
+
+    // apply lifestyle adjustments (food/misc)
+    foodEstimate = applyLifestyle(foodEstimate, 'food', lifestyle);
+    miscEstimate = applyLifestyle(miscEstimate, 'misc', lifestyle);
+
+    return {
+      housing: Math.round(housingEstimate),
+      food: Math.round(foodEstimate),
+      transport: Math.round(transportEstimate),
+      utilities: Math.round(utilitiesEstimate),
+      healthcare: Math.round(healthcareEstimate),
+      misc: Math.round(miscEstimate),
+      total: Math.round(housingEstimate + foodEstimate + transportEstimate + utilitiesEstimate + healthcareEstimate + miscEstimate)
+    };
+  }
+
+  let expenseChart = null; // Chart instance
+
+  function renderChart(currentExp, targetExp, categories) {
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+    if (expenseChart) expenseChart.destroy();
+    expenseChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: categories,
+        datasets: [
+          { label: 'Current City', data: [currentExp.housing, currentExp.food, currentExp.transport, currentExp.utilities, currentExp.healthcare, currentExp.misc], backgroundColor: '#3b82f6', borderRadius: 8 },
+          { label: 'Target City', data: [targetExp.housing, targetExp.food, targetExp.transport, targetExp.utilities, targetExp.healthcare, targetExp.misc], backgroundColor: '#f97316', borderRadius: 8 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
+    });
+  }
+
+  function updateTopCities() {
+    const sorted = [...citiesData].sort((a,b) => a.overall - b.overall);
+    const cheapest = sorted.slice(0, 5);
+    const expensive = sorted.slice(-5).reverse();
+    const container = document.getElementById('topCitiesList');
+    container.innerHTML = `
+      <div class="cheap-exp"><strong>💰 Cheapest (lowest COL):</strong><br> ${cheapest.map(c => `${c.name} (${c.overall})`).join(' • ')}</div>
+      <div class="cheap-exp"><strong>💎 Most Expensive:</strong><br> ${expensive.map(c => `${c.name} (${c.overall})`).join(' • ')}</div>
+    `;
+  }
+  updateTopCities();
+
+  function calculateAndDisplay() {
+    const currentCityName = currentSelect.value;
+    const targetCityName = targetSelect.value;
+    if (!currentCityName || !targetCityName) return alert("Select both cities");
+    const currentCityObj = getCityByName(currentCityName);
+    const targetCityObj = getCityByName(targetCityName);
+    const salaryInput = parseFloat(document.getElementById('salary').value);
+    if (isNaN(salaryInput) || salaryInput <= 0) return alert("Please enter a valid salary");
+    const rentInputRaw = document.getElementById('rent').value;
+    const rentValue = rentInputRaw && !isNaN(parseFloat(rentInputRaw)) ? parseFloat(rentInputRaw) : null;
+    const lifestyle = document.getElementById('lifestyle').value;
+
+    // Equivalent Salary calculation (overall index)
+    const eqSalary = salaryInput * (targetCityObj.overall / currentCityObj.overall);
+    const costDiffPercent = ((targetCityObj.overall - currentCityObj.overall) / currentCityObj.overall) * 100;
+
+    // compute monthly expenses: current + target
+    const currentExpenses = computeMonthlyExpenses(currentCityObj, rentValue, lifestyle, false, null, null);
+    // for target we need scaling if user rent provided
+    const targetExpenses = computeMonthlyExpenses(targetCityObj, rentValue, lifestyle, true, currentCityObj, rentValue);
+
+    const totalCurrentMonthly = currentExpenses.total;
+    const totalTargetMonthly = targetExpenses.total;
+    const monthlyDiff = totalTargetMonthly - totalCurrentMonthly;
+    const yearlyDiff = monthlyDiff * 12;
+
+    // show results section
+    const resultsDiv = document.getElementById('resultsSection');
+    resultsDiv.style.display = 'block';
+    document.getElementById('targetCityName').innerText = targetCityName;
+    document.getElementById('eqSalary').innerHTML = `$${Math.round(eqSalary).toLocaleString()}`;
+    const diffColor = costDiffPercent >= 0 ? '🔴 higher' : '🟢 lower';
+    document.getElementById('costDiffMsg').innerHTML = `Cost difference: ${costDiffPercent > 0 ? '+' : ''}${costDiffPercent.toFixed(1)}% (Target cost of living is ${diffColor})`;
+    document.getElementById('yearlyDiffMsg').innerHTML = `📅 Yearly total expense difference: ${monthlyDiff >= 0 ? '+' : '-'}$${Math.abs(yearlyDiff).toLocaleString()} ${yearlyDiff >= 0 ? 'more' : 'less'} in target city`;
+
+    // Fill expense table
+    const categories = ['Housing', 'Food', 'Transportation', 'Utilities', 'Healthcare', 'Miscellaneous'];
+    const currentVals = [currentExpenses.housing, currentExpenses.food, currentExpenses.transport, currentExpenses.utilities, currentExpenses.healthcare, currentExpenses.misc];
+    const targetVals = [targetExpenses.housing, targetExpenses.food, targetExpenses.transport, targetExpenses.utilities, targetExpenses.healthcare, targetExpenses.misc];
+    let tbodyHtml = '';
+    for (let i=0; i<categories.length; i++) {
+      tbodyHtml += `<tr>
+        <td class="category-name">${categories[i]}</td>
+        <td>$${currentVals[i].toLocaleString()}</td>
+        <td>$${targetVals[i].toLocaleString()}</td>
+      </tr>`;
+    }
+    tbodyHtml += `<tr style="background:#f9f3e3; font-weight:bold;"><td>💵 TOTAL Monthly</td><td>$${totalCurrentMonthly.toLocaleString()}</td><td>$${totalTargetMonthly.toLocaleString()}</td></tr>`;
+    document.getElementById('expenseTbody').innerHTML = tbodyHtml;
+
+    // Bar chart
+    const currentExpObj = { housing: currentExpenses.housing, food: currentExpenses.food, transport: currentExpenses.transport, utilities: currentExpenses.utilities, healthcare: currentExpenses.healthcare, misc: currentExpenses.misc };
+    const targetExpObj = { housing: targetExpenses.housing, food: targetExpenses.food, transport: targetExpenses.transport, utilities: targetExpenses.utilities, healthcare: targetExpenses.healthcare, misc: targetExpenses.misc };
+    renderChart(currentExpObj, targetExpObj, categories);
+    // scroll to results
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // shareable link (store state in URL)
+  function buildShareableLink() {
+    const current = currentSelect.value;
+    const target = targetSelect.value;
+    const salary = document.getElementById('salary').value;
+    const rent = document.getElementById('rent').value;
+    const lifestyle = document.getElementById('lifestyle').value;
+    const url = new URL(window.location.href);
+    url.searchParams.set('current', current);
+    url.searchParams.set('target', target);
+    url.searchParams.set('salary', salary);
+    if (rent) url.searchParams.set('rent', rent);
+    url.searchParams.set('lifestyle', lifestyle);
+    return url.toString();
+  }
+
+  function loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('current')) currentSelect.value = params.get('current');
+    if (params.has('target')) targetSelect.value = params.get('target');
+    if (params.has('salary')) document.getElementById('salary').value = params.get('salary');
+    if (params.has('rent')) document.getElementById('rent').value = params.get('rent');
+    if (params.has('lifestyle')) document.getElementById('lifestyle').value = params.get('lifestyle');
+    if (params.has('current') && params.has('target')) calculateAndDisplay();
+  }
+
+  document.getElementById('calculateBtn').addEventListener('click', () => {
+    calculateAndDisplay();
+    // optional: update URL without reload? but keep manual, but share link button will capture new state.
+    const newUrl = buildShareableLink();
+    window.history.replaceState({}, '', newUrl);
+  });
+
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    const link = buildShareableLink();
+    navigator.clipboard.writeText(link).then(() => {
+      alert("Shareable link copied to clipboard! 🎉");
+    }).catch(() => alert("Press Ctrl+C to copy link: " + link));
+  });
+
+  // trigger auto load from url if present
+  loadFromURL();
+
+  // add schema JSON-LD for FAQ
+  const scriptSchema = document.createElement('script');
+  scriptSchema.type = 'application/ld+json';
+  scriptSchema.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How is equivalent salary calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Equivalent Salary = Current Salary × (Target City Index / Current City Index) based on cost-of-living indices." } },
+      { "@type": "Question", "name": "What does lifestyle level do?", "acceptedAnswer": { "@type": "Answer", "text": "Budget reduces food & misc by 10%, luxury increases them by 20% to reflect different spending habits." } },
+      { "@type": "Question", "name": "Is the dataset reliable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we use realistic indices for 25+ major US cities, covering housing, food, transport, utilities, healthcare and more." } }
+    ]
+  });
+  document.head.appendChild(scriptSchema);
+</script>
+</body>
+</html>
