@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculator federal Taxes for United States </title>
+  <meta name="description" content="Use our calculator for taxes to estimate your federal income tax, tax refund, and effective tax rate. Fast, accurate, and easy US tax calculator.">
+  <meta name="keywords" content="federal tax calculator, federal income tax calculator, estimate my tax return, federal income tax rate calculator, income tax refund calculator, calculator for taxes">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+.related-tools a {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-weight: 700;
+    font-size: x-small;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD STYLING */
+.tool-card{
+  margin-top:32px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* --- CALCULATOR SPECIFIC STYLES --- */
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 880px) {
+  .two-columns { grid-template-columns: 1fr; }
+}
+
+.input-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; }
+.input-group label { font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem; color: #1f4e6e; display: flex; align-items: center; gap: 0.5rem; }
+.input-group input, .input-group select { padding: 0.85rem 1rem; border-radius: 1rem; border: 1.5px solid #dce5ec; background: white; font-size: 1rem; font-weight: 500; }
+.input-group input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); }
+
+.deduction-row { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+.deduction-row input { flex: 2; min-width: 140px; }
+.btn-reset { background: #f3f4f6; border: 1px solid #d1d5db; padding: 0.6rem 1rem; border-radius: 2rem; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
+.btn-reset:hover { background: #e5e7eb; }
+
+.result-block { background: #f0fdfa; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem; border-left: 5px solid var(--brand); }
+.result-highlight { font-size: 2rem; font-weight: 800; color: var(--brand-dark); }
+.refund-positive { color: #15803d; }
+.refund-negative { color: #b91c1c; }
+
+.result-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0; }
+.meta-card { background: white; border-radius: 1.2rem; padding: 0.8rem; flex: 1; text-align: center; border: 1px solid #e2edf2; }
+.meta-card span { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); display: block; }
+.meta-card .value { font-size: 1.2rem; font-weight: 700; color: var(--brand-dark); }
+
+.brackets-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.brackets-table th, .brackets-table td { text-align: left; padding: 0.7rem 0.5rem; border-bottom: 1px solid #f3f4f6; }
+.section-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.8rem; color: var(--brand-dark); border-left: 3px solid var(--brand); padding-left: 0.8rem; }
+
+/* SEO SECTION */
+.seo-section{ margin-top:50px; background:#ffffff; padding:30px; border-radius:20px; box-shadow:var(--shadow); }
+.seo-section h2{ font-size:1.6rem; margin-bottom:10px; }
+.seo-section h3{ margin-top:20px; font-size:1.2rem; }
+.seo-section p{ margin-top:8px; color:var(--muted); }
+
+footer{ text-align:center; margin-top:60px; color:var(--muted); padding-bottom:20px; }
+</style>
+</head>
+
+<body>
+
+ <header class="site-header">
+    <div class="shell">
+        <a class="brand" href="index.html">
+            <span class="brand-mark">CC</span>
+            <span class="brand-copy">
+                <strong>Critical Calculator</strong>
+                <small>Simple tools for everyday numbers</small>
+            </span>
+        </a>
+        <div class="header-actions">
+            <a class="header-link" href="calculatorlist.html">Explore</a>
+        </div>
+    </div>
+</header>
+
+<main class="page">
+<div class="shell">
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / calculator for federal taxes united states
+</nav>
+
+<h1 class="page-title">Federal Tax Calculator</h1>
+<p class="page-copy">
+Estimate your 2026 US Federal Income Tax liability based on the latest progressive tax brackets.
+</p>
+
+<!-- 🔁 TOOL CARD START -->
+<div class="tool-card">
+  <div class="two-columns">
+    <!-- INPUT SECTION -->
+    <div>
+      <div class="input-group">
+        <label>💰 Annual Income (USD)</label>
+        <input type="number" id="annualIncome" value="65000" step="1000">
+      </div>
+
+      <div class="input-group">
+        <label>📋 Filing Status</label>
+        <select id="filingStatus">
+          <option value="single">Single</option>
+          <option value="married">Married Filing Jointly</option>
+          <option value="head">Head of Household</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>📌 Standard Deduction</label>
+        <div class="deduction-row">
+          <input type="number" id="stdDeduction" step="100" value="14600">
+          <button type="button" id="resetStdBtn" class="btn-reset">⟳ Reset</button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>💸 Tax Withheld (YTD)</label>
+        <input type="number" id="taxWithheld" value="8500" step="500">
+      </div>
+    </div>
+
+    <!-- RESULTS SUMMARY -->
+    <div>
+      <div class="result-block">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+          <span style="font-weight: 700;">Total Tax Owed</span>
+          <span class="result-highlight" id="totalTaxDisplay">$0.00</span>
+        </div>
+        <div class="result-meta">
+          <div class="meta-card"><span>Effective Rate</span><div class="value" id="effectiveRate">0%</div></div>
+          <div class="meta-card"><span>Marginal Rate</span><div class="value" id="marginalRate">0%</div></div>
+        </div>
+        <div style="margin-top: 12px; font-size: 1.1rem; background: #fff; border-radius: 1rem; padding: 0.8rem; text-align: center; border: 1px solid #e2e8f0;">
+          <span>Refund / Due: </span>
+          <strong id="refundAmount" class="refund-positive">$0.00</strong>
+        </div>
+      </div>
+      
+      <div class="section-title">Tax Bracket Breakdown</div>
+      <div style="max-height: 250px; overflow-y: auto;">
+        <table class="brackets-table" id="bracketsTable">
+          <thead>
+            <tr><th>Rate</th><th>Range</th><th>Taxable</th><th>Tax</th></tr>
+          </thead>
+          <tbody id="bracketsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 🔁 TOOL CARD END -->
+
+<section class="seo-section">
+  <h2>How to use this tax calculator</h2>
+  <p><strong>1. Enter your Gross Annual Income:</strong> Input your total earnings before any taxes or deductions are applied.</p><br>
+  <p><strong>2. Select Filing Status:</strong> Choose between Single, Married Filing Jointly, or Head of Household to apply the correct brackets.</p><br>
+  <p><strong>3. Review Deductions:</strong> The tool automatically applies the 2024 standard deduction, but you can edit this if you itemize.</p><br>
+  <p><strong>4. View Results:</strong> See your total tax liability, effective tax rate, and whether you are due for a refund or owe money based on your withholding.</p>
+
+  <h3>Key Tax Terms</h3>
+  <p><strong>● Marginal Tax Rate:</strong> The percentage of tax applied only to your highest dollar earned.</p>
+  <p><strong>● Effective Tax Rate:</strong> The actual percentage of your total income paid in taxes after all brackets are calculated.</p>
+  <p><strong>● Standard Deduction:</strong> A flat amount that reduces your taxable income, based on your filing status.</p><br>
+
+<h2>FAQ</h2>
+  <p><strong>1. <em>How accurate is this federal income tax calculator?</em></strong></p><br>
+	<p>This calculator provides a close estimate based on the latest 2024 U.S. federal tax brackets and standard deductions. However, actual tax results may vary depending on credits, itemized deductions, and other factors.<p><br>
+
+  <p><strong>2. <em>What is the difference between marginal and effective tax rate?</em></strong></p><br>
+	<p>Your marginal tax rate is the percentage applied to your last dollar of income, while your effective tax rate is the average rate you pay on your total income.<p><br>
+
+
+  <p><strong>3. <em>How is taxable income calculated?</em></strong></p><br>
+	<p>Taxable income is calculated by subtracting your standard deduction or itemized deductions from your total annual income. Only the remaining amount is taxed using progressive brackets.<p><br>
+
+
+  <p><strong>4. <em>Why is my refund or amount owed changing?</em></strong></p><br>
+	<p>Your refund or tax due depends on how much tax has already been withheld from your income. If you paid more than your total tax liability, you get a refund; otherwise, you owe the remaining amount.<p><br>
+
+<p><strong>5. <em>Does this calculator include state taxes?</em></strong></p><br>
+	<p>No, this tool only estimates federal income tax. State and local taxes vary by location and are not included in this calculation.<p><br>
+
+<h2><em>Try:<em></h2>
+		<div class="related-tools">
+                    <a href="state-living-cost-calculator.html">See cost of living in different states of America.</a>
+                </div>
+
+</section>
+
+</div>
+</main>
+
+<footer>
+  Critical Calculator • © 2026 All rights reserved
+</footer>
+
+<script>
+  (function() {
+    const BRACKETS = {
+      single: [
+        { lower: 0, upper: 11600, rate: 0.10 }, { lower: 11600, upper: 47150, rate: 0.12 },
+        { lower: 47150, upper: 100525, rate: 0.22 }, { lower: 100525, upper: 191950, rate: 0.24 },
+        { lower: 191950, upper: 243725, rate: 0.32 }, { lower: 243725, upper: 609350, rate: 0.35 },
+        { lower: 609350, upper: Infinity, rate: 0.37 }
+      ],
+      married: [
+        { lower: 0, upper: 23200, rate: 0.10 }, { lower: 23200, upper: 94300, rate: 0.12 },
+        { lower: 94300, upper: 201050, rate: 0.22 }, { lower: 201050, upper: 383900, rate: 0.24 },
+        { lower: 383900, upper: 487450, rate: 0.32 }, { lower: 487450, upper: 731200, rate: 0.35 },
+        { lower: 731200, upper: Infinity, rate: 0.37 }
+      ],
+      head: [
+        { lower: 0, upper: 16550, rate: 0.10 }, { lower: 16550, upper: 63100, rate: 0.12 },
+        { lower: 63100, upper: 100500, rate: 0.22 }, { lower: 100500, upper: 191950, rate: 0.24 },
+        { lower: 191950, upper: 243700, rate: 0.32 }, { lower: 243700, upper: 609350, rate: 0.35 },
+        { lower: 609350, upper: Infinity, rate: 0.37 }
+      ]
+    };
+
+    const STD_DEDUCTION_MAP = { single: 14600, married: 29200, head: 21900 };
+
+    const incomeInput = document.getElementById('annualIncome');
+    const statusSelect = document.getElementById('filingStatus');
+    const stdDeductionInput = document.getElementById('stdDeduction');
+    const taxWithheldInput = document.getElementById('taxWithheld');
+    const resetStdBtn = document.getElementById('resetStdBtn');
+    const totalTaxSpan = document.getElementById('totalTaxDisplay');
+    const effectiveRateSpan = document.getElementById('effectiveRate');
+    const marginalRateSpan = document.getElementById('marginalRate');
+    const refundAmountSpan = document.getElementById('refundAmount');
+    const bracketsTbody = document.getElementById('bracketsTbody');
+
+    function performCalculation() {
+      let annualIncome = parseFloat(incomeInput.value) || 0;
+      let stdDeduction = parseFloat(stdDeductionInput.value) || 0;
+      let taxWithheld = parseFloat(taxWithheldInput.value) || 0;
+      const brackets = BRACKETS[statusSelect.value];
+      let taxableIncome = Math.max(annualIncome - stdDeduction, 0);
+
+      let totalTax = 0;
+      let marginalRate = 0;
+      let htmlRows = '';
+
+      brackets.forEach(bracket => {
+        let amount = 0;
+        if (taxableIncome > bracket.lower) {
+          amount = Math.min(taxableIncome, bracket.upper) - bracket.lower;
+        }
+        let tax = amount * bracket.rate;
+        totalTax += tax;
+
+        if (amount > 0) {
+          marginalRate = bracket.rate;
+          htmlRows += `<tr>
+            <td>${(bracket.rate * 100).toFixed(0)}%</td>
+            <td>$${bracket.lower.toLocaleString()} ${bracket.upper === Infinity ? '+' : '- ' + bracket.upper.toLocaleString()}</td>
+            <td>$${amount.toFixed(0)}</td>
+            <td>$${tax.toFixed(0)}</td>
+          </tr>`;
+        }
+      });
+
+      let effectiveRate = annualIncome > 0 ? (totalTax / annualIncome) * 100 : 0;
+      let refund = taxWithheld - totalTax;
+
+      totalTaxSpan.innerText = `$${totalTax.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      effectiveRateSpan.innerText = `${effectiveRate.toFixed(2)}%`;
+      marginalRateSpan.innerText = `${(marginalRate * 100).toFixed(1)}%`;
+      refundAmountSpan.innerText = `$${Math.abs(refund).toLocaleString(undefined, {minimumFractionDigits: 2})} ${refund >= 0 ? '(Refund)' : '(Owed)'}`;
+      refundAmountSpan.className = refund >= 0 ? 'refund-positive' : 'refund-negative';
+      bracketsTbody.innerHTML = htmlRows || '<tr><td colspan="4">No taxable income.</td></tr>';
+    }
+
+    statusSelect.addEventListener('change', () => {
+      stdDeductionInput.value = STD_DEDUCTION_MAP[statusSelect.value];
+      performCalculation();
+    });
+    [incomeInput, stdDeductionInput, taxWithheldInput].forEach(el => el.addEventListener('input', performCalculation));
+    resetStdBtn.addEventListener('click', () => {
+      stdDeductionInput.value = STD_DEDUCTION_MAP[statusSelect.value];
+      performCalculation();
+    });
+
+    performCalculation();
+  })();
+</script>
+</body>
+</html>
