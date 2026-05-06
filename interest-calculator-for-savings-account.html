@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator for Savings Account USA</title>
+    <meta name="description" content="Stop wondering 'what if' and start earning! Use our free interest calculator for savings account to project your wealth. Compare a high yield savings account calculator against top banks like Bank of America, Chase, and Citibank to maximize your monthly returns.">
+    <meta name="keywords" content="interest calculator for savings account, high yield savings account calculator, savings interest calculator, saving account interest calculator monthly, monthly savings interest calculator, bank of america savings account interest rate calculator, chase savings account interest rate calculator, citibank savings account interest rate calculator, compound interest calculator, APY calculator, savings growth projector, capital one savings calculator, wells fargo interest calculator">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compound Savings Interest Calculator | Critical Calculator</title>
+<meta name="description" content="Calculate your savings growth with our Compound Interest Calculator. Compare US bank rates like Bank of America, Chase, and Ally while accounting for monthly contributions.">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD */
+.tool-card{
+  margin-top:32px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* --- TOOL SPECIFIC STYLES --- */
+.tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-field label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.input-field input, .input-field select {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.results-section {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.result-row:last-child { border-bottom: none; }
+
+.result-label { font-weight: 500; color: var(--muted); }
+.result-value { font-weight: 700; font-size: 1.2rem; color: var(--brand-dark); }
+
+.formula-note {
+    margin-top: 20px;
+    padding: 12px;
+    background: #eef7f5;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--brand-dark);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .tool-grid { grid-template-columns: 1fr; }
+}
+
+/* SEO SECTION */
+.seo-section{
+  margin-top:50px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.seo-section h2{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.seo-section h3{
+  margin-top:20px;
+  font-size:1.2rem;
+}
+
+.seo-section p{
+  margin-top:8px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  padding-bottom:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                    <small>Simple tools for everyday numbers</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+            </div>
+        </div>
+    </header>
+
+<main class="page">
+<div class="shell">
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Interest Calculator for Savings account
+
+</nav>
+
+<h1 class="page-title">Interest Calculator for Savings account</h1>
+<p class="page-copy">
+Calculate your future wealth using initial deposits and monthly contributions with real-time US bank comparisons.
+</p>
+
+<!-- 🔁 TOOL GOES HERE -->
+<div class="tool-card">
+    <div class="tool-grid">
+        <!-- LEFT: INPUTS -->
+        <div class="input-section">
+            <div class="input-field">
+                <label>🏦 Select Bank (Presets)</label>
+                <select id="bankSelect">
+                    <option value="0.01">Bank of America (0.01% APY)</option>
+                    <option value="0.01">Chase (0.01% APY)</option>
+                    <option value="0.01">Wells Fargo (0.01% APY)</option>
+                    <option value="4.25">Ally Bank (4.25% APY)</option>
+                    <option value="4.40">SoFi (4.40% APY)</option>
+                    <option value="4.50" selected>High-Yield Average (4.50% APY)</option>
+                </select>
+            </div>
+
+            <div class="input-field">
+                <label>💰 Initial Deposit ($)</label>
+                <input type="number" id="initialDeposit" value="5000" min="0">
+            </div>
+
+            <div class="input-field">
+                <label>📅 Monthly Contribution ($)</label>
+                <input type="number" id="monthlyPmt" value="200" min="0">
+            </div>
+
+            <div class="input-field">
+                <label>📈 Annual Interest Rate (%)</label>
+                <input type="number" id="interestRate" value="4.50" step="0.01">
+            </div>
+
+            <div class="input-field">
+                <label>⏱️ Time Period (Years)</label>
+                <input type="number" id="years" value="10" min="1">
+            </div>
+        </div>
+
+        <!-- RIGHT: RESULTS -->
+        <div class="results-section">
+            <h3 style="margin-bottom:15px; color:var(--brand-dark)">Growth Projection</h3>
+            
+            <div class="result-row">
+                <span class="result-label">Total Balance</span>
+                <span class="result-value" id="totalBalance">$0.00</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Deposits</span>
+                <span class="result-value" id="totalDeposits">$0.00</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Interest Earned</span>
+                <span class="result-value" id="totalInterest" style="color:var(--brand)">$0.00</span>
+            </div>
+
+            <div class="formula-note">
+                Uses Monthly Compounding Formula:<br>
+                <strong>A = P(1 + r/n)<sup>nt</sup> + PMT [ ((1 + r/n)<sup>nt</sup> - 1) / (r/n) ]</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="seo-section">
+  <h2>How to use this Interest Calculator</h2>
+  <p>To plan your financial future, follow these simple steps:</p><br>
+  <p><strong>1. Select your bank or enter a custom rate:</strong> Choose from major US institutions like Bank of America or Chase to see how their current APY affects your growth.</p><br>
+  <p><strong>2. Enter your starting amount:</strong> This is your initial principal deposit.</p><br>
+  <p><strong>3. Add monthly contributions:</strong> Most US savings growth comes from consistent monthly additions.</p><br>
+  <p><strong>4. Set your timeline:</strong> Adjust the years to see the power of long-term compounding.</p>
+
+  <h3>Why do bank rates matter?</h3>
+  <p>In the US, traditional banks like <strong>Bank of America</strong> typically offer an APR of <strong>0.01%</strong>, which results in very little growth. Online high-yield accounts often offer 400x that amount. This tool helps you visualize that difference instantly.</p>
+
+  <h3>FAQ</h3>
+  <p><strong>1. <em>Is interest compounded monthly or daily?</em></strong></p><br>
+  <p>While some banks calculate interest daily, most US savings accounts credit and compound interest on a monthly basis. This calculator uses monthly compounding (n=12) for the most realistic estimate.<p><br>
+
+  <p><strong>2. <em>Is the interest earned taxable?</em></strong></p><br>
+  <p>Yes. In the United States, if you earn more than $10 in interest, your bank will send you a 1099-INT form at the end of the year, as this interest is considered taxable income.<p><br>
+
+
+<p><strong>3. <em>How does a High Yield Savings Account (HYSA) calculator differ from a standard one?</em></strong></p><br>
+  <p>A high yield savings account calculator is specifically designed to handle the higher Annual Percentage Yields (APY) offered by online banks and credit unions, which can be 10 to 20 times higher than traditional accounts. While a Bank of America savings account interest rate calculator might show growth based on a 0.01% rate, an HYSA calculator demonstrates the power of compound interest at rates often exceeding 4.00%, showing you how much faster your "emergency fund" can actually grow.<p><br>
+
+ <p><strong>4. <em>Why should I use a monthly savings interest calculator instead of an annual one?</em></strong></p><br>
+  <p>Using a saving account interest calculator monthly provides a more accurate picture of your wealth because most banks compound interest daily and credit it to your account every month. A monthly savings interest calculator allows you to see the "snowball effect" in real-time; as your interest is added to your principal each month, you begin earning interest on your interest, leading to higher long-term gains than a simple annual estimate would suggest.<p><br>
+
+ <p><strong>5. <em>Are the results from a Chase or Citibank savings account interest rate calculator guaranteed?</em></strong></p><br>
+  <p>No, the results from a Chase savings account interest rate calculator or a Citibank savings account interest rate calculator are projections based on current market rates. Interest rates on standard savings accounts are variable, meaning the bank can change them at any time based on Federal Reserve movements. These tools are best used to compare the earning potential between different institutions rather than as a fixed guarantee of future balance.<p><br>
+</section>
+
+
+
+
+
+
+
+
+</div>
+</main>
+
+<footer>
+  Critical Calculator • All rights reserved
+</footer>
+
+<script>
+    const bankSelect = document.getElementById('bankSelect');
+    const initialInput = document.getElementById('initialDeposit');
+    const monthlyInput = document.getElementById('monthlyPmt');
+    const rateInput = document.getElementById('interestRate');
+    const yearsInput = document.getElementById('years');
+
+    const totalBalanceOut = document.getElementById('totalBalance');
+    const totalDepositsOut = document.getElementById('totalDeposits');
+    const totalInterestOut = document.getElementById('totalInterest');
+
+    function calculate() {
+        const P = parseFloat(initialInput.value) || 0;
+        const PMT = parseFloat(monthlyInput.value) || 0;
+        const r = (parseFloat(rateInput.value) / 100) || 0;
+        const t = parseFloat(yearsInput.value) || 0;
+        const n = 12; // Monthly compounding
+
+        let totalBalance = 0;
+
+        if (r === 0) {
+            totalBalance = P + (PMT * n * t);
+        } else {
+            // Formula: A = P(1 + r/n)^(nt) + PMT * [ ((1 + r/n)^(nt) - 1) / (r/n) ]
+            const compoundFactor = Math.pow(1 + r/n, n * t);
+            const principalGrowth = P * compoundFactor;
+            const annuityGrowth = PMT * ((compoundFactor - 1) / (r/n));
+            totalBalance = principalGrowth + annuityGrowth;
+        }
+
+        const totalDeposits = P + (PMT * n * t);
+        const totalInterest = totalBalance - totalDeposits;
+
+        // Formatting
+        const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+        
+        totalBalanceOut.innerText = formatter.format(totalBalance);
+        totalDepositsOut.innerText = formatter.format(totalDeposits);
+        totalInterestOut.innerText = formatter.format(totalInterest);
+    }
+
+    // Auto-update rate when bank is selected
+    bankSelect.addEventListener('change', () => {
+        rateInput.value = bankSelect.value;
+        calculate();
+    });
+
+    // Event listeners for real-time updates
+    [initialInput, monthlyInput, rateInput, yearsInput].forEach(el => {
+        el.addEventListener('input', calculate);
+    });
+
+    // Initial run
+    calculate();
+</script>
+
+</body>
+</html>
