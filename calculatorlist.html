@@ -1,256 +1,494 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator Directory | Critical Calculator</title>
+  <meta name="description" content="Browse all free online calculators: finance, health, fitness, math tools. Organized categories with modern card design.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Tailwind (lightweight, only for basics; we override with custom styles) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- BASE (preserve original feel) ---------- */
+    :root {
+      --bg:#f5efe4;
+      --text:#1f2937;
+      --muted:#5b6472;
+      --line:rgba(31,41,55,.12);
+      --brand:#0f766e;
+      --brand-dark:#134e4a;
+      --shadow:0 24px 60px rgba(15,23,42,.14);
+      --max:1280px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+    }
+    .shell{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+    /* HEADER */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(18px);
+      background:rgba(255,248,237,.86);
+      border-bottom:1px solid var(--line);
+    }
+    .site-header .shell{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      min-height:82px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      text-decoration:none;
+      color:inherit;
+    }
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+      color:#fff;
+    }
+    .brand-copy small{
+      display:block;
+      font-size:.7rem;
+      color:var(--muted);
+    }
+    .header-link{
+      text-decoration:none;
+      font-weight:500;
+      color:var(--text);
+      padding:8px 16px;
+      border-radius:40px;
+      transition:0.2s;
+    }
+    .header-link:hover{ background:var(--line); }
+    /* PAGE */
+    .page{ padding:42px 0 72px; }
+    .breadcrumbs{ font-size:.9rem; margin-bottom:18px; color:var(--muted); }
+    .breadcrumbs a{ color:var(--muted); text-decoration:none; }
+    .breadcrumbs a:hover{ color:var(--brand); }
+    .page-title{ font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:0.5rem; }
+    .page-copy{ color:var(--muted); margin-bottom:32px; }
+    /* footer */
+    footer{ text-align:center; margin-top:60px; color:var(--muted); padding-bottom:20px; border-top:1px solid var(--line); padding-top:32px; }
 
-<title>Critical Calculator's List</title>
-<meta name="description" content="Get all the calculators of your need on one website.">
-
-<link rel="icon" type="image/png" href="logo.png">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --bg:#f5efe4;
-  --text:#1f2937;
-  --muted:#5b6472;
-  --line:rgba(31,41,55,.12);
-  --brand:#0f766e;
-  --brand-dark:#134e4a;
-  --shadow:0 24px 60px rgba(15,23,42,.14);
-  --max:1180px;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  font-family:'Inter',sans-serif;
-  color:var(--text);
-  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
-}
-
-.shell{
-  width:min(var(--max), calc(100% - 32px));
-  margin:0 auto;
-}
-
-/* HEADER */
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:20;
-  backdrop-filter:blur(18px);
-  background:rgba(255,248,237,.86);
-  border-bottom:1px solid var(--line);
-}
-
-.site-header .shell{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  min-height:82px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-.brand-mark{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
-  color:#fff;
-}
-
-.brand-copy small{
-  display:block;
-  font-size:.7rem;
-  color:var(--muted);
-}
-
-/* PAGE */
-.page{
-  padding:42px 0 72px;
-}
-
-.breadcrumbs{
-  font-size:.9rem;
-  margin-bottom:18px;
-  color:var(--muted);
-}
-
-.page-title{
-  font-size:clamp(2.2rem,5vw,3.5rem);
-  font-weight:900;
-}
-
-.page-copy{
-  margin-top:10px;
-  color:var(--muted);
-}
-
-/* TOOL CARD (EMPTY PLACEHOLDER) */
-.tool-card{
-  margin-top:32px;
-  background:#fff;
-  border-radius:24px;
-  box-shadow:var(--shadow);
-  padding:28px;
-}
-
-/* SEO SECTION */
-.seo-section{
-  margin-top:50px;
-  background:#ffffff;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:var(--shadow);
-}
-
-.seo-section h2{
-  margin-top:20px;
-}
-
-.seo-section p{
-  margin-top:8px;
-  color:var(--muted);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  margin-top:60px;
-  color:var(--muted);
-  padding-bottom:20px;
-}
-</style>
-
+    /* ---------- ADDITIONAL STYLES FOR DROPDOWN CATEGORIES & CARDS ---------- */
+    .category-section {
+      margin-bottom: 32px;
+      background: #ffffff;
+      border-radius: 32px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      cursor: pointer;
+      background: #fff;
+      transition: 0.2s;
+    }
+    .category-header:hover { background: rgba(15,118,110,0.03); }
+    .category-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .category-icon { font-size: 1.8rem; color: var(--brand); }
+    .category-header h2 { font-size: 1.5rem; font-weight: 700; margin:0; }
+    .category-count {
+      background: var(--line);
+      padding: 4px 12px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .category-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .category-body.open { max-height: 2000px; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      padding: 0 28px 32px 28px;
+    }
+    /* Calculator Cards */
+    .calc-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 24px;
+      transition: all 0.25s ease;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .calc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+      border-color: var(--brand);
+    }
+    .card-icon { font-size: 2rem; color: var(--brand); margin-bottom: 16px; }
+    .calc-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+    .calc-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.4; margin-bottom: 20px; flex-grow: 1; }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .badge {
+      background: var(--brand);
+      color: white;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 60px;
+      font-weight: 600;
+    }
+    .btn-card {
+      background: transparent;
+      border: none;
+      color: var(--brand);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+    .btn-card:hover { gap: 10px; color: var(--brand-dark); }
+    /* Floating category navigation */
+    .floating-nav {
+      position: sticky;
+      top: 100px;
+      z-index: 12;
+      background: rgba(255,255,240,0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      display: inline-flex;
+      gap: 6px;
+      padding: 8px 20px;
+      margin: 0 auto 32px;
+      border: 1px solid var(--line);
+      width: fit-content;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .floating-nav a {
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .floating-nav a:hover { background: var(--brand); color: white; }
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--brand);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+      z-index: 99;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    /* Card reveal animation */
+    .calc-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .calc-card.revealed { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      .cards-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 20px 24px 20px; }
+      .category-header { padding: 16px 20px; }
+      .floating-nav { display: none; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-
+<!-- HEADER (preserved from original) -->
 <header class="site-header">
-        <div class="shell">
-            <a class="brand" href="index.html">
-                <span class="brand-mark">CC</span>
-                <span class="brand-copy">
-                    <strong>Critical Calculator</strong>
-                    <small>Simple tools for everyday numbers</small>
-                </span>
-            </a>
+  <div class="shell">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">CC</span>
+      <span class="brand-copy">
+        <strong>Critical Calculator</strong>
+      </span>
+    </a>
+    <div class="header-actions">
+      <a class="header-link" href="calculatorlist.html">Explore</a>
+    </div>
+  </div>
+</header>
 
-            <div class="header-actions">
-                <a class="header-link" href="calculatorlist.html">Explore</a>
-                                </div>
-            </div>
-        </div>
-    </header>
-
-<!-- PAGE -->
-
+<!-- MAIN PAGE with SHELL section where dropdown menus are placed -->
 <main class="page">
-<div class="shell">
+  <div class="shell">
+    <!-- breadcrumbs -->
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> /Calculators list
+    </nav>
 
-<!-- BREADCRUMB -->
+    <h1 class="page-title">📐 All Critical Calculators</h1>
+    <p class="page-copy">
+      Discover smart financial, health, fitness & utility tools. Each card opens a dedicated calculator.
+    </p>
 
-<nav class="breadcrumbs">
-  <a href="index.html">Home</a> / List of Calculator's
-</nav>
+    <!-- Floating category navigation (quick jump) -->
+    <div style="display: flex; justify-content: center;">
+      <div class="floating-nav">
+        <a data-cat="health">❤️ Health</a>
+        <a data-cat="fitness">💪 Fitness</a>
+        <a data-cat="finance">💰 Finance</a>
+        <a data-cat="others">📁 Others</a>
+      </div>
+    </div>
 
-<!-- TITLE -->
-
-<h2 class="page-title">All Calculator's</h2>
-<p class="page-copy">
-This is the page holding all the Calculator's this website has.
-</p>
-
-<!-- 🔁 TOOL GOES HERE -->
-
-<div class="tool-card">
-
-  <main class="page">
-        <div class="shell">
-            <h2 class="text-4xl font-black tracking-tight">Calculator Directory</h2>
-            <p class="text-muted mt-2">Explore our full suite of professional-grade calculation tools.</p><br>
-            
-            <div class="grid">
-
-              <a href="alternatives-to-stripe-and-paypal-2026.html" class="tool-card">
-                    <h2>● 🚀 Alternatives to Stripe and PayPal in 2026</h2>
-                    <p>Stripe and PayPal dominate but their 2.9%+ fees, sudden account holds, and expensive currency conversion frustrate merchants.</p><br>
-                </a> 
-                <a href="calculator-for-cd-rates.html" class="tool-card">
-                    <h2>● CD Calculator</h2>
-                    <p>Compare interest rates and monthly returns for bank CDs.</p>
-                </a>
-              <a href="debt-to-income-ratio-t-buy-a-house-calculator.html" class="tool-card">
-                    <h2>● Debt to Income ratio to buy a House calculator</h2>
-                    <p>Calculate your DTI, understand lender limits, and find out how much home you can afford before applying.</p>
-                </a>
-                <a href="fraction-calculator.html" class="tool-card">
-                    <h2>● Fraction Calculator</h2>
-                    <p>Add, subtract, multiply, and divide fractions easily.</p>
-                </a>
-              <a href="calculator-for-taxes-united-states.html" class="tool-card">
-                    <h2>● Federal Tax Calculator</h2>
-                    <p>Calculate your future wealth using initial deposits and monthly contributions with real-time US bank comparisons.
-
-</p>
-                </a>
-              <a href="interest-calculator-for-savings-account.html" class="tool-card">
-                    <h2>● Interest Calculator for Savings-account</h2>
-                    <p>Estimate your 2026 US Federal Income Tax liability based on the latest progressive tax brackets.</p>
-                </a>
-                <a href="mortgage-income-calculator.html" class="tool-card">
-                    <h2>● Mortgage Income Calculator</h2>
-                    <p>Estimate monthly mortgage costs and affordability.</p>
-                </a>
-                <a href="state-living-cost-calculator.html" class="tool-card">
-                    <h2>● State Living Cost Calculator</h2>
-                    <p>Compare estimated monthly living costs across U.S. states.</p>
-                </a>
-              <a href="square-footage-calculator-for-flooring.html" class="tool-card">
-                    <h2>● Square footage calculator for flooring</h2>
-                    <p>Get an rough estimation of sq/ft size for florring along with cost rate for per sq/ft.</p>
-                </a>
-              <a href="multiplying-and-dividing-mixed-numbers-calculator.html" class="tool-card">
-                    <h2>● Multiplying and Dividing mixed Numbers calculator</h2>
-                    <p>This calculator helps you easily multiply and divide mixed numbers. Just enter the values, choose the operation, and get the result in both fraction and mixed number form instantly.
-</p>
-                </a>
-              <a href="relocation-cost-of-living-calculator.html" class="tool-card">
-                    <h2>● Relocation cost of Living Calculator</h2>
-                    <p>A Relocation Cost of Living Calculator helps you compare expenses between two cities and understand how much your lifestyle will cost after moving.</p>
-                </a>
-
-                  <a href="substitute-for-paypal.html" class="tool-card">
-                    <h2>● Substitute for Paypal</h2>
-                    <p>7 Reasons Your Business is Outgrowing PayPal (and Why Substitute for Paypal, Airwallex is the 2026 Standard)</p><br>
-                </a>
-            </div>
-        </div>
-    </main>
-
-</div>
-<!-- FOOTER -->
+    <!-- DROPDOWN CATEGORIES CONTAINER (inserted here) -->
+    <div id="categoriesContainer"></div>
+  </div>
+</main>
 
 <footer>
-  Critical Calculator • All rights reserved
+  Critical Calculator • All rights reserved • Smart tools, fast results
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+  // ---------- CALCULATOR DATA (all original links + categories) ----------
+  const calculators = [
+    { title: "Alternatives to Stripe & PayPal", desc: "Compare payment processors & fees.", link: "alternatives-to-stripe-and-paypal-2026.html", category: "finance", icon: "fas fa-credit-card", trending: true },
+    { title: "BMI Calculator", desc: "Calculate Body Mass Index with metric or imperial units.", link: "bmi-calculator.html", category: "health", icon: "fas fa-heartbeat", popular: true },
+    { title: "BMI by Age and Gender", desc: "Age & gender adjusted BMI for better accuracy.", link: "bmi-calculator-by-age-and-gender.html", category: "health", icon: "fas fa-venus-mars" },
+    { title: "Bra Size Calculator", desc: "Estimate band and cup size at home.", link: "bra-size-calculator.html", category: "health", icon: "fas fa-tshirt" },
+    { title: "CD Calculator", desc: "Compare interest rates & monthly returns for bank CDs.", link: "calculator-for-cd-rates.html", category: "finance", icon: "fas fa-chart-line" },
+    { title: "Debt-to-Income Ratio", desc: "Calculate DTI & home affordability.", link: "debt-to-income-ratio-t-buy-a-house-calculator.html", category: "finance", icon: "fas fa-home" },
+    { title: "Fraction Calculator", desc: "Add, subtract, multiply, divide fractions.", link: "fraction-calculator.html", category: "others", icon: "fas fa-divide" },
+    { title: "Federal Tax Calculator", desc: "Estimate 2026 US Federal Income Tax.", link: "calculator-for-taxes-united-states.html", category: "finance", icon: "fas fa-file-invoice-dollar", trending: true },
+    { title: "Interest Calculator (Savings)", desc: "Real-time US bank comparisons.", link: "interest-calculator-for-savings-account.html", category: "finance", icon: "fas fa-piggy-bank" },
+    { title: "Mortgage Income Calculator", desc: "Estimate monthly mortgage costs.", link: "mortgage-income-calculator.html", category: "finance", icon: "fas fa-building" },
+    { title: "State Living Cost", desc: "Compare monthly living costs across US.", link: "state-living-cost-calculator.html", category: "finance", icon: "fas fa-dollar-sign" },
+    { title: "Square Footage (Flooring)", desc: "Estimate flooring size & cost.", link: "square-footage-calculator-for-flooring.html", category: "others", icon: "fas fa-ruler-combined" },
+    { title: "Mixed Numbers Calculator", desc: "Multiply & divide mixed numbers easily.", link: "multiplying-and-dividing-mixed-numbers-calculator.html", category: "others", icon: "fas fa-calculator" },
+    { title: "Relocation Cost of Living", desc: "Compare expenses between two cities.", link: "relocation-cost-of-living-calculator.html", category: "finance", icon: "fas fa-suitcase" },
+    { title: "Substitute for PayPal", desc: "Reasons to switch & better alternatives.", link: "substitute-for-paypal.html", category: "finance", icon: "fas fa-exchange-alt" },
+    // Fitness & more
+    { title: "One Rep Max Calculator", desc: "Estimate your max lift strength.", link: "#", category: "fitness", icon: "fas fa-dumbbell" },
+    { title: "Running Pace Calculator", desc: "Find pace per km/mile.", link: "#", category: "fitness", icon: "fas fa-running" },
+    { title: "Macro Calculator", desc: "Daily protein, fat, carb intake.", link: "#", category: "fitness", icon: "fas fa-apple-alt" },
+    { title: "Calorie Burn Estimator", desc: "Track calories burned during exercise.", link: "#", category: "fitness", icon: "fas fa-fire" }
+  ];
+
+  // Category definitions
+  const categories = [
+    { id: "health", name: "Health", icon: "fas fa-heartbeat", color: "#0f766e" },
+    { id: "fitness", name: "Fitness", icon: "fas fa-dumbbell", color: "#e67e22" },
+    { id: "finance", name: "Finance", icon: "fas fa-chart-pie", color: "#2c7da0" },
+    { id: "others", name: "Others", icon: "fas fa-folder-open", color: "#8b5cf6" }
+  ];
+
+  // Helper: escape HTML
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // Render category accordions & cards
+  function renderCategories() {
+    const container = document.getElementById("categoriesContainer");
+    if (!container) return;
+    container.innerHTML = "";
+
+    categories.forEach(cat => {
+      const calcsInCat = calculators.filter(c => c.category === cat.id);
+      if (calcsInCat.length === 0) return;
+
+      const section = document.createElement("div");
+      section.className = "category-section";
+      section.dataset.category = cat.id;
+
+      const header = document.createElement("div");
+      header.className = "category-header";
+      header.innerHTML = `
+        <div class="category-header-left">
+          <i class="${cat.icon}" style="color: ${cat.color};"></i>
+          <h2>${cat.name}</h2>
+          <span class="category-count">${calcsInCat.length} tools</span>
+        </div>
+        <i class="fas fa-chevron-down" style="transition: transform 0.2s;"></i>
+      `;
+
+      const body = document.createElement("div");
+      body.className = "category-body";
+      const cardsGrid = document.createElement("div");
+      cardsGrid.className = "cards-grid";
+
+      calcsInCat.forEach(calc => {
+        const card = document.createElement("div");
+        card.className = "calc-card";
+        card.innerHTML = `
+          <div class="card-icon"><i class="${calc.icon}"></i></div>
+          <h3>${escapeHtml(calc.title)}</h3>
+          <p>${escapeHtml(calc.desc)}</p>
+          <div class="card-footer">
+            ${calc.trending ? '<span class="badge"><i class="fas fa-fire"></i> Trending</span>' : calc.popular ? '<span class="badge">⭐ Popular</span>' : '<span></span>'}
+            <a href="${calc.link}" class="btn-card" target="_blank">Open <i class="fas fa-arrow-right"></i></a>
+          </div>
+        `;
+        cardsGrid.appendChild(card);
+      });
+
+      body.appendChild(cardsGrid);
+      section.appendChild(header);
+      section.appendChild(body);
+
+      // accordion toggle
+      header.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = body.classList.contains("open");
+        if (isOpen) {
+          body.classList.remove("open");
+          header.querySelector(".fa-chevron-down").style.transform = "rotate(0deg)";
+        } else {
+          body.classList.add("open");
+          header.querySelector(".fa-chevron-down").style.transform = "rotate(180deg)";
+        }
+      });
+
+      container.appendChild(section);
+    });
+
+    // open first category by default
+    const firstBody = container.querySelector(".category-body");
+    const firstChevron = container.querySelector(".category-header .fa-chevron-down");
+    if (firstBody && !firstBody.classList.contains("open")) {
+      firstBody.classList.add("open");
+      if (firstChevron) firstChevron.style.transform = "rotate(180deg)";
+    }
+
+    initScrollReveal();
+  }
+
+  // Intersection Observer for card reveals
+  function initScrollReveal() {
+    const cards = document.querySelectorAll(".calc-card");
+    cards.forEach(card => card.classList.remove("revealed"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" });
+    cards.forEach(card => observer.observe(card));
+  }
+
+  // Floating nav smooth scroll + auto open category
+  function initFloatingNav() {
+    document.querySelectorAll(".floating-nav a").forEach(link => {
+      link.addEventListener("click", (e) => {
+        const cat = link.dataset.cat;
+        const section = document.querySelector(`.category-section[data-category="${cat}"]`);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+          const body = section.querySelector(".category-body");
+          const icon = section.querySelector(".category-header .fa-chevron-down");
+          if (body && !body.classList.contains("open")) {
+            body.classList.add("open");
+            if (icon) icon.style.transform = "rotate(180deg)";
+          }
+        }
+      });
+    });
+  }
+
+  // Back to top button
+  const backBtn = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) backBtn.classList.add("show");
+    else backBtn.classList.remove("show");
+  });
+  backBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // Optional: Trending button interaction (scroll to first trending card)
+  const addTrendingHelper = () => {
+    const trendingCalc = calculators.find(c => c.trending);
+    if (trendingCalc) {
+      const trendingButton = document.createElement("button");
+      // not required but we can style existing header link? we simply add click on "Explore" link? not needed.
+      // However we attach a small helper for demo: no explicit trending btn in design; but we can keep one from original? No, the original didn't have trending btn; but we leave as optional.
+    }
+  };
+
+  // Schema.org structured data for SEO
+  const scriptSchema = document.createElement('script');
+  scriptSchema.type = 'application/ld+json';
+  scriptSchema.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Free Online Calculators Directory",
+    "description": "Complete collection of finance, health, fitness calculators",
+    "numberOfItems": calculators.length,
+    "itemListElement": calculators.map((calc, idx) => ({
+      "@type": "ListItem",
+      "position": idx+1,
+      "url": `https://criticalcalculator.online/${calc.link}`,
+      "name": calc.title
+    }))
+  });
+  document.head.appendChild(scriptSchema);
+
+  // Initialize everything
+  renderCategories();
+  initFloatingNav();
+</script>
 </body>
 </html>
