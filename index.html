@@ -491,6 +491,242 @@
                 right: -8px;
             }
         }
+		/* footer background: deep neutral / dark theme (SaaS/fintech style) */
+        .cc-footer {
+            background: linear-gradient(145deg, #0C111D 0%, #080C17 100%);
+            color: #E2E8F0;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 2rem;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* each column flexible */
+        .footer-col {
+            flex: 1 1 200px;
+            min-width: 180px;
+        }
+
+        /* Brand area */
+        .brand-col h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(130deg, #FFFFFF, #A5C9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #94A3B8;
+            border-left: 2px solid #3B82F6;
+            padding-left: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Column titles */
+        .footer-col h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #F1F5F9;
+            margin-bottom: 1.1rem;
+            letter-spacing: 0.3px;
+            display: inline-block;
+            position: relative;
+        }
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 28px;
+            height: 2px;
+            background: #3B82F6;
+            border-radius: 2px;
+        }
+
+        /* Navigation links */
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .nav-list a {
+            color: #CBD5E1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-list a:hover {
+            color: white;
+            transform: translateX(3px);
+        }
+
+        /* SOCIAL ICONS — modern, touch-friendly (larger tap area on mobile) */
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(2px);
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .social-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #E2E8F0;
+            stroke-width: 1.2;
+            fill: none;
+            transition: all 0.2s;
+        }
+        /* specific fill for brand icons that need fill */
+        .social-icon .fill-icon {
+            fill: #E2E8F0;
+            stroke: none;
+        }
+        .social-icon:hover {
+            background: #1E293B;
+            border-color: #3B82F6;
+            transform: translateY(-2px);
+        }
+        .social-icon:hover svg {
+            stroke: white;
+        }
+        .social-icon:hover .fill-icon {
+            fill: white;
+        }
+
+        /* copyright + live time */
+        .copyright-text {
+            font-size: 0.8rem;
+            color: #9CA3AF;
+            margin: 0.5rem 0;
+        }
+        .live-datetime {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 40px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-family: 'SF Mono', 'JetBrains Mono', monospace;
+            display: inline-block;
+            margin-top: 0.8rem;
+            border: 0.5px solid rgba(59, 130, 246, 0.4);
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.3px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2D3A5E, #3B82F660, #2D3A5E, transparent);
+            margin: 1rem 0 0.6rem;
+        }
+        .trust-badge {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 1rem 1rem 1.2rem;
+            color: #5F6F93;
+            border-top: 1px solid rgba(56, 78, 110, 0.4);
+            margin-top: 0.5rem;
+        }
+
+        /* ===== RESPONSIVE: MOBILE FIRST FIXES ===== */
+        @media (max-width: 750px) {
+            .footer-container {
+                padding: 2rem 1.2rem;
+                gap: 1.8rem;
+                flex-direction: column;
+            }
+            .footer-col {
+                flex: auto;
+                width: 100%;
+                text-align: center;
+            }
+            .brand-col h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            .tagline {
+                border-left: none;
+                text-align: center;
+                padding-left: 0;
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .footer-col h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+            }
+            .nav-list {
+                align-items: center;
+            }
+            .nav-list a {
+                justify-content: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+            .social-icon {
+                width: 48px;
+                height: 48px;  /* bigger tap area on mobile */
+            }
+            .social-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            .copyright-text {
+                text-align: center;
+            }
+            .live-datetime {
+                display: inline-block;
+                margin-top: 0.6rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                padding: 1.8rem 1rem;
+            }
+            .brand-col h2 {
+                font-size: 1.6rem;
+            }
+            .tagline {
+                font-size: 0.8rem;
+            }
+            .social-icon {
+                width: 44px;
+                height: 44px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -582,11 +818,83 @@
         </section>
     </main>
 
-    <footer>
-        <div class="shell">
-            <p class="footer-copy">Critical Calculator hub for quick access to your five calculator pages.</p>
+    <footer class="cc-footer">
+        <div class="footer-container">
+            <!-- Brand Column -->
+            <div class="footer-col brand-col">
+                <h2>⚡ Critical Calculator</h2>
+                <div class="tagline">
+                    Free Online Tools for Finance, Math & Everyday Calculations
+                </div>
+            </div>
+
+            <!-- Quick Navigation Links (HTML only) -->
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <ul class="nav-list">
+                    <li><a href="/index.html">🏠 Home</a></li>
+                    <li><a href="/about.html">📖 About</a></li>
+                    <li><a href="/privacy.html">🔒 Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Section with Real SVG Icons (brand colors + new tab) -->
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <!-- Medium -->
+                    <a href="https://medium.com/@khankaif" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Medium">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.5 7.5C4.5 5.84315 5.84315 4.5 7.5 4.5H16.5C18.1569 4.5 19.5 5.84315 19.5 7.5V16.5C19.5 18.1569 18.1569 19.5 16.5 19.5H7.5C5.84315 19.5 4.5 18.1569 4.5 16.5V7.5Z" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M8 9L12 12.75L16 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12.75" r="1.25" stroke="currentColor" stroke-width="1.2"/>
+                        </svg>
+                    </a>
+                    <!-- Quora -->
+                    <a href="https://www.quora.com/profile/Kaif-Critical-Calculator" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Quora">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M12 8C10.5 8 9 9.3 9 12C9 14.7 10.5 16 12 16C13.5 16 15 14.7 15 12C15 9.3 13.5 8 12 8Z" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M14 9L16 7M10 9L8 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <!-- X (Twitter) modern X logo -->
+                    <a href="https://x.com/KhanKai53141555" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/profile.php?id=61590006802612" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 3H15C12.2386 3 10 5.23858 10 8V11H7V15H10V21H14V15H18V11H14V8C14 7.44772 14.4477 7 15 7H18V3Z" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/kaif-khan-936754189/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5 8.5H9.5V18.5H6.5V8.5Z" fill="currentColor" stroke="none"/>
+                            <path d="M11 11.5H14V13.5C14.8 12.3 15.9 11.5 17.5 11.5C20 11.5 21 13 21 16V18.5H18V15.5C18 14.1 17.5 13 16 13C14.5 13 14 14.1 14 15.5V18.5H11V11.5Z" fill="currentColor" stroke="none"/>
+                            <circle cx="8" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright + Live Date & Time -->
+            <div class="footer-col">
+                <h3>Legal & Info</h3>
+                <div class="copyright-text">© <span id="dynamic-year">2026</span> Critical Calculator. All rights reserved.</div>
+                <div class="live-datetime" id="liveClock">🕒 loading...</div>
+                <hr>
+                <div style="font-size: 0.7rem; opacity: 0.7;">⚡ precision tools — free & secure</div>
+            </div>
+        </div>
+        <div class="trust-badge">
+            🔢 Trusted by thousands · Instant calculators for finance & math
         </div>
     </footer>
+
 
     <script>
         const menu = document.getElementById("toolMenu");
@@ -614,6 +922,36 @@
                 closeMenu();
             }
         });
+		(function() {
+            // 1) Dynamic copyright year
+            const yearSpan = document.getElementById('dynamic-year');
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+            // 2) Live date & time (updates every second)
+            const clockDiv = document.getElementById('liveClock');
+            if (clockDiv) {
+                function updateClock() {
+                    try {
+                        const now = new Date();
+                        const formatted = now.toLocaleString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                        });
+                        clockDiv.textContent = `🕒 ${formatted}`;
+                    } catch(e) {
+                        clockDiv.textContent = "🕒 live time ready";
+                    }
+                }
+                updateClock();
+                setInterval(updateClock, 1000);
+            }
+        })();
+
     </script>
 </body>
 </html>
