@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Privacy Policy | Critical Calculator</title>
+<meta name="description" content="Privacy Policy for CriticalCalculator.online – free calculator hub. Learn how we protect your data, use cookies, analytics, and your privacy rights.">
+
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#f5efe4;
+  --text:#1f2937;
+  --muted:#5b6472;
+  --line:rgba(31,41,55,.12);
+  --brand:#0f766e;
+  --brand-dark:#134e4a;
+  --shadow:0 24px 60px rgba(15,23,42,.14);
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#fff8ed 0%,var(--bg) 45%,#eef7f5 100%);
+}
+
+.shell{
+  width:min(var(--max), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(255,248,237,.86);
+  border-bottom:1px solid var(--line);
+}
+
+.site-header .shell{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:82px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;
+}
+
+.brand-copy small{
+  display:block;
+  font-size:.7rem;
+  color:var(--muted);
+}
+
+/* PAGE */
+.page{
+  padding:42px 0 72px;
+}
+
+.breadcrumbs{
+  font-size:.9rem;
+  margin-bottom:18px;
+  color:var(--muted);
+}
+
+.page-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;
+}
+
+.page-copy{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* TOOL CARD (replaced by privacy content) */
+.tool-card{
+  margin-top:32px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* PRIVACY POLICY SPECIFIC STYLES (added) */
+.privacy-policy-content {
+  color: #1e293b;
+}
+
+.privacy-policy-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.8rem 0;
+  color: #0f2b3d;
+  border-left: 4px solid #2c7da0;
+  padding-left: 0.9rem;
+}
+
+.privacy-policy-content h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.2rem 0 0.5rem 0;
+  color: #1e4a6e;
+}
+
+.privacy-policy-content p, .privacy-policy-content li {
+  color: #2d3a4b;
+  margin-bottom: 0.8rem;
+}
+
+.privacy-policy-content ul, .privacy-policy-content ol {
+  margin: 0.5rem 0 1rem 1.8rem;
+}
+
+.privacy-policy-content li {
+  margin-bottom: 0.4rem;
+}
+
+.privacy-summary {
+  background: #fefce8;
+  border: 1px solid #fde047;
+  border-radius: 24px;
+  padding: 1.5rem;
+  margin: 2rem 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: space-between;
+}
+
+.summary-item {
+  flex: 1 1 180px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+  background: white;
+  padding: 0.6rem 1rem;
+  border-radius: 60px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.summary-emoji {
+  font-size: 1.5rem;
+}
+
+hr {
+  margin: 1.5rem 0;
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+/* footer background: deep neutral / dark theme (SaaS/fintech style) */
+        .cc-footer {
+            background: linear-gradient(145deg, #0C111D 0%, #080C17 100%);
+            color: #E2E8F0;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 2rem;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* each column flexible */
+        .footer-col {
+            flex: 1 1 200px;
+            min-width: 180px;
+        }
+
+        /* Brand area */
+        .brand-col h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(130deg, #FFFFFF, #A5C9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #94A3B8;
+            border-left: 2px solid #3B82F6;
+            padding-left: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Column titles */
+        .footer-col h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #F1F5F9;
+            margin-bottom: 1.1rem;
+            letter-spacing: 0.3px;
+            display: inline-block;
+            position: relative;
+        }
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 28px;
+            height: 2px;
+            background: #3B82F6;
+            border-radius: 2px;
+        }
+
+        /* Navigation links */
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .nav-list a {
+            color: #CBD5E1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-list a:hover {
+            color: white;
+            transform: translateX(3px);
+        }
+
+        /* SOCIAL ICONS — modern, touch-friendly (larger tap area on mobile) */
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(2px);
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .social-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #E2E8F0;
+            stroke-width: 1.2;
+            fill: none;
+            transition: all 0.2s;
+        }
+        /* specific fill for brand icons that need fill */
+        .social-icon .fill-icon {
+            fill: #E2E8F0;
+            stroke: none;
+        }
+        .social-icon:hover {
+            background: #1E293B;
+            border-color: #3B82F6;
+            transform: translateY(-2px);
+        }
+        .social-icon:hover svg {
+            stroke: white;
+        }
+        .social-icon:hover .fill-icon {
+            fill: white;
+        }
+
+        /* copyright + live time */
+        .copyright-text {
+            font-size: 0.8rem;
+            color: #9CA3AF;
+            margin: 0.5rem 0;
+        }
+        .live-datetime {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 40px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-family: 'SF Mono', 'JetBrains Mono', monospace;
+            display: inline-block;
+            margin-top: 0.8rem;
+            border: 0.5px solid rgba(59, 130, 246, 0.4);
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.3px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2D3A5E, #3B82F660, #2D3A5E, transparent);
+            margin: 1rem 0 0.6rem;
+        }
+        .trust-badge {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 1rem 1rem 1.2rem;
+            color: #5F6F93;
+            border-top: 1px solid rgba(56, 78, 110, 0.4);
+            margin-top: 0.5rem;
+        }
+
+        /* ===== RESPONSIVE: MOBILE FIRST FIXES ===== */
+        @media (max-width: 750px) {
+            .footer-container {
+                padding: 2rem 1.2rem;
+                gap: 1.8rem;
+                flex-direction: column;
+            }
+            .footer-col {
+                flex: auto;
+                width: 100%;
+                text-align: center;
+            }
+            .brand-col h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            .tagline {
+                border-left: none;
+                text-align: center;
+                padding-left: 0;
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .footer-col h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+            }
+            .nav-list {
+                align-items: center;
+            }
+            .nav-list a {
+                justify-content: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+            .social-icon {
+                width: 48px;
+                height: 48px;  /* bigger tap area on mobile */
+            }
+            .social-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            .copyright-text {
+                text-align: center;
+            }
+            .live-datetime {
+                display: inline-block;
+                margin-top: 0.6rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                padding: 1.8rem 1rem;
+            }
+            .brand-col h2 {
+                font-size: 1.6rem;
+            }
+            .tagline {
+                font-size: 0.8rem;
+            }
+            .social-icon {
+                width: 44px;
+                height: 44px;
+            }
+        }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+ <header class="site-header">
+        <div class="shell">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">CC</span>
+                <span class="brand-copy">
+                    <strong>Critical Calculator</strong>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a class="header-link" href="calculatorlist.html">Explore</a>
+                                </div>
+            </div>
+        </div>
+    </header>
+<!-- PAGE -->
+
+<main class="page">
+<div class="shell">
+
+<!-- BREADCRUMB (updated for privacy) -->
+
+<nav class="breadcrumbs">
+  <a href="index.html">Home</a> / Privacy Policy
+</nav>
+
+<!-- TITLE (privacy) -->
+
+<h1 class="page-title">Privacy Policy</h1>
+<p class="page-copy">
+Your data protection is our priority. Learn how CriticalCalculator.online handles information.
+</p>
+
+<!-- 🔁 PRIVACY POLICY CONTENT (full) inside tool-card -->
+
+<div class="tool-card privacy-policy-content">
+    <p><strong>CriticalCalculator.online</strong> (referred to as “we”, “us”, or “our”) operates a free online calculator platform accessible at <a href="https://criticalcalculator.online">https://criticalcalculator.online</a>. Your privacy is important to us, and this Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website. Because we respect your data, our tools are designed to keep most of your inputs private — right inside your browser.</p>
+    
+    <h2>1. Introduction</h2>
+    <p>This Privacy Policy applies to all visitors, users, and others who access our website (“you”). We provide a collection of free calculators (finance, math, lifestyle, conversion tools, and more). <strong>You do not need to create an account</strong> to use any calculator. Most calculations happen directly in your browser (client-side), meaning your numbers and input data are not sent to our servers. This policy explains what limited information we may collect, how we use cookies, analytics, and your rights regarding your data.</p>
+    
+    <h2>2. Information We Collect</h2>
+    <p>Because account creation is not required, we intentionally limit the collection of personal data. The following categories may be collected automatically:</p>
+    
+    <h3>💻 Technical Data (automatic collection)</h3>
+    <ul>
+        <li><strong>IP address</strong> (anonymized where possible), browser type and version, device type, operating system, referring/exit pages, and timestamps.</li>
+        <li>Log data collected through standard server logs and analytics providers to help maintain security and improve performance.</li>
+        <li>This data is used in aggregate and never sold or rented.</li>
+        <li><strong>No personal information (such as name, email, or contact details) is collected</strong> because we do not offer contact forms, support email, or any user-initiated communication channels.</li>
+    </ul>
+    
+    <h3>🧮 Calculator Input Data (client-side only)</h3>
+    <ul>
+        <li>All numeric inputs, formulas, selections, and results you enter into any calculator tool <strong>stay in your browser</strong>. We do NOT store, transmit, or log your calculations on our servers. Once you close the page or refresh, the input data is gone (unless your browser caches locally, which we cannot control).</li>
+        <li>No calculator input is ever collected, shared, or visible to us.</li>
+    </ul>
+    
+    <h2>3. How We Use Information</h2>
+    <p>We limit usage of any collected data to legitimate operational purposes:</p>
+    <ul>
+        <li><strong>Site functionality & improvements:</strong> ensure calculators work correctly, troubleshoot technical issues, and enhance user experience.</li>
+        <li><strong>Analytics & performance:</strong> understand how visitors interact with our tools (e.g., popular calculators, load times) to optimize speed and content.</li>
+        <li><strong>Security & fraud prevention:</strong> detect and prevent malicious activity, spam, or abuse of our website.</li>
+        <li><strong>Legal compliance:</strong> respond to lawful requests by public authorities, including to meet national security or law enforcement requirements.</li>
+    </ul>
+    <p>No automated decision-making or profiling is performed based on your data.</p>
+    
+    <h2>4. Cookies and Tracking Technologies</h2>
+    <p>We use cookies and similar tracking technologies (web beacons, localStorage) to enhance website functionality, analyze traffic, and remember user preferences. Cookies are small text files stored on your device.</p>
+    
+    <h3>🍪 Types of cookies we use</h3>
+    <ul>
+        <li><strong>Essential cookies:</strong> Required for basic site operation (e.g., session management, load balancing). These cannot be disabled without affecting performance.</li>
+        <li><strong>Analytics cookies:</strong> We use services like Google Analytics to collect anonymous usage data (page visits, time spent, clicks). These cookies help us understand which calculators are most used.</li>
+        <li><strong>Preference & performance cookies:</strong> Remember your settings (e.g., theme or input units) if available in future versions.</li>
+    </ul>
+    
+    <h3>🛠️ Your control over cookies</h3>
+    <p>Most browsers allow you to manage or delete cookies via their settings. You can opt out of analytics cookies by adjusting your browser settings, using an opt-out add-on (e.g., Google Analytics Opt-out Browser Add-on), or disabling cookies entirely. Note that disabling essential cookies may affect your user experience.</p>
+    <p>To learn more, visit <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer">www.aboutcookies.org</a>.</p>
+    
+    <h2>5. Third-Party Services</h2>
+    <p>We rely on trusted third parties to operate and improve our website. These service providers are contractually obligated to keep your information confidential and secure.</p>
+    <ul>
+        <li><strong>Analytics tools:</strong> We use <strong>Google Analytics</strong> (or similar privacy-focused alternatives) to track aggregated usage. Google processes data according to its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. You can prevent Google Analytics from recognizing you by disabling cookies in your browser.</li>
+        <li><strong>CDN & hosting services:</strong> Our website is hosted on secure infrastructure (e.g., cloud providers like Vercel, Netlify, or AWS) that may collect standard server logs. These providers store information only as required for security and performance.</li>
+        <li><strong>Advertising (future feature):</strong> We may display non-intrusive advertisements in the future. If ad networks are integrated, they may use cookies or tracking pixels to serve relevant ads. This policy will be updated accordingly. Currently, we do not run ads.</li>
+    </ul>
+    <p>We do not allow third-party services to collect calculator input data or any personal information.</p>
+    
+    <h2>6. Data Storage and Security</h2>
+    <p><strong>No storage of calculator inputs:</strong> As noted above, we never store the numbers or calculations you enter — they remain client-side only. No personal correspondence or support data is collected because we provide no contact option.</p>
+    <p><strong>Security measures:</strong> We implement industry-standard safeguards to protect any technical data we collect, including:</p>
+    <ul>
+        <li>Encryption via HTTPS/TLS across all website communications.</li>
+        <li>Regular security scanning and software updates.</li>
+        <li>Access controls limiting internal personnel to necessary operations.</li>
+        <li>Firewalls and monitoring to prevent unauthorized access.</li>
+    </ul>
+    <p>Despite our efforts, no transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
+    
+    <h2>7. Data Sharing</h2>
+    <p>We <strong>do not sell, rent, or trade</strong> your personal information to third parties for their marketing purposes. Because we collect no personal information (names, emails, etc.), data sharing is limited to:</p>
+    <ul>
+        <li>With service providers that help us operate the site (analytics, hosting) – under strict confidentiality agreements, involving only non-personal technical data.</li>
+        <li>If required by law, subpoena, or governmental request, or to protect our legal rights and user safety.</li>
+        <li>In connection with a merger, acquisition, or sale of assets (with notice and continued protection).</li>
+    </ul>
+    <p>We never share calculator input data because we simply do not collect it.</p>
+    
+    <h2>8. Your Rights (GDPR / CCPA / Global)</h2>
+    <p>Depending on your location (EEA, UK, California, Brazil, etc.), you may have certain rights regarding your personal data. Since we collect <strong>no personal information</strong> (no names, emails, or contact details), the only data possibly linked to you is technical data (e.g., IP address, which is anonymized where feasible). In practice, this means:</p>
+    <ul>
+        <li><strong>Access, correction, deletion:</strong> Because we do not store personal identifiers, there is no individually identifiable information to access, correct, or delete beyond server logs that rotate automatically. If you believe we hold any personal data, you may request review via the absence of a contact form – however, due to the design of the site, no such data exists.</li>
+        <li><strong>Opt-out of cookies & analytics:</strong> Manage cookie settings in your browser or use opt-out mechanisms described in Section 4.</li>
+        <li><strong>Right to object:</strong> You can stop using the website at any time. No further action is required.</li>
+    </ul>
+    <p>As we provide no contact option, all data processing is limited to strictly necessary technical operations. Your use of the website constitutes acceptance of this policy.</p>
+    
+    <h2>9. Children’s Privacy</h2>
+    <p>Our website is intended for a general audience and <strong>not directed at children under 13 years of age</strong> (or the equivalent minimum age in your jurisdiction). We do not knowingly collect personal information from children under 13. If you believe we inadvertently collected such data, please note that we have no contact channels – however, technical logs are anonymized and not linked to age. Parents are encouraged to supervise children’s online activity.</p>
+    
+    <h2>10. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or site features. Any updates will be posted on this page with a revised “effective date”. We encourage you to review this policy periodically.</p>
+    <p>Your continued use of CriticalCalculator.online after changes become effective constitutes your acceptance of the updated policy.</p>
+    
+    <!-- Privacy Summary Box -->
+    <div class="privacy-summary">
+        <div class="summary-item"><span class="summary-emoji">🔒</span> We don’t sell your data</div>
+        <div class="summary-item"><span class="summary-emoji">🧮</span> Calculator inputs stay in your browser</div>
+        <div class="summary-item"><span class="summary-emoji">🍪</span> Cookies used only for improvement</div>
+        <div class="summary-item"><span class="summary-emoji">📊</span> Limited analytics for performance</div>
+    </div>
+</div>
+
+<!-- (original seo-section removed to keep privacy page clean) -->
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+ <footer class="cc-footer">
+        <div class="footer-container">
+            <!-- Brand Column -->
+            <div class="footer-col brand-col">
+                <h2>⚡ Critical Calculator</h2>
+                <div class="tagline">
+                    Free Online Tools for Finance, Math & Everyday Calculations
+                </div>
+            </div>
+
+            <!-- Quick Navigation Links (HTML only) -->
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <ul class="nav-list">
+                    <li><a href="/index.html">🏠 Home</a></li>
+                    <li><a href="/about.html">📖 About</a></li>
+                    <li><a href="/privacy.html">🔒 Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Section with Real SVG Icons (brand colors + new tab) -->
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <!-- Medium -->
+                    <a href="https://medium.com/@khankaif" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Medium">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.5 7.5C4.5 5.84315 5.84315 4.5 7.5 4.5H16.5C18.1569 4.5 19.5 5.84315 19.5 7.5V16.5C19.5 18.1569 18.1569 19.5 16.5 19.5H7.5C5.84315 19.5 4.5 18.1569 4.5 16.5V7.5Z" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M8 9L12 12.75L16 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12.75" r="1.25" stroke="currentColor" stroke-width="1.2"/>
+                        </svg>
+                    </a>
+                    <!-- Quora -->
+                    <a href="https://www.quora.com/profile/Kaif-Critical-Calculator" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Quora">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M12 8C10.5 8 9 9.3 9 12C9 14.7 10.5 16 12 16C13.5 16 15 14.7 15 12C15 9.3 13.5 8 12 8Z" stroke="currentColor" stroke-width="1.2"/>
+                            <path d="M14 9L16 7M10 9L8 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <!-- X (Twitter) modern X logo -->
+                    <a href="https://x.com/KhanKai53141555" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/profile.php?id=61590006802612" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 3H15C12.2386 3 10 5.23858 10 8V11H7V15H10V21H14V15H18V11H14V8C14 7.44772 14.4477 7 15 7H18V3Z" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/kaif-khan-936754189/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5 8.5H9.5V18.5H6.5V8.5Z" fill="currentColor" stroke="none"/>
+                            <path d="M11 11.5H14V13.5C14.8 12.3 15.9 11.5 17.5 11.5C20 11.5 21 13 21 16V18.5H18V15.5C18 14.1 17.5 13 16 13C14.5 13 14 14.1 14 15.5V18.5H11V11.5Z" fill="currentColor" stroke="none"/>
+                            <circle cx="8" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright + Live Date & Time -->
+            <div class="footer-col">
+                <h3>Legal & Info</h3>
+                <div class="copyright-text">© <span id="dynamic-year">2026</span> Critical Calculator. All rights reserved.</div>
+                <div class="live-datetime" id="liveClock">🕒 loading...</div>
+                <hr>
+                <div style="font-size: 0.7rem; opacity: 0.7;">⚡ precision tools — free & secure</div>
+            </div>
+        </div>
+        <div class="trust-badge">
+            🔢 Trusted by thousands · Instant calculators for finance & math
+        </div>
+    </footer>
+<!-- SIMPLE VANILLA JS: Year auto-update + live real-time clock -->
+    <script>
+(function() {
+    // Auto-update copyright year
+    var yearSpan = document.getElementById('dynamic-year');
+    if (yearSpan) yearSpan.innerText = new Date().getFullYear();
+
+    // Live date & time — works immediately, no "loading..."
+    var clockDiv = document.getElementById('liveClock');
+    if (clockDiv) {
+        function updateClock() {
+            try {
+                var now = new Date();
+                var dateStr = now.toLocaleDateString();
+                var timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                clockDiv.innerText = '🕒 ' + dateStr + ' · ' + timeStr;
+            } catch(e) {
+                // Ultimate fallback for any browser
+                var d = new Date();
+                var fallback = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                clockDiv.innerText = '🕒 ' + fallback;
+            }
+        }
+        updateClock();              // runs immediately on page load
+        setInterval(updateClock, 1000); // updates every second
+    }
+})();
+</script>
+
+</body>
+</html>
