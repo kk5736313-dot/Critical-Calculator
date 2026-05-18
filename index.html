@@ -897,62 +897,32 @@
 
 
     <script>
-        const menu = document.getElementById("toolMenu");
-        const menuButton = document.getElementById("menuButton");
+(function() {
+    // Auto-update copyright year
+    var yearSpan = document.getElementById('dynamic-year');
+    if (yearSpan) yearSpan.innerText = new Date().getFullYear();
 
-        function closeMenu() {
-            menu.classList.remove("open");
-            menuButton.setAttribute("aria-expanded", "false");
+    // Live date & time — works immediately, no "loading..."
+    var clockDiv = document.getElementById('liveClock');
+    if (clockDiv) {
+        function updateClock() {
+            try {
+                var now = new Date();
+                var dateStr = now.toLocaleDateString();
+                var timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                clockDiv.innerText = '🕒 ' + dateStr + ' · ' + timeStr;
+            } catch(e) {
+                // Ultimate fallback for any browser
+                var d = new Date();
+                var fallback = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                clockDiv.innerText = '🕒 ' + fallback;
+            }
         }
-
-        menuButton.addEventListener("click", function (event) {
-            event.stopPropagation();
-            const isOpen = menu.classList.toggle("open");
-            menuButton.setAttribute("aria-expanded", String(isOpen));
-        });
-
-        document.addEventListener("click", function (event) {
-            if (!menu.contains(event.target)) {
-                closeMenu();
-            }
-        });
-
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-                closeMenu();
-            }
-        });
-		(function() {
-            // 1) Dynamic copyright year
-            const yearSpan = document.getElementById('dynamic-year');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-            // 2) Live date & time (updates every second)
-            const clockDiv = document.getElementById('liveClock');
-            if (clockDiv) {
-                function updateClock() {
-                    try {
-                        const now = new Date();
-                        const formatted = now.toLocaleString(undefined, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            second: '2-digit',
-                            hour12: false
-                        });
-                        clockDiv.textContent = `🕒 ${formatted}`;
-                    } catch(e) {
-                        clockDiv.textContent = "🕒 live time ready";
-                    }
-                }
-                updateClock();
-                setInterval(updateClock, 1000);
-            }
-        })();
-
-    </script>
+        updateClock();              // runs immediately on page load
+        setInterval(updateClock, 1000); // updates every second
+    }
+})();
+</script>
 </body>
 </html>
 
