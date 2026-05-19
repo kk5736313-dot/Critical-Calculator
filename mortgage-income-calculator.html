@@ -462,79 +462,112 @@
             🔢 Trusted by thousands · Instant calculators for finance & math
         </div>
     </footer>
-    <script>
-        const menu = document.getElementById("toolMenu");
-        const menuButton = document.getElementById("menuButton");
-        function closeMenu() { menu.classList.remove("open"); menuButton.setAttribute("aria-expanded", "false"); }
-        menuButton.addEventListener("click", function (event) { event.stopPropagation(); const isOpen = menu.classList.toggle("open"); menuButton.setAttribute("aria-expanded", String(isOpen)); });
-        document.addEventListener("click", function (event) { if (!menu.contains(event.target)) closeMenu(); });
-        document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeMenu(); });
-        const stateTaxes = {
-            "Alabama": 0.41, "Alaska": 1.17, "Arizona": 0.62, "Arkansas": 0.62, "California": 0.75, "Colorado": 0.51, "Connecticut": 2.15, "Delaware": 0.58, "DC": 0.57, "Florida": 0.86,
-            "Georgia": 0.90, "Hawaii": 0.29, "Idaho": 0.63, "Illinois": 2.23, "Indiana": 0.81, "Iowa": 1.57, "Kansas": 1.43, "Kentucky": 0.85, "Louisiana": 0.56, "Maine": 1.28,
-            "Maryland": 1.07, "Massachusetts": 1.20, "Michigan": 1.48, "Minnesota": 1.11, "Mississippi": 0.79, "Missouri": 0.98, "Montana": 0.83, "Nebraska": 1.67, "Nevada": 0.55, "New Hampshire": 2.09,
-            "New Jersey": 2.47, "New Mexico": 0.80, "New York": 1.73, "North Carolina": 0.80, "North Dakota": 0.98, "Ohio": 1.53, "Oklahoma": 0.90, "Oregon": 0.93, "Pennsylvania": 1.53, "Rhode Island": 1.53,
-            "South Carolina": 0.56, "South Dakota": 1.22, "Tennessee": 0.66, "Texas": 1.74, "Utah": 0.58, "Vermont": 1.90, "Virginia": 0.82, "Washington": 0.94, "West Virginia": 0.59, "Wisconsin": 1.73, "Wyoming": 0.61
-        };
-        const select = document.getElementById("stateSelect");
-        for (const state in stateTaxes) { const opt = document.createElement("option"); opt.value = stateTaxes[state]; opt.innerHTML = state + " (" + stateTaxes[state] + "%)"; select.appendChild(opt); }
-        function toggleTaxes() {
-            const isHome = document.getElementById("loanType").value === "Home";
-            document.getElementById("stateContainer").style.display = isHome ? "block" : "none";
-            document.getElementById("taxRow").style.display = isHome ? "flex" : "none";
-        }
-        function calculate() {
-            const P = parseFloat(document.getElementById("principal").value);
-            const annualRate = parseFloat(document.getElementById("interest").value);
-            const years = parseFloat(document.getElementById("years").value);
-            const insurance = parseFloat(document.getElementById("insurance").value) || 0;
-            const taxRate = parseFloat(document.getElementById("stateSelect").value);
-            const isHome = document.getElementById("loanType").value === "Home";
-            const r = (annualRate / 100) / 12;
-            const n = years * 12;
-            let monthlyPI = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-            if (r === 0) monthlyPI = P / n;
-            const monthlyTax = isHome ? (P * (taxRate / 100)) / 12 : 0;
-            const total = monthlyPI + monthlyTax + insurance;
-            document.getElementById("resultsBox").style.display = "block";
-            document.getElementById("resPI").innerText = format(monthlyPI);
-            document.getElementById("resTax").innerText = format(monthlyTax);
-            document.getElementById("resIns").innerText = format(insurance);
-            document.getElementById("resTotal").innerText = format(total);
-        }
-        function format(num) { return "$" + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-        toggleTaxes();
-        (function() {
-            // 1) Dynamic copyright year
-            const yearSpan = document.getElementById('dynamic-year');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  <script>
+    // ----- SAFE MENU HANDLING (prevents errors if elements are missing) -----
+    const menu = document.getElementById("toolMenu");
+    const menuButton = document.getElementById("menuButton");
 
-            // 2) Live date & time (updates every second)
-            const clockDiv = document.getElementById('liveClock');
-            if (clockDiv) {
-                function updateClock() {
-                    try {
-                        const now = new Date();
-                        const formatted = now.toLocaleString(undefined, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            second: '2-digit',
-                            hour12: false
-                        });
-                        clockDiv.textContent = `🕒 ${formatted}`;
-                    } catch(e) {
-                        clockDiv.textContent = "🕒 live time ready";
-                    }
+    function closeMenu() {
+        if (menu) menu.classList.remove("open");
+        if (menuButton) menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    if (menuButton && menu) {
+        menuButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            const isOpen = menu.classList.toggle("open");
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+        });
+        document.addEventListener("click", function (event) {
+            if (!menu.contains(event.target)) closeMenu();
+        });
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") closeMenu();
+        });
+    }
+
+    // ----- STATE TAX DATA & MORTGAGE CALCULATOR LOGIC -----
+    const stateTaxes = {
+        "Alabama": 0.41, "Alaska": 1.17, "Arizona": 0.62, "Arkansas": 0.62, "California": 0.75, "Colorado": 0.51, "Connecticut": 2.15, "Delaware": 0.58, "DC": 0.57, "Florida": 0.86,
+        "Georgia": 0.90, "Hawaii": 0.29, "Idaho": 0.63, "Illinois": 2.23, "Indiana": 0.81, "Iowa": 1.57, "Kansas": 1.43, "Kentucky": 0.85, "Louisiana": 0.56, "Maine": 1.28,
+        "Maryland": 1.07, "Massachusetts": 1.20, "Michigan": 1.48, "Minnesota": 1.11, "Mississippi": 0.79, "Missouri": 0.98, "Montana": 0.83, "Nebraska": 1.67, "Nevada": 0.55, "New Hampshire": 2.09,
+        "New Jersey": 2.47, "New Mexico": 0.80, "New York": 1.73, "North Carolina": 0.80, "North Dakota": 0.98, "Ohio": 1.53, "Oklahoma": 0.90, "Oregon": 0.93, "Pennsylvania": 1.53, "Rhode Island": 1.53,
+        "South Carolina": 0.56, "South Dakota": 1.22, "Tennessee": 0.66, "Texas": 1.74, "Utah": 0.58, "Vermont": 1.90, "Virginia": 0.82, "Washington": 0.94, "West Virginia": 0.59, "Wisconsin": 1.73, "Wyoming": 0.61
+    };
+    const select = document.getElementById("stateSelect");
+    if (select) {
+        for (const state in stateTaxes) {
+            const opt = document.createElement("option");
+            opt.value = stateTaxes[state];
+            opt.innerHTML = state + " (" + stateTaxes[state] + "%)";
+            select.appendChild(opt);
+        }
+    }
+
+    function toggleTaxes() {
+        const isHome = document.getElementById("loanType").value === "Home";
+        const stateContainer = document.getElementById("stateContainer");
+        const taxRow = document.getElementById("taxRow");
+        if (stateContainer) stateContainer.style.display = isHome ? "block" : "none";
+        if (taxRow) taxRow.style.display = isHome ? "flex" : "none";
+    }
+
+    function calculate() {
+        const P = parseFloat(document.getElementById("principal").value);
+        const annualRate = parseFloat(document.getElementById("interest").value);
+        const years = parseFloat(document.getElementById("years").value);
+        const insurance = parseFloat(document.getElementById("insurance").value) || 0;
+        const taxRate = parseFloat(document.getElementById("stateSelect").value);
+        const isHome = document.getElementById("loanType").value === "Home";
+        const r = (annualRate / 100) / 12;
+        const n = years * 12;
+        let monthlyPI = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        if (r === 0) monthlyPI = P / n;
+        const monthlyTax = isHome ? (P * (taxRate / 100)) / 12 : 0;
+        const total = monthlyPI + monthlyTax + insurance;
+        document.getElementById("resultsBox").style.display = "block";
+        document.getElementById("resPI").innerText = format(monthlyPI);
+        document.getElementById("resTax").innerText = format(monthlyTax);
+        document.getElementById("resIns").innerText = format(insurance);
+        document.getElementById("resTotal").innerText = format(total);
+    }
+
+    function format(num) { return "$" + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+    // Initialize UI
+    if (typeof toggleTaxes === "function") toggleTaxes();
+
+    // ----- FOOTER: LIVE DATE & TIME (FIXED) -----
+    (function() {
+        // Dynamic copyright year
+        const yearSpan = document.getElementById('dynamic-year');
+        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+        // Live clock (updates every second)
+        const clockDiv = document.getElementById('liveClock');
+        if (clockDiv) {
+            function updateClock() {
+                try {
+                    const now = new Date();
+                    const formatted = now.toLocaleString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false
+                    });
+                    clockDiv.textContent = `🕒 ${formatted}`;
+                } catch(e) {
+                    clockDiv.textContent = "🕒 live time ready";
                 }
-                updateClock();
-                setInterval(updateClock, 1000);
             }
-        })();
-
-    </script>
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+    })();
+</script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
