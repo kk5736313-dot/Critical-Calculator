@@ -441,31 +441,7 @@
     </footer>
 
     <script>
-           (function() {
-    // Auto-update copyright year
-    var yearSpan = document.getElementById('dynamic-year');
-    if (yearSpan) yearSpan.innerText = new Date().getFullYear();
-
-    // Live date & time — works immediately, no "loading..."
-    var clockDiv = document.getElementById('liveClock');
-    if (clockDiv) {
-        function updateClock() {
-            try {
-                var now = new Date();
-                var dateStr = now.toLocaleDateString();
-                var timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                clockDiv.innerText = '🕒 ' + dateStr + ' · ' + timeStr;
-            } catch(e) {
-                // Ultimate fallback for any browser
-                var d = new Date();
-                var fallback = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                clockDiv.innerText = '🕒 ' + fallback;
-            }
-        }
-        updateClock();              // runs immediately on page load
-        setInterval(updateClock, 1000); // updates every second
-    }
-})();
+     
   (function() {
          
 
@@ -493,7 +469,32 @@
             document.getElementById("res-num").innerText = finalNum / common;
             document.getElementById("res-den").innerText = finalDen / common;
         }
-       
+      
+             (function() {
+    // Auto-update copyright year
+    var yearSpan = document.getElementById('dynamic-year');
+    if (yearSpan) yearSpan.innerText = new Date().getFullYear();
+
+    // Live date & time — works immediately, no "loading..."
+    var clockDiv = document.getElementById('liveClock');
+    if (clockDiv) {
+        function updateClock() {
+            try {
+                var now = new Date();
+                var dateStr = now.toLocaleDateString();
+                var timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                clockDiv.innerText = '🕒 ' + dateStr + ' · ' + timeStr;
+            } catch(e) {
+                // Ultimate fallback for any browser
+                var d = new Date();
+                var fallback = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                clockDiv.innerText = '🕒 ' + fallback;
+            }
+        }
+        updateClock();              // runs immediately on page load
+        setInterval(updateClock, 1000); // updates every second
+    }
+})();
     </script>
     <script type="application/ld+json">
         {
