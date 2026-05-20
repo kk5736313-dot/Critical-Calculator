@@ -481,25 +481,112 @@
         if (clockDiv) {
             function updateClock() {
                 try {
-                    const now = new Date();
-                    const formatted = now.toLocaleString(undefined, {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: false
-                    });
-                    clockDiv.textContent = `🕒 ${formatted}`;
-                } catch(e) {
-                    clockDiv.textContent = "🕒 live time ready";
-                }
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
+                   <script>
+(function () {
+
+    // ----- SAFE MENU HANDLING -----
+    const menu = document.getElementById("toolMenu");
+    const menuButton = document.getElementById("menuButton");
+
+    function closeMenu() {
+        if (menu) menu.classList.remove("open");
+        if (menuButton) menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    if (menu && menuButton) {
+        menuButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            const isOpen = menu.classList.toggle("open");
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!menu.contains(event.target)) closeMenu();
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") closeMenu();
+        });
+    }
+
+    // ----- FRACTION CALCULATOR -----
+    function gcd(a, b) {
+        return b ? gcd(b, a % b) : a;
+    }
+
+    window.calculate = function () {
+        const n1 = parseInt(document.getElementById("n1").value, 10);
+        const d1 = parseInt(document.getElementById("d1").value, 10);
+        const n2 = parseInt(document.getElementById("n2").value, 10);
+        const d2 = parseInt(document.getElementById("d2").value, 10);
+        const op = document.getElementById("op").value;
+
+        if (isNaN(n1) || isNaN(d1) || isNaN(n2) || isNaN(d2)) {
+            alert("Please fill in all fields.");
+            return;
         }
-    })();
+
+        if (d1 === 0 || d2 === 0) {
+            alert("Denominator cannot be zero.");
+            return;
+        }
+
+        let finalNum, finalDen;
+
+        if (op === "+") {
+            finalNum = n1 * d2 + n2 * d1;
+            finalDen = d1 * d2;
+        } else if (op === "-") {
+            finalNum = n1 * d2 - n2 * d1;
+            finalDen = d1 * d2;
+        } else if (op === "*") {
+            finalNum = n1 * n2;
+            finalDen = d1 * d2;
+        } else {
+            finalNum = n1 * d2;
+            finalDen = d1 * n2;
+        }
+
+        const common = Math.abs(gcd(finalNum, finalDen));
+
+        document.getElementById("res-num").innerText = finalNum / common;
+        document.getElementById("res-den").innerText = finalDen / common;
+    };
+
+    // ----- FOOTER LIVE CLOCK -----
+    const yearSpan = document.getElementById("dynamic-year");
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    const clockDiv = document.getElementById("liveClock");
+
+    if (clockDiv) {
+        function updateClock() {
+            try {
+                const now = new Date();
+
+                const formatted = now.toLocaleString(undefined, {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                });
+
+                clockDiv.textContent = `🕒 ${formatted}`;
+            } catch (e) {
+                clockDiv.textContent = "🕒 live time ready";
+            }
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+})();
     </script>
     <script type="application/ld+json">
         {
