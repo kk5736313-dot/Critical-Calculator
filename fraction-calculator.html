@@ -312,8 +312,7 @@
 
             <div class="header-actions">
                 <a class="header-link" href="calculatorlist.html">Explore</a>
-                                </div>
-            </div>
+                            
         </div>
     </header>
 
@@ -440,8 +439,7 @@
         </div>
     </footer>
     <script>
-        const menu = document.getElementById("toolMenu");
-        const menuButton = document.getElementById("menuButton");
+  
         function closeMenu() { menu.classList.remove("open"); menuButton.setAttribute("aria-expanded", "false"); }
         menuButton.addEventListener("click", function (event) { event.stopPropagation(); const isOpen = menu.classList.toggle("open"); menuButton.setAttribute("aria-expanded", String(isOpen)); });
         document.addEventListener("click", function (event) { if (!menu.contains(event.target)) closeMenu(); });
