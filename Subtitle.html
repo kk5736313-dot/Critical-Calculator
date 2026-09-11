@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>live subtitle · video speech recognition</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #0b0d10;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 16px;
+        }
+
+        .app-container {
+            background: #15191e;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 860px;
+            padding: 28px 24px 32px;
+        }
+
+        h1 {
+            color: #fff;
+            font-weight: 500;
+            font-size: 1.7rem;
+            letter-spacing: -0.01em;
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1 span {
+            background: #2b6bff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 40px;
+            color: white;
+            letter-spacing: 0.2px;
+        }
+
+        .subhead {
+            color: #9aa5b5;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            border-left: 3px solid #2b6bff;
+            padding-left: 16px;
+            line-height: 1.4;
+        }
+
+        .upload-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .file-label {
+            background: #232a33;
+            color: #eef2f6;
+            padding: 12px 26px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+            border: 1px solid #323c48;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+
+        .file-label:hover {
+            background: #2f3a45;
+        }
+
+        .file-label svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            opacity: 0.8;
+        }
+
+        #videoInput {
+            display: none;
+        }
+
+        .file-name {
+            color: #bbc9db;
+            font-size: 0.9rem;
+            background: #1e252d;
+            padding: 8px 16px;
+            border-radius: 60px;
+            border: 1px solid #2b3540;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 400;
+        }
+
+        .video-wrapper {
+            background: #080a0c;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 12px 30px rgba(0,0,0,0.7);
+            margin: 16px 0 24px;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 6px 0 18px;
+            flex-wrap: wrap;
+        }
+
+        .play-btn {
+            background: #2b6bff;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 12px 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s, transform 0.1s;
+            box-shadow: 0 8px 18px rgba(43, 107, 255, 0.3);
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .play-btn:hover:not(:disabled) {
+            background: #3f7aff;
+        }
+
+        .play-btn:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .play-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            box-shadow: none;
+            background: #2c3a4b;
+        }
+
+        .mic-btn {
+            background: #2a3542;
+            border: 1px solid #3b4859;
+            color: #dbe4f0;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 12px 26px;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .mic-btn:hover:not(:disabled) {
+            background: #354351;
+        }
+
+        .mic-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .mic-btn.granted {
+            background: #1e3a2b;
+            border-color: #2c6e4a;
+            color: #8ef0b5;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1c2229;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #b7c4d4;
+            border: 1px solid #2d3642;
+            font-weight: 450;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4a5a6e;
+            transition: background 0.2s;
+        }
+
+        .dot.listening {
+            background: #2ecc71;
+            box-shadow: 0 0 12px #2ecc71aa;
+            animation: pulse 1.4s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .subtitle-panel {
+            background: #0b0f13;
+            border-radius: 22px;
+            padding: 24px 28px;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #242e38;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+            margin-top: 8px;
+        }
+
+        .subtitle-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5f7186;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .subtitle-text {
+            color: #f0f4fc;
+            font-size: 2rem;
+            line-height: 1.4;
+            font-weight: 450;
+            word-break: break-word;
+            min-height: 4.2rem;
+        }
+
+        .subtitle-text .small-hint {
+            color: #66788e;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .error-message {
+            color: #ff8a8a;
+            background: #2a1a1e;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            border-left: 4px solid #e35f5f;
+        }
+
+        .info-message {
+            color: #9ec5ff;
+            background: #16202e;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            border-left: 4px solid #2b6bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>
+            🎬 Live Subtitles
+            <span>experiment</span>
+        </h1>
+        <div class="subhead">
+            Upload a video, allow microphone access, then press play — subtitles appear in real time.
+        </div>
+
+        <!-- upload area -->
+        <div class="upload-row">
+            <label for="videoInput" class="file-label">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M12 16L12 8M12 8L9 11M12 8L15 11M5 20H19C20.1046 20 21 19.1046 21 18V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20Z" 
+                          stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Choose Video
+            </label>
+            <input type="file" id="videoInput" accept="video/mp4,video/webm,video/quicktime,video/ogg,video/x-matroska,.mp4,.webm,.mov,.mkv,.ogv">
+            <div class="file-name" id="fileNameDisplay">No file selected</div>
+        </div>
+
+        <!-- video player -->
+        <div class="video-wrapper">
+            <video id="videoPlayer" controls preload="metadata"></video>
+        </div>
+
+        <!-- controls -->
+        <div class="controls">
+            <button class="mic-btn" id="micButton">🎤 Allow Microphone</button>
+            <button class="play-btn" id="playButton" disabled>
+                ▶ Play
+            </button>
+            <div class="status-badge">
+                <span class="dot" id="statusDot"></span>
+                <span id="statusText">ready · upload a video</span>
+            </div>
+        </div>
+
+        <!-- subtitle display -->
+        <div class="subtitle-panel">
+            <div class="subtitle-label">live subtitles</div>
+            <div class="subtitle-text" id="subtitleDisplay">
+                <span class="small-hint">Press play and speak — subtitles appear here.</span>
+            </div>
+        </div>
+
+        <!-- error / info area -->
+        <div id="errorContainer" style="min-height: 0;"></div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- DOM elements ----------
+            const videoInput = document.getElementById('videoInput');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const playButton = document.getElementById('playButton');
+            const micButton = document.getElementById('micButton');
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            const subtitleDisplay = document.getElementById('subtitleDisplay');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const errorContainer = document.getElementById('errorContainer');
+
+            // ---------- state ----------
+            let recognition = null;
+            let isRecognizing = false;
+            let micPermissionGranted = false;
+            let speechSupported = false;
+
+            // ---------- helpers ----------
+            function showError(msg) {
+                errorContainer.innerHTML = `<div class="error-message">⚠️ ${msg}</div>`;
+            }
+
+            function showInfo(msg) {
+                errorContainer.innerHTML = `<div class="info-message">ℹ️ ${msg}</div>`;
+            }
+
+            function clearMessages() {
+                errorContainer.innerHTML = '';
+            }
+
+            function setStatus(text, listening = false) {
+                statusText.textContent = text;
+                if (listening) {
+                    statusDot.classList.add('listening');
+                } else {
+                    statusDot.classList.remove('listening');
+                }
+            }
+
+            function setSubtitle(text, isHint = false) {
+                if (!text || text.trim() === '') {
+                    subtitleDisplay.innerHTML = `<span class="small-hint">${isHint ? 'Waiting for speech…' : 'No speech detected yet.'}</span>`;
+                    return;
+                }
+                subtitleDisplay.textContent = text;
+            }
+
+            function resetSubtitleHint(msg = 'Press play and speak — subtitles appear here.') {
+                subtitleDisplay.innerHTML = `<span class="small-hint">${msg}</span>`;
+            }
+
+            // ---------- REQUEST MICROPHONE PERMISSION ----------
+            // This must be triggered by a user gesture (click).
+            async function requestMicrophonePermission() {
+                clearMessages();
+
+                // Check browser support for getUserMedia
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showError('Your browser does not support microphone access (getUserMedia). Please use Chrome, Edge, or Safari.');
+                    return false;
+                }
+
+                // Check secure context (HTTPS or localhost)
+                if (!window.isSecureContext) {
+                    showError('Microphone access requires a secure context (HTTPS or localhost). Please serve this file over HTTPS.');
+                    return false;
+                }
+
+                try {
+                    setStatus('requesting microphone…', false);
+                    micButton.disabled = true;
+
+                    // This call triggers the browser permission prompt
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                    // Permission granted — stop the tracks immediately, we only needed permission
+                    stream.getTracks().forEach(track => track.stop());
+
+                    micPermissionGranted = true;
+                    micButton.textContent = '✅ Microphone allowed';
+                    micButton.classList.add('granted');
+                    micButton.disabled = true; // no need to click again
+
+                    showInfo('Microphone access granted. You can now press Play.');
+                    setStatus('mic ready · press play', false);
+                    return true;
+                } catch (err) {
+                    console.error('Microphone permission error:', err);
+                    micButton.disabled = false;
+
+                    // Give specific guidance based on the error
+                    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                        showError(
+                            'Microphone permission was denied. ' +
+                            'Please check your browser\'s address bar / site settings, ' +
+                            'allow microphone access for this page, then click "Allow Microphone" again.'
+                        );
+                        setStatus('mic denied', false);
+                    } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+                        showError('No microphone found. Please connect a microphone and try again.');
+                        setStatus('no microphone', false);
+                    } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+                        showError('Microphone is already in use by another application.');
+                        setStatus('mic busy', false);
+                    } else if (err.name === 'SecurityError') {
+                        showError('Security error: microphone access blocked. Make sure the page is served over HTTPS.');
+                        setStatus('security error', false);
+                    } else {
+                        showError('Could not access microphone: ' + err.message);
+                        setStatus('mic error', false);
+                    }
+                    return false;
+                }
+            }
+
+            // ---------- initialize speech recognition ----------
+            function initSpeechRecognition() {
+                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                    speechSupported = false;
+                    showError('Speech recognition is not supported in this browser. Try Chrome, Edge, or Safari (latest).');
+                    setStatus('speech not supported', false);
+                    return null;
+                }
+
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recog = new SpeechRecognition();
+                recog.continuous = true;
+                recog.interimResults = true;
+                recog.lang = 'en-US';
+
+                recog.onresult = (event) => {
+                    let finalTranscript = '';
+                    let interimTranscript = '';
+
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += transcript;
+                        } else {
+                            interimTranscript += transcript;
+                        }
+                    }
+
+                    let displayText = finalTranscript.trim() || interimTranscript.trim();
+                    if (displayText) {
+                        setSubtitle(displayText);
+                    }
+                };
+
+                recog.onerror = (event) => {
+                    console.warn('Speech recognition error:', event.error);
+                    if (event.error === 'not-allowed') {
+                        showError('Microphone access was blocked. Click "Allow Microphone" first, then try again.');
+                        setStatus('mic blocked', false);
+                    } else if (event.error === 'audio-capture') {
+                        showError('No microphone detected. Please connect a microphone.');
+                        setStatus('no microphone', false);
+                    } else if (event.error === 'network') {
+                        showError('Network error – speech recognition requires internet.');
+                        setStatus('network issue', false);
+                    } else if (event.error === 'aborted') {
+                        // user stopped, ignore
+                    } else if (event.error === 'no-speech') {
+                        // no speech detected — ignore silently
+                    } else {
+                        showError(`Speech recognition error: ${event.error}`);
+                    }
+                    isRecognizing = false;
+                    setStatus('speech stopped', false);
+                };
+
+                recog.onend = () => {
+                    isRecognizing = false;
+                    setStatus('listening stopped', false);
+                };
+
+                recog.onstart = () => {
+                    isRecognizing = true;
+                    setStatus('listening…', true);
+                    clearMessages();
+                };
+
+                return recog;
+            }
+
+            function startRecognition() {
+                if (!recognition) {
+                    recognition = initSpeechRecognition();
+                    if (!recognition) return false;
+                }
+
+                if (isRecognizing) return true;
+
+                try {
+                    recognition.start();
+                    return true;
+                } catch (err) {
+                    console.error('Failed to start recognition:', err);
+                    if (err.name === 'InvalidStateError') {
+                        isRecognizing = true;
+                        setStatus('listening…', true);
+                        return true;
+                    }
+                    showError('Could not start speech recognition: ' + err.message);
+                    setStatus('start failed', false);
+                    return false;
+                }
+            }
+
+            function stopRecognition() {
+                if (recognition && isRecognizing) {
+                    try { recognition.stop(); } catch (e) {}
+                    isRecognizing = false;
+                    setStatus('paused', false);
+                }
+            }
+
+            // ---------- MIC BUTTON CLICK ----------
+            micButton.addEventListener('click', () => {
+                requestMicrophonePermission();
+            });
+
+            // ---------- handle video file selection ----------
+            videoInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                clearMessages();
+
+                if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(videoPlayer.src);
+                }
+
+                const videoURL = URL.createObjectURL(file);
+                videoPlayer.src = videoURL;
+                videoPlayer.load();
+                fileNameDisplay.textContent = file.name;
+
+                playButton.disabled = false;
+                resetSubtitleHint('Video loaded. Press play to start subtitles.');
+                setStatus('ready · press play', false);
+
+                stopRecognition();
+                if (recognition) {
+                    try { recognition.abort(); } catch (e) {}
+                    recognition = null;
+                }
+            });
+
+            // ---------- PLAY BUTTON ----------
+            playButton.addEventListener('click', async () => {
+                if (!videoPlayer.src) {
+                    showError('Please choose a video file first.');
+                    return;
+                }
+
+                clearMessages();
+
+                // Ensure microphone permission is granted BEFORE starting recognition
+                if (!micPermissionGranted) {
+                    const granted = await requestMicrophonePermission();
+                    if (!granted) {
+                        showError('Microphone permission is required to generate subtitles. Click "Allow Microphone" and try again.');
+                        return;
+                    }
+                }
+
+                // Ensure recognition object exists
+                if (!recognition) {
+                    recognition = initSpeechRecognition();
+                    if (!recognition) return;
+                }
+
+                // Start recognition
+                if (!isRecognizing) {
+                    try {
+                        recognition.start();
+                    } catch (err) {
+                        if (err.name !== 'InvalidStateError') {
+                            console.warn('Recognition start error:', err);
+                        }
+                    }
+                }
+
+                // Play video
+                videoPlayer.play().catch(error => {
+                    console.warn('Playback error:', error);
+                    showError('Could not play video: ' + error.message);
+                });
+
+                setStatus('listening to video…', true);
+            });
+
+            // ---------- sync recognition with video events ----------
+            videoPlayer.addEventListener('play', () => {
+                if (micPermissionGranted && !isRecognizing && recognition) {
+                    try { recognition.start(); } catch (e) {
+                        if (e.name !== 'InvalidStateError') console.warn(e);
+                    }
+                }
+                if (micPermissionGranted) setStatus('listening to video…', true);
+            });
+
+            videoPlayer.addEventListener('pause', () => {
+                if (isRecognizing && recognition) {
+                    try { recognition.stop(); } catch (e) {}
+                    isRecognizing = false;
+                }
+                setStatus('paused', false);
+            });
+
+            videoPlayer.addEventListener('ended', () => {
+                stopRecognition();
+                setStatus('video ended', false);
+            });
+
+            // ---------- INIT ----------
+            window.addEventListener('load', () => {
+                // Check speech recognition support
+                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                    speechSupported = false;
+                    showError('Speech recognition not supported. Please use Chrome, Edge, or Safari.');
+                    setStatus('unsupported browser', false);
+                    playButton.disabled = true;
+                    micButton.disabled = true;
+                } else {
+                    speechSupported = true;
+                    recognition = initSpeechRecognition();
+                    setStatus('ready · upload a video', false);
+
+                    // Warn if not on HTTPS/localhost
+                    if (!window.isSecureContext) {
+                        showError('This page is not served over HTTPS. Microphone access will be blocked by the browser. Please use HTTPS or localhost.');
+                    }
+                }
+
+                resetSubtitleHint();
+                playButton.disabled = true;
+            });
+
+            // ---------- cleanup ----------
+            window.addEventListener('beforeunload', () => {
+                if (recognition && isRecognizing) {
+                    try { recognition.abort(); } catch (e) {}
+                }
+                if (videoPlayer.src && videoPlayer.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(videoPlayer.src);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
